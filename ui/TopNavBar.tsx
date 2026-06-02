@@ -1,7 +1,68 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+
+/**
+ * Componente interno de búsqueda con debounce y actualización dinámica.
+ */
+const SearchInputInner = ({ isMobile = false }: { isMobile?: boolean }) => {
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") || "";
+  const [query, setQuery] = useState(initialQuery);
+
+  // Sincronizar el input con la URL si cambia externamente
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
+
+  // Debounce effect para buscar por tecla
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      // Solo hacer push si el usuario realmente cambió el valor
+      if (query !== initialQuery) {
+        const params = new URLSearchParams(searchParams.toString());
+        if (query.trim()) {
+          params.set("q", query);
+        } else {
+          params.delete("q");
+        }
+        router.push(`/search?${params.toString()}`);
+      }
+    }, 400); // 400ms delay
+
+    return () => clearTimeout(handler);
+  }, [query, router, searchParams, initialQuery]);
+
+  return (
+    <form
+      onSubmit={(e) => { e.preventDefault(); }}
+      className={`flex items-center bg-surface-variant rounded-full ${isMobile ? 'px-4 py-2 w-full mb-2' : 'hidden md:flex px-3 py-1.5'} focus-within:ring-2 ring-primary transition-all`}
+    >
+      <span className="material-symbols-outlined text-on-surface-variant text-[20px] mr-1">search</span>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={isMobile ? "Buscar productos..." : "Buscar..."}
+        className={`bg-transparent border-none outline-none text-on-surface w-full ${!isMobile ? 'font-body-sm text-body-sm w-24 lg:w-40 focus:w-48' : 'font-body-md text-body-md'} transition-all placeholder:text-on-surface-variant`}
+      />
+    </form>
+  );
+};
+
+const SearchInput = ({ isMobile = false }: { isMobile?: boolean }) => {
+  return (
+    <Suspense fallback={
+      <div className={`bg-surface-variant rounded-full animate-pulse ${isMobile ? 'w-full h-10 mb-2' : 'hidden md:block w-32 h-8'}`}></div>
+    }>
+      <SearchInputInner isMobile={isMobile} />
+    </Suspense>
+  );
+};
 
 /**
  * Componente TopNavBar que representa la barra de navegación superior principal.
@@ -35,6 +96,7 @@ export const TopNavBar = () => {
 
         {/* Trailing Icons */}
         <div className="flex items-center gap-base text-primary">
+          <SearchInput />
           <button className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">person</span>
           </button>
@@ -67,6 +129,7 @@ export const TopNavBar = () => {
           }`}
       >
         <nav className="flex flex-col px-margin-mobile py-4 gap-4">
+          <SearchInput isMobile={true} />
           <Link
             href="/"
             className="font-label-md text-label-lg text-on-surface hover:text-primary transition-colors"

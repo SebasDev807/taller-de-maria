@@ -6,9 +6,22 @@ import { mockProducts } from "@/lib/mockData";
  * Renderiza la cabecera, controles de filtro, y la grilla de productos 
  * utilizando diferentes variantes de tarjetas según el diseño.
  *
+ * @param {Object} props
+ * @param {Promise<{ [key: string]: string | string[] | undefined }>} props.searchParams Parámetros de la URL para filtros.
  * @returns {React.JSX.Element} La página de catálogo renderizada.
  */
-export default function Catalog() {
+export default async function Catalog({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const category = typeof params.category === "string" ? params.category : "All Items";
+
+  const filteredProducts = mockProducts.filter(
+    (product) => category === "All Items" || product.category === category
+  );
+
   return (
     <>
       <TopNavBar />
@@ -32,22 +45,30 @@ export default function Catalog() {
         </header>
 
         {/* Product Grid (Bento-style layout variations) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
-          {mockProducts.map((product, index) => {
-            // Apply variants based on index to match the mockup exactly
-            let variant: "featured" | "vertical" | "icon" = "vertical";
-            if (index === 0) variant = "featured";
-            if (index === 4) variant = "icon";
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            {filteredProducts.map((product, index) => {
+              // Apply variants based on index to match the mockup exactly
+              let variant: "featured" | "vertical" | "icon" = "vertical";
+              if (index === 0) variant = "featured";
+              if (index === 4) variant = "icon";
 
-            return (
-              <CatalogCard 
-                key={product.id} 
-                product={product} 
-                variant={variant} 
-              />
-            );
-          })}
-        </div>
+              return (
+                <CatalogCard 
+                  key={product.id} 
+                  product={product} 
+                  variant={variant} 
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="text-center py-24">
+            <p className="font-body-lg text-body-lg text-on-surface-variant">
+              No se encontraron productos en esta categoría.
+            </p>
+          </div>
+        )}
 
         {/* Pagination */}
         <div className="mt-xl border-t border-surface-container-high pt-lg">

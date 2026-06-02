@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 interface PaginationProps {
   currentPage?: number;
@@ -17,7 +16,7 @@ export const Pagination = ({ currentPage = 1, totalPages = 5 }: PaginationProps)
   return (
     <nav className="flex items-center justify-center gap-2" aria-label="Pagination">
       {/* Botón Anterior */}
-      <button 
+      <button
         disabled={currentPage <= 1}
         className="p-2 flex items-center justify-center rounded-full border border-surface-container-high text-on-surface-variant hover:border-secondary hover:text-secondary disabled:opacity-50 disabled:pointer-events-none transition-all"
         aria-label="Previous page"
@@ -33,25 +32,24 @@ export const Pagination = ({ currentPage = 1, totalPages = 5 }: PaginationProps)
           return (
             <button
               key={page}
-              className={`w-10 h-10 flex items-center justify-center rounded-full font-label-md text-label-md transition-all ${
-                isActive
+              className={`w-10 h-10 flex items-center justify-center rounded-full font-label-md text-label-md transition-all ${isActive
                   ? "bg-secondary-container text-on-secondary-container font-bold border border-secondary-container"
                   : "text-on-surface-variant hover:bg-surface-container-high hover:text-primary border border-transparent"
-              }`}
+                }`}
             >
               {page}
             </button>
           );
         })}
       </div>
-      
+
       {/* Mobile Page indicator */}
       <div className="flex sm:hidden items-center justify-center px-4 font-label-md text-label-md text-on-surface-variant">
         Página {currentPage} de {totalPages}
       </div>
 
       {/* Botón Siguiente */}
-      <button 
+      <button
         disabled={currentPage >= totalPages}
         className="p-2 flex items-center justify-center rounded-full border border-surface-container-high text-on-surface-variant hover:border-secondary hover:text-secondary disabled:opacity-50 disabled:pointer-events-none transition-all"
         aria-label="Next page"
