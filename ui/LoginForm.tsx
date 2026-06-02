@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/use-auth";
 
 type LoginFields = {
     email: string;
@@ -11,8 +11,9 @@ type LoginFields = {
 
 export const LoginForm = () => {
 
-    const router = useRouter();
+    const { login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
+    const [serverError, setServerError] = useState<string | null>(null);
 
     const {
         register,
@@ -20,9 +21,17 @@ export const LoginForm = () => {
         formState: { errors, isSubmitting },
     } = useForm<LoginFields>({ mode: "onTouched" });
 
-    const onSubmit = async (_data: LoginFields) => {
-        // Sin autenticación por el momento — redirige directo al dashboard
-        router.push("/admin");
+    const onSubmit = async (data: LoginFields) => {
+        setServerError(null);
+
+        const formData = new FormData();
+        formData.set("email", data.email);
+        formData.set("password", data.password);
+
+        const error = await login(formData);
+        if (error) {
+            setServerError(error);
+        }
     };
 
     return (
@@ -31,6 +40,22 @@ export const LoginForm = () => {
             onSubmit={handleSubmit(onSubmit)}
             noValidate
         >
+            {/* ── Server error banner ── */}
+            {serverError && (
+                <div
+                    role="alert"
+                    className="flex items-center gap-2 bg-error-container text-on-error-container font-label-sm text-label-sm px-4 py-3 rounded-lg animate-field-error"
+                >
+                    <span
+                        className="material-symbols-outlined shrink-0"
+                        style={{ fontSize: "18px", fontVariationSettings: "'FILL' 1" }}
+                    >
+                        error
+                    </span>
+                    <span>{serverError}</span>
+                </div>
+            )}
+
             {/* ── Email ── */}
             <div className="flex flex-col gap-xs">
                 <label
@@ -47,7 +72,13 @@ export const LoginForm = () => {
                     placeholder="jhondoe@example.com"
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "login-email-error" : undefined}
-                    {...register("email", { required: true })}
+                    {...register("email", {
+                        required: "El correo es obligatorio",
+                        pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: "Ingresa un correo válido",
+                        },
+                    })}
                     className={[
                         "w-full bg-transparent border-0 border-b px-0 py-sm",
                         "font-body-md text-body-md text-on-surface placeholder:text-outline",
@@ -70,7 +101,7 @@ export const LoginForm = () => {
                         >
                             error
                         </span>
-                        Este campo es obligatorio.
+                        {errors.email.message}
                     </p>
                 )}
             </div>
@@ -101,7 +132,7 @@ export const LoginForm = () => {
                         placeholder="••••••••"
                         aria-invalid={!!errors.password}
                         aria-describedby={errors.password ? "login-password-error" : undefined}
-                        {...register("password", { required: true })}
+                        {...register("password", { required: "La contraseña es obligatoria" })}
                         className={[
                             "w-full bg-transparent border-0 border-b px-0 py-sm pr-9",
                             "font-body-md text-body-md text-on-surface placeholder:text-outline",
@@ -146,7 +177,7 @@ export const LoginForm = () => {
                         >
                             error
                         </span>
-                        Este campo es obligatorio.
+                        {errors.password.message}
                     </p>
                 )}
             </div>
@@ -168,7 +199,7 @@ export const LoginForm = () => {
                             >
                                 progress_activity
                             </span>
-                            <span>Ingresando...</span>
+                            <span>Verificando...</span>
                         </>
                     ) : (
                         <>

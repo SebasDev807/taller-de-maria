@@ -7,6 +7,11 @@ const envSchema = z.object({
     .min(1, "MONGODB_URI no puede estar vacía")
     .startsWith("mongodb", "MONGODB_URI debe ser una URI de MongoDB válida"),
 
+  // Sesión JWT
+  SESSION_SECRET: z
+    .string({ error: "SESSION_SECRET es requerida" })
+    .min(32, "SESSION_SECRET debe tener al menos 32 caracteres"),
+
   // Entorno de la aplicación
   NODE_ENV: z
     .enum(["development", "production", "test"], {
