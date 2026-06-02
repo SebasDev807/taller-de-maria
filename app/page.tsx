@@ -1,8 +1,5 @@
 import Link from "next/link";
-import { TopNavBar } from "@/ui/TopNavBar";
-import { Footer } from "@/ui/Footer";
-import { DailyContentBox } from "@/ui/DailyContentBox";
-import { ProductCard } from "@/ui/ProductCard";
+import { TopNavBar, Footer, DailyContentBox, ProductCard } from "@/ui";
 import { mockProducts, mockDailyContent } from "@/lib/mockData";
 
 /**
