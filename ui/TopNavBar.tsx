@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SearchInput } from "./SearchInput";
 import { useCart } from "@/store/shopping-cart";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { mergeClassNames } from "@/helpers";
 
 /**
  * Componente TopNavBar que representa la barra de navegación superior principal.
@@ -34,13 +34,13 @@ export const TopNavBar = () => {
 
         {/* Navigation Links (Desktop) */}
         <nav className="hidden md:flex items-center gap-gutter">
-          <Link href="/" className={cn("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
+          <Link href="/" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
             Inicio
           </Link>
-          <Link href="/catalog" className={cn("font-label-md text-label-md transition-all duration-300 pb-1", pathname.startsWith("/catalog") ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
+          <Link href="/catalog" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname.startsWith("/catalog") ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
             Productos
           </Link>
-          <Link href="/about" className={cn("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/about" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
+          <Link href="/about" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/about" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
             Sobre Nosotros
           </Link>
         </nav>
@@ -86,21 +86,21 @@ export const TopNavBar = () => {
           <SearchInput isMobile={true} />
           <Link
             href="/"
-            className={cn("font-label-md text-label-lg transition-colors duration-300", pathname === "/" ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
+            className={mergeClassNames("font-label-md text-label-lg transition-colors duration-300", pathname === "/" ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
             onClick={() => setIsMenuOpen(false)}
           >
             Inicio
           </Link>
           <Link
             href="/catalog"
-            className={cn("font-label-md text-label-lg transition-colors duration-300", pathname.startsWith("/catalog") ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
+            className={mergeClassNames("font-label-md text-label-lg transition-colors duration-300", pathname.startsWith("/catalog") ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
             onClick={() => setIsMenuOpen(false)}
           >
             Productos
           </Link>
           <Link
             href="/about"
-            className={cn("font-label-md text-label-lg transition-colors duration-300", pathname === "/about" ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
+            className={mergeClassNames("font-label-md text-label-lg transition-colors duration-300", pathname === "/about" ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
             onClick={() => setIsMenuOpen(false)}
           >
             Sobre Nosotros

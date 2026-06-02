@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:users": "tsx --env-file=.env.local scripts/seed-users.ts"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "mongoose": "^9.6.3",
     "next": "16.2.7",
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@prisma/client": "^6.19.3",
     "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^3.0.0",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -28,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }

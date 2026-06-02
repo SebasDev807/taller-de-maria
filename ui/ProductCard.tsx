@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/mockData";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/helpers";
 
 interface ProductCardProps {
   product: Product;

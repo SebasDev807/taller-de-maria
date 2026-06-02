@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/mockData";
 import { AddToCartButton } from "./AddToCartButton";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/helpers";
 
 interface CatalogCardProps {
   product: Product;

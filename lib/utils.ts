@@ -1,13 +1,3 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export const formatCurrency = (amount: number) => {
-  return `$${new Intl.NumberFormat('es-ES', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amount)}`;
-};
+// Las funciones utilitarias fueron movidas a la carpeta helpers/.
+// Este archivo re-exporta desde el barrel para compatibilidad.
+export { mergeClassNames, formatCurrency } from "@/helpers";

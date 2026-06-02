@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AddToCartButton } from "@/ui/AddToCartButton";
 import { notFound } from "next/navigation";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/helpers";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
 

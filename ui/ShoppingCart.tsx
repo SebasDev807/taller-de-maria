@@ -3,7 +3,7 @@
 import { useCart } from "@/store";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/helpers";
 
 export const ShoppingCart = () => {
 
