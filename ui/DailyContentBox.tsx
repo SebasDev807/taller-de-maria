@@ -6,6 +6,14 @@ interface DailyContentBoxProps {
   content: DailyContent;
 }
 
+/**
+ * Componente que muestra contenido diario, como el evangelio o una oración.
+ * Renderiza una tarjeta con diseño adaptativo basado en el tipo de contenido proporcionado.
+ *
+ * @param {DailyContentBoxProps} props - Propiedades del componente DailyContentBox.
+ * @param {DailyContent} props.content - Objeto que contiene la información del contenido diario a mostrar (título, texto, tipo, etc.).
+ * @returns {React.JSX.Element} La tarjeta de contenido diario renderizada.
+ */
 export const DailyContentBox = ({ content }: DailyContentBoxProps) => {
   if (content.type === "evangelio") {
     return (

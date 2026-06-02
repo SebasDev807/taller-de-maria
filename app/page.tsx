@@ -5,6 +5,13 @@ import { DailyContentBox } from "@/ui/DailyContentBox";
 import { ProductCard } from "@/ui/ProductCard";
 import { mockProducts, mockDailyContent } from "@/lib/mockData";
 
+/**
+ * Componente principal de la página de inicio (Home).
+ * Renderiza la vista principal de la aplicación, combinando secciones como la cabecera (TopNavBar),
+ * el Hero Section, el contenido devocional diario, los productos destacados y el pie de página (Footer).
+ *
+ * @returns {React.JSX.Element} La página de inicio renderizada.
+ */
 export default function Home() {
 
   const evangelio = mockDailyContent.find(content => content.type === "evangelio");

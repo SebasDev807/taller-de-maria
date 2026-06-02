@@ -1,6 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
+/**
+ * Componente Footer que muestra el pie de página de la aplicación.
+ * Contiene información de marca, derechos de autor y enlaces de navegación (políticas, contacto, etc.).
+ *
+ * @returns {React.JSX.Element} El componente del pie de página renderizado.
+ */
 export const Footer: React.FC = () => {
   return (
     <footer className="w-full py-xl px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface border-t border-surface-container-high">

@@ -3,6 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 
+/**
+ * Componente TopNavBar que representa la barra de navegación superior principal.
+ * Incluye el logotipo, enlaces de navegación de escritorio, íconos de acciones y un menú responsivo para dispositivos móviles.
+ *
+ * @returns {React.JSX.Element} La barra de navegación superior renderizada.
+ */
 export const TopNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

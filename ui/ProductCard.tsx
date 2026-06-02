@@ -7,6 +7,15 @@ interface ProductCardProps {
   product: Product;
 }
 
+/**
+ * Componente que representa una tarjeta de producto individual.
+ * Muestra información esencial del producto como imagen, nombre y precio.
+ * Incluye efectos de hover y badges para destacar productos (ej: "Nuevo").
+ *
+ * @param {ProductCardProps} props - Propiedades del componente ProductCard.
+ * @param {Product} props.product - El objeto Product con los datos a mostrar.
+ * @returns {React.JSX.Element} La tarjeta del producto renderizada.
+ */
 export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link

@@ -7,6 +7,17 @@ interface ActionBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
+/**
+ * Componente de botón de acción reutilizable.
+ * Permite configurar un ícono, variantes visuales (primario/secundario) y propiedades estándar de un botón HTML.
+ *
+ * @param {ActionBtnProps} props - Propiedades del componente ActionBtn.
+ * @param {React.ReactNode} props.children - El contenido principal del botón.
+ * @param {string} [props.icon] - Nombre del ícono opcional (Material Symbols) a mostrar junto al texto.
+ * @param {"primary" | "secondary"} [props.variant="primary"] - Variante de estilo del botón.
+ * @param {string} [props.className=""] - Clases CSS adicionales para personalizar el estilo.
+ * @returns {React.JSX.Element} El botón renderizado.
+ */
 export const ActionBtn = ({
   children,
   icon,
