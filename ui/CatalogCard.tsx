@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/mockData";
 import { AddToCartButton } from "./AddToCartButton";
+import { formatCurrency } from "@/lib/utils";
 
 interface CatalogCardProps {
   product: Product;
@@ -48,7 +49,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
               {product.shortDescription}
             </p>
             <span className="block font-headline-md text-headline-md text-tertiary-container mb-md">
-              ${product.price.toFixed(2)}
+              {formatCurrency(product.price)}
             </span>
           </div>
           <div className="relative z-20">
@@ -85,7 +86,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
           </p>
           <div className="mt-auto flex items-center justify-between">
             <span className="font-headline-md text-headline-md text-tertiary-container text-xl">
-              ${product.price.toFixed(2)}
+              {formatCurrency(product.price)}
             </span>
             <div className="relative z-20">
               <AddToCartButton variant="icon" product={product} />
@@ -125,7 +126,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
         </p>
         <div className="mt-auto flex items-center justify-between">
           <span className="font-headline-md text-headline-md text-tertiary-container text-xl">
-            ${product.price.toFixed(2)}
+            {formatCurrency(product.price)}
           </span>
           <div className="relative z-20">
             <AddToCartButton variant="icon" product={product} />

@@ -1,7 +1,7 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/mockData";
+import { formatCurrency } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
@@ -41,7 +41,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.name}
         </h4>
         <p className="font-body-md text-body-md text-secondary font-semibold">
-          € {product.price.toFixed(2)}
+          {formatCurrency(product.price)}
         </p>
       </div>
     </Link>

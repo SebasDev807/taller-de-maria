@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AddToCartButton } from "@/ui/AddToCartButton";
 import { notFound } from "next/navigation";
+import { formatCurrency } from "@/lib/utils";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
 
@@ -72,7 +73,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </div>
               )}
               <h1 className="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-primary mb-2">{product.name}</h1>
-              <p className="font-headline-md text-headline-md text-primary mb-md">${product.price.toFixed(2)}</p>
+              <p className="font-headline-md text-headline-md text-primary mb-md">{formatCurrency(product.price)}</p>
               <div className="w-full h-[1px] bg-surface-container my-sm"></div>
               <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg">
                 {product.shortDescription || "Un producto artesanal creado con devoción."}
@@ -85,7 +86,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </div>
                 <div className="flex items-center justify-center gap-2 text-on-surface-variant mt-2">
                   <span className="material-symbols-outlined text-[16px]">local_shipping</span>
-                  <span className="font-label-sm text-label-sm">Envío gratis en compras mayores a $100</span>
+                  <span className="font-label-sm text-label-sm">Envío gratis en compras mayores a {formatCurrency(100000)}</span>
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@
 import { useCart } from "@/store";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { formatCurrency } from "@/lib/utils";
 
 export const ShoppingCart = () => {
 
@@ -69,7 +70,7 @@ export const ShoppingCart = () => {
                                         </button>
                                     </div>
                                     <span className="font-headline-md text-headline-md text-primary">
-                                        ${(item.price * item.quantity).toFixed(2)}
+                                        {formatCurrency(item.price * item.quantity)}
                                     </span>
                                 </div>
                             </div>
@@ -85,7 +86,7 @@ export const ShoppingCart = () => {
                     <div className="flex flex-col gap-sm font-body-md text-body-md text-on-surface-variant mb-md">
                         <div className="flex justify-between">
                             <span>Subtotal ({currentTotalItems} {currentTotalItems === 1 ? 'artículo' : 'artículos'})</span>
-                            <span className="text-primary font-medium">${currentSubtotal.toFixed(2)}</span>
+                            <span className="text-primary font-medium">{formatCurrency(currentSubtotal)}</span>
                         </div>
                         <div className="flex justify-between">
                             <span>Envío</span>
@@ -94,7 +95,7 @@ export const ShoppingCart = () => {
                     </div>
                     <div className="flex justify-between items-end border-t border-surface-container-high pt-sm mb-lg">
                         <span className="font-headline-md text-headline-md text-primary">Total Estimado</span>
-                        <span className="font-headline-lg text-headline-lg text-primary">${currentSubtotal.toFixed(2)}</span>
+                        <span className="font-headline-lg text-headline-lg text-primary">{formatCurrency(currentSubtotal)}</span>
                     </div>
                     {/* WhatsApp Information Box */}
                     <div className="bg-surface-container p-sm rounded flex items-start gap-sm mb-md">

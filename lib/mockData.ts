@@ -16,7 +16,7 @@ export const mockProducts: Product[] = [
   {
     id: "prod-cat-001",
     name: "Olive Wood Rosary of Peace",
-    price: 45.00,
+    price: 45000,
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAR1PaO6QbfYC3VW4WIf23YgRp2crUfQTlXhWt8Z2SjG8utD-kGrDfRfrj2cG5_kY-megwdVjcGNhJwBkdkDXY8ZbgIGOkuj82j5Gj7WYwB9RjB4KU8osELc2vhww5jL9-8Pd9r98HerQADMh0-Q-_LbyLIHxglgrgXVoFHWFTALa41ccR-1b5qzc4c91-6obREGC04lyL-5eQauhv7bcoCnhSgmSaRMSd3sjUVm_f-yJkMOYQiXh7T2ylu2jxJuCs5reRoTDaJaoA",
     images: [
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAR1PaO6QbfYC3VW4WIf23YgRp2crUfQTlXhWt8Z2SjG8utD-kGrDfRfrj2cG5_kY-megwdVjcGNhJwBkdkDXY8ZbgIGOkuj82j5Gj7WYwB9RjB4KU8osELc2vhww5jL9-8Pd9r98HerQADMh0-Q-_LbyLIHxglgrgXVoFHWFTALa41ccR-1b5qzc4c91-6obREGC04lyL-5eQauhv7bcoCnhSgmSaRMSd3sjUVm_f-yJkMOYQiXh7T2ylu2jxJuCs5reRoTDaJaoA",
@@ -32,7 +32,7 @@ export const mockProducts: Product[] = [
   {
     id: "prod-cat-002",
     name: "Our Lady of Grace Figure",
-    price: 85.00,
+    price: 85000,
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBccRAm38pKomH7axgeTzIg7J1URZqww3RoMD_OTc6rSxEvbs_fokDf1KyqjgdZ7izWfi4qJEf9TV54mgZvslFOFnOcjf8SPUQRQRDmzoWpSJdVuoPhdHBqF8VlEx-InYN7Tz-Jdr_5khTLNcOvF9iD_ozwoUK6LHQYDKg6_72y7uN29CQC8Ahgjqd1gIaMjXIvBxd3az4pmLxXd0nOKd4LWTS1l3mOZOLSW0DZ86Ms2eQk8sRhpvCbZ68AOPwKsvvShe77HNjevpk",
     imageAlt: "A minimalist, elegantly carved stone statue of the Virgin Mary against a stark, pure white background.",
     category: "Figuras",
@@ -41,7 +41,7 @@ export const mockProducts: Product[] = [
   {
     id: "prod-cat-003",
     name: "Classic Wall Crucifix",
-    price: 55.00,
+    price: 55000,
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCE4twuWvmyf42fhH0fi8INJ65Ds8nrgqTjFcNvQlcEeirz5K6f5iM3cVO3EAtzuKGg_hc__jvyf0bbZ0DxznN3aN9lusxunOsith4ZHiranD-w1GmiNHtk4Q2PEBPkfK68TD2ClX0fX1rbeSLlSM_9VmReyx2pPieh8113p56XSs_T_NZpD61Er6MNHMUIRRrjhKI2apLMEW5RmZ2IUEvNBhG0EhRbSTdtDA8jhhsupAoIAsusgOTJ69WouooRG2dD1e4xm8saca0",
     imageAlt: "A traditional wooden crucifix mounted on a plain, subtly textured plaster wall.",
     category: "Figuras",
@@ -50,7 +50,7 @@ export const mockProducts: Product[] = [
   {
     id: "prod-cat-004",
     name: "Sacred Heart Framed Print",
-    price: 38.00,
+    price: 38000,
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuARrollTKs2jbqd7wB34sTmBWnp284AppHXE45vq0kwPsE5VGm6pfXU0KEps1KitRSo-3fDyw-Byc0BXxo2Dt4d-txrIe82qeLbC3Cccy_xEce_MN2GcCp91Bc3mT9vcYC3Eqr_Z0ht_cOAXckQCx3gV0T4b-xYHyLPZjtQVtYIGf1xLf2waADIAjrJXDU0mlcn4OEe_bGISBELoW6Q3dL-yCD8F-auZCUUtGYyuqStbfpDKSzZbYF3pxrLAFFZiiwCULZ47wuBAOQ",
     imageAlt: "A delicate, framed image of the Sacred Heart of Jesus resting on a pristine white marble surface next to a lit votive candle.",
     badge: "Bestseller",
@@ -60,7 +60,7 @@ export const mockProducts: Product[] = [
   {
     id: "prod-cat-005",
     name: "Leather Bound Devotional",
-    price: 60.00,
+    price: 60000,
     icon: "import_contacts",
     category: "Otros",
     shortDescription: "Hand-stitched genuine leather"
