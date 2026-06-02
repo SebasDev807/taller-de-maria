@@ -60,7 +60,7 @@ export const TopNavBar = () => {
               <span className="absolute top-1 right-1 w-2 h-2 bg-secondary-container rounded-full"></span>
             )}
           </Link>
-          <Link href="/admin" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
+          <Link href="/auth/login" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">admin_panel_settings</span>
           </Link>
 
@@ -116,7 +116,7 @@ export const TopNavBar = () => {
             <span className="material-symbols-outlined">notifications</span>
             <span className="font-label-md text-label-lg">Notificaciones</span>
           </button>
-          <Link href="/admin" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+          <Link href="/auth/login" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-outlined">admin_panel_settings</span>
             <span className="font-label-md text-label-lg">Panel de Control</span>
           </Link>

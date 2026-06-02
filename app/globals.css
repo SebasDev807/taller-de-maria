@@ -163,3 +163,18 @@
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
 }
+
+@keyframes field-error {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-field-error {
+  animation: field-error 0.2s ease both;
+}

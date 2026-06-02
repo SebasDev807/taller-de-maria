@@ -12,3 +12,4 @@ export * from "./ProductGallery";
 export * from "./ProductAddToCart";
 export * from "./ShoppingCart";
 export * from "./AdminLayoutShell";
+export * from "./LoginForm";
