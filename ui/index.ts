@@ -8,3 +8,4 @@ export * from "./CatalogCard";
 export * from "./CatalogFilters";
 export * from "./Pagination";
 export * from "./SearchInput";
+export * from "./ProductGallery";

@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   price: number;
   imageUrl?: string;
+  images?: string[];
   imageAlt?: string;
   badge?: string;
   isFeatured?: boolean;
@@ -17,6 +18,11 @@ export const mockProducts: Product[] = [
     name: "Olive Wood Rosary of Peace",
     price: 45.00,
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAR1PaO6QbfYC3VW4WIf23YgRp2crUfQTlXhWt8Z2SjG8utD-kGrDfRfrj2cG5_kY-megwdVjcGNhJwBkdkDXY8ZbgIGOkuj82j5Gj7WYwB9RjB4KU8osELc2vhww5jL9-8Pd9r98HerQADMh0-Q-_LbyLIHxglgrgXVoFHWFTALa41ccR-1b5qzc4c91-6obREGC04lyL-5eQauhv7bcoCnhSgmSaRMSd3sjUVm_f-yJkMOYQiXh7T2ylu2jxJuCs5reRoTDaJaoA",
+    images: [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAR1PaO6QbfYC3VW4WIf23YgRp2crUfQTlXhWt8Z2SjG8utD-kGrDfRfrj2cG5_kY-megwdVjcGNhJwBkdkDXY8ZbgIGOkuj82j5Gj7WYwB9RjB4KU8osELc2vhww5jL9-8Pd9r98HerQADMh0-Q-_LbyLIHxglgrgXVoFHWFTALa41ccR-1b5qzc4c91-6obREGC04lyL-5eQauhv7bcoCnhSgmSaRMSd3sjUVm_f-yJkMOYQiXh7T2ylu2jxJuCs5reRoTDaJaoA",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCKmuNgOPpNepr48KJO3H5ytnFY2u9KqBz-_1-_T5jyOeoHwPA9_7GkBXG6lvZ60eL30PvYvBz8UMSuQwhdLy3fWLp94doVBkjC7lRsJxDGePstym_FycY44MNJRLfKiTU7m7ObT4XkpHw9BMEK4kCtpIJjGNHZnVrAOIOifcWGFEi-KAC3tEuPu4_7SxyvLeMIL5MD8tYaMdCDZadJ_oqC9EpQUerPWXLJKMQhVkUqhp0D2kJtIevhX5OIJbYJNbiDm_ILUtf45C8",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDKnaWBsXzGfcYO5wR5bYzXrI4mEbdjjxD9mSOaVgg-YT0yGuSMgnw0cmxSwPM4xj_fRRwKxLp0fNyPPOfl3DXqrBa7VUuSKdaRktcKwTSNuP-S9lkhHoRIwcaEbpVYYOjEvyUGGuxlRBsuGFSJv_PSJ9C-wJDiDRsp_QdpZkxnbJhRLtI9EUxlw1P-ZFPKuyA5Ht5_K8JvnerAKlx8AeYGRcbp1VF7LHKZ4UGSTJbcMuYdfg_QgW3bOf5SYhxSp8HycjpF8Mv987A"
+    ],
     imageAlt: "A beautifully crafted olive wood rosary resting on an antique open bible.",
     badge: "Handcrafted",
     isFeatured: true,

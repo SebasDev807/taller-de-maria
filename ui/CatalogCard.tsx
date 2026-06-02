@@ -20,7 +20,7 @@ interface CatalogCardProps {
 export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps) => {
   if (variant === "featured") {
     return (
-      <article className="col-span-1 lg:col-span-2 bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col md:flex-row h-full">
+      <article className="col-span-1 lg:col-span-2 bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col md:flex-row h-full relative cursor-pointer">
         <div className="w-full md:w-1/2 h-64 md:h-auto bg-surface-variant relative overflow-hidden">
           {product.imageUrl && (
             <Image
@@ -32,7 +32,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
             />
           )}
           {product.badge && (
-            <div className="absolute top-4 left-4 bg-secondary-fixed-dim text-on-secondary-fixed px-3 py-1 rounded-full font-label-sm text-label-sm">
+            <div className="absolute top-4 left-4 bg-secondary-fixed-dim text-on-secondary-fixed px-3 py-1 rounded-full font-label-sm text-label-sm z-20">
               {product.badge}
             </div>
           )}
@@ -40,7 +40,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
         <div className="p-md flex flex-col justify-between w-full md:w-1/2">
           <div>
             <h2 className="font-headline-lg text-headline-md text-primary mb-2">
-              <Link href={`/shop/${product.id}`} className="hover:underline">
+              <Link href={`/catalog/${product.id}`} className="hover:underline before:absolute before:inset-0 before:z-10">
                 {product.name}
               </Link>
             </h2>
@@ -51,7 +51,9 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
               ${product.price.toFixed(2)}
             </span>
           </div>
-          <AddToCartButton variant="full" />
+          <div className="relative z-20">
+            <AddToCartButton variant="full" />
+          </div>
         </div>
       </article>
     );
@@ -59,7 +61,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
 
   if (variant === "icon") {
     return (
-      <article className="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full">
+      <article className="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full relative cursor-pointer">
         <div className="w-full aspect-[4/5] bg-surface-variant relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-tr from-surface-dim to-surface flex items-center justify-center">
             <span className="material-symbols-outlined text-[64px] text-outline-variant font-light">
@@ -67,25 +69,27 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
             </span>
           </div>
           {product.badge && (
-            <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm border border-surface-container-high">
+            <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm border border-surface-container-high z-20">
               {product.badge}
             </div>
           )}
         </div>
         <div className="p-4 flex flex-col flex-grow">
           <h2 className="font-headline-md text-headline-md text-primary mb-1 text-lg">
-            <Link href={`/shop/${product.id}`} className="hover:underline">
+            <Link href={`/catalog/${product.id}`} className="hover:underline before:absolute before:inset-0 before:z-10">
               {product.name}
             </Link>
           </h2>
-          <p className="font-body-md text-body-md text-on-surface-variant mb-3 text-sm">
+          <p className="font-body-md text-body-md text-on-surface-variant mb-3 text-sm relative z-20 pointer-events-none">
             {product.shortDescription}
           </p>
           <div className="mt-auto flex items-center justify-between">
             <span className="font-headline-md text-headline-md text-tertiary-container text-xl">
               ${product.price.toFixed(2)}
             </span>
-            <AddToCartButton variant="icon" />
+            <div className="relative z-20">
+              <AddToCartButton variant="icon" />
+            </div>
           </div>
         </div>
       </article>
@@ -93,7 +97,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
   }
 
   return (
-    <article className="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full">
+    <article className="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full relative cursor-pointer">
       <div className="w-full aspect-[4/5] bg-surface-variant relative overflow-hidden">
         {product.imageUrl && (
           <Image
@@ -105,25 +109,27 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
           />
         )}
         {product.badge && (
-          <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm border border-surface-container-high">
+          <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm border border-surface-container-high z-20">
             {product.badge}
           </div>
         )}
       </div>
       <div className="p-4 flex flex-col flex-grow">
         <h2 className="font-headline-md text-headline-md text-primary mb-1 text-lg">
-          <Link href={`/shop/${product.id}`} className="hover:underline">
+          <Link href={`/catalog/${product.id}`} className="hover:underline before:absolute before:inset-0 before:z-10">
             {product.name}
           </Link>
         </h2>
-        <p className="font-body-md text-body-md text-on-surface-variant mb-3 text-sm">
+        <p className="font-body-md text-body-md text-on-surface-variant mb-3 text-sm relative z-20 pointer-events-none">
           {product.shortDescription}
         </p>
         <div className="mt-auto flex items-center justify-between">
           <span className="font-headline-md text-headline-md text-tertiary-container text-xl">
             ${product.price.toFixed(2)}
           </span>
-          <AddToCartButton variant="icon" />
+          <div className="relative z-20">
+            <AddToCartButton variant="icon" />
+          </div>
         </div>
       </div>
     </article>

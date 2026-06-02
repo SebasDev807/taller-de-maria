@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Rosario de Madera de Olivo - Taller De Maria</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-variant": "#e2e2e2",
+                        "tertiary": "#28120b",
+                        "primary-fixed": "#ffdad4",
+                        "on-background": "#1a1c1c",
+                        "inverse-surface": "#2f3131",
+                        "on-secondary-fixed-variant": "#604100",
+                        "secondary": "#7e5700",
+                        "surface-tint": "#745853",
+                        "surface-container-high": "#e8e8e8",
+                        "on-primary-fixed": "#2b1613",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-bright": "#f9f9f9",
+                        "primary-container": "#3e2723",
+                        "surface": "#f9f9f9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#b18c81",
+                        "on-secondary-fixed": "#281900",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline": "#827472",
+                        "on-secondary-container": "#6a4800",
+                        "secondary-container": "#feb300",
+                        "secondary-fixed-dim": "#ffba38",
+                        "primary-fixed-dim": "#e3beb8",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-fixed": "#ffdeac",
+                        "on-tertiary-fixed": "#2c160e",
+                        "outline-variant": "#d3c3c0",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-primary-container": "#ae8d87",
+                        "background": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "inverse-primary": "#e3beb8",
+                        "tertiary-container": "#40261e",
+                        "on-surface": "#1a1c1c",
+                        "on-primary-fixed-variant": "#5b403c",
+                        "primary": "#271310",
+                        "surface-dim": "#dadada",
+                        "on-surface-variant": "#504442"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Libre Caslon Text"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "headline-xl": ["Libre Caslon Text"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ambient shadow utility for "lift" effect without harsh borders */
+        .ambient-shadow {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Thin stroke icons */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-primary antialiased selection:bg-secondary-container selection:text-primary-container">
+    <!-- TopNavBar -->
+    <header class="bg-surface border-b border-surface-container sticky top-0 z-50 w-full transition-shadow duration-300"
+        id="top-nav">
+        <div
+            class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto h-16">
+            <!-- Brand -->
+            <div class="flex-shrink-0">
+                <a class="font-headline-md text-headline-md text-primary tracking-tight font-bold" href="#">
+                    Taller De Maria
+                </a>
+            </div>
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex space-x-md items-center h-full">
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 h-full flex items-center px-2"
+                    href="#">
+                    Home
+                </a>
+                <a class="font-label-md text-label-md text-secondary border-b-2 border-secondary pb-[2px] h-full flex items-center px-2 relative top-[1px]"
+                    href="#">
+                    Catalog
+                </a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 h-full flex items-center px-2"
+                    href="#">
+                    About Us
+                </a>
+            </nav>
+            <!-- Actions -->
+            <div class="flex items-center space-x-sm">
+                <!-- Search (implied by "search_bar: on_right" in JSON context, using icon) -->
+                <button aria-label="Search"
+                    class="p-2 text-primary hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-[24px]">search</span>
+                </button>
+                <button aria-label="Profile"
+                    class="p-2 text-primary hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform hidden md:block">
+                    <span class="material-symbols-outlined text-[24px]">person</span>
+                </button>
+                <button aria-label="Notifications"
+                    class="p-2 text-primary hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform hidden md:block">
+                    <span class="material-symbols-outlined text-[24px]">notifications</span>
+                </button>
+                <button aria-label="Shopping Cart"
+                    class="p-2 text-primary hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform relative">
+                    <span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-secondary-container rounded-full"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="w-full pb-xl">
+        <!-- Breadcrumb -->
+        <div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-sm">
+            <nav aria-label="Breadcrumb" class="flex text-on-surface-variant font-label-sm text-label-sm">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a class="hover:text-primary transition-colors" href="#">Home</a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+                            <a class="hover:text-primary transition-colors" href="#">Catalog</a>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+                            <span class="text-primary font-medium">Rosaries</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Product Hero Section -->
+        <section class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop pt-md pb-lg">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter lg:gap-lg">
+                <!-- Product Image (Left) -->
+                <div class="md:col-span-7 lg:col-span-8 flex flex-col gap-sm">
+                    <div
+                        class="w-full aspect-[4/5] md:aspect-square bg-surface-container-lowest rounded-xl ambient-shadow overflow-hidden relative group">
+                        <img alt="Hand-carved Olive Wood Rosary"
+                            class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                            data-alt="A close-up, high-resolution product photograph of a meticulously crafted olive wood rosary resting on a pristine, soft white linen surface. The lighting is ethereal and soft, creating a serene, sanctuary-like atmosphere typical of a high-end minimalist editorial shoot. Subtle ambient shadows highlight the smooth texture of the wooden beads and the delicate silver detailing of the crucifix. The overall color palette is sober, relying on natural wood tones, pure whites, and deep umber shadows to evoke reverence and tradition."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKmuNgOPpNepr48KJO3H5ytnFY2u9KqBz-_1-_T5jyOeoHwPA9_7GkBXG6lvZ60eL30PvYvBz8UMSuQwhdLy3fWLp94doVBkjC7lRsJxDGePstym_FycY44MNJRLfKiTU7m7ObT4XkpHw9BMEK4kCtpIJjGNHZnVrAOIOifcWGFEi-KAC3tEuPu4_7SxyvLeMIL5MD8tYaMdCDZadJ_oqC9EpQUerPWXLJKMQhVkUqhp0D2kJtIevhX5OIJbYJNbiDm_ILUtf45C8" />
+                    </div>
+                    <!-- Thumbnail Gallery (Minimalist) -->
+                    <div class="flex gap-sm overflow-x-auto pb-2 scrollbar-hide">
+                        <button
+                            class="w-20 h-20 flex-shrink-0 bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden">
+                            <img alt="Thumbnail 1" class="w-full h-full object-cover opacity-100"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKnaWBsXzGfcYO5wR5bYzXrI4mEbdjjxD9mSOaVgg-YT0yGuSMgnw0cmxSwPM4xj_fRRwKxLp0fNyPPOfl3DXqrBa7VUuSKdaRktcKwTSNuP-S9lkhHoRIwcaEbpVYYOjEvyUGGuxlRBsuGFSJv_PSJ9C-wJDiDRsp_QdpZkxnbJhRLtI9EUxlw1P-ZFPKuyA5Ht5_K8JvnerAKlx8AeYGRcbp1VF7LHKZ4UGSTJbcMuYdfg_QgW3bOf5SYhxSp8HycjpF8Mv987A" />
+                        </button>
+                        <button
+                            class="w-20 h-20 flex-shrink-0 bg-surface-container-lowest rounded-lg border border-transparent overflow-hidden opacity-60 hover:opacity-100 transition-opacity">
+                            <div
+                                class="w-full h-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+                                <span class="material-symbols-outlined">zoom_in</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Product Details (Right) -->
+                <div class="md:col-span-5 lg:col-span-4 flex flex-col pt-md md:pt-0">
+                    <!-- Chips/Tags -->
+                    <div class="flex gap-2 mb-sm">
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded bg-[#FFE082] bg-opacity-20 text-secondary-container font-label-sm text-label-sm border border-secondary-container/30">
+                            Handmade
+                        </span>
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                            Best Seller
+                        </span>
+                    </div>
+                    <h1 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-primary mb-2">Rosario
+                        de Madera de Olivo</h1>
+                    <p class="font-headline-md text-headline-md text-primary mb-md">$45.00</p>
+                    <div class="w-full h-[1px] bg-surface-container my-sm"></div>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">
+                        Hand-carved from genuine Bethlehem olive wood, this exquisite rosary features smooth, tactile
+                        beads and a detailed silver crucifix. A timeless instrument of prayer and devotion.
+                    </p>
+                    <!-- Add to Cart Area -->
+                    <div class="mt-auto flex flex-col gap-sm">
+                        <div class="flex items-center gap-sm">
+                            <!-- Quantity Selector -->
+                            <div
+                                class="flex items-center border border-outline-variant rounded-lg bg-surface-container-lowest h-12 w-32">
+                                <button aria-label="Decrease quantity"
+                                    class="w-10 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[18px]">remove</span>
+                                </button>
+                                <input aria-label="Quantity"
+                                    class="w-full h-full text-center border-none bg-transparent font-label-md text-label-md text-primary focus:ring-0 p-0 m-0 [-moz-appearance:_textfield] [&amp;::-webkit-outer-spin-button]:m-0 [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:m-0 [&amp;::-webkit-inner-spin-button]:appearance-none"
+                                    min="1" type="number" value="1" />
+                                <button aria-label="Increase quantity"
+                                    class="w-10 h-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[18px]">add</span>
+                                </button>
+                            </div>
+                            <!-- Add to Cart Button -->
+                            <button
+                                class="flex-1 bg-secondary-container hover:bg-secondary-fixed-dim text-primary-container font-label-md text-label-md h-12 rounded-lg flex items-center justify-center transition-all duration-200 active:scale-[0.98] ambient-shadow">
+                                Add to Cart
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-center gap-2 text-on-surface-variant mt-2">
+                            <span class="material-symbols-outlined text-[16px]">local_shipping</span>
+                            <span class="font-label-sm text-label-sm">Free shipping on orders over $100</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Specifications Bento -->
+        <section class="bg-surface-bright py-xl border-y border-surface-container">
+            <div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
+                <h2 class="font-headline-lg text-headline-lg text-primary text-center mb-lg">Product Specifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                    <!-- Material -->
+                    <div
+                        class="bg-surface-container-lowest p-md rounded-xl ambient-shadow flex flex-col items-center text-center">
+                        <span class="material-symbols-outlined text-[32px] text-secondary mb-sm">forest</span>
+                        <h3
+                            class="font-label-md text-label-md text-primary mb-xs uppercase tracking-widest text-[11px]">
+                            Materials</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Genuine Olive Wood<br />&amp;
+                            Sterling Silver</p>
+                    </div>
+                    <!-- Dimensions -->
+                    <div
+                        class="bg-surface-container-lowest p-md rounded-xl ambient-shadow flex flex-col items-center text-center">
+                        <span class="material-symbols-outlined text-[32px] text-secondary mb-sm">straighten</span>
+                        <h3
+                            class="font-label-md text-label-md text-primary mb-xs uppercase tracking-widest text-[11px]">
+                            Dimensions</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Length: 50cm<br />Bead Size: 8mm
+                        </p>
+                    </div>
+                    <!-- Origin -->
+                    <div
+                        class="bg-surface-container-lowest p-md rounded-xl ambient-shadow flex flex-col items-center text-center">
+                        <span class="material-symbols-outlined text-[32px] text-secondary mb-sm">public</span>
+                        <h3
+                            class="font-label-md text-label-md text-primary mb-xs uppercase tracking-widest text-[11px]">
+                            Origin</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">Handcrafted in<br />Bethlehem</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Artisanal Process (Editorial Layout) -->
+        <section class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-lg items-center">
+                <div class="order-2 lg:order-1 flex flex-col justify-center pr-0 lg:pr-lg">
+                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-md">
+                        Handcrafted with Devotion</h2>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-md leading-relaxed">
+                        Every bead is individually shaped and polished by master artisans whose families have passed
+                        down the tradition of olive wood carving for generations. The wood is sustainably sourced from
+                        trimmings of ancient olive trees, ensuring no tree is harmed in the creation of these sacred
+                        items.
+                    </p>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        The natural variations in the wood grain mean that no two rosaries are exactly alike, making
+                        each piece a unique testament to faith and craftsmanship.
+                    </p>
+                </div>
+                <div class="order-1 lg:order-2 w-full aspect-[4/3] rounded-xl overflow-hidden ambient-shadow">
+                    <img alt="Artisan carving wood" class="w-full h-full object-cover"
+                        data-alt="An atmospheric, medium shot of a skilled artisan's hands carefully shaping a small piece of light brown wood in a softly lit, dusty workshop. The lighting is warm and directional, emphasizing the texture of the wood shavings and the focus of the craft. The scene embodies a modern minimalist editorial style, avoiding clutter and focusing entirely on the reverent, traditional process of handcrafting. The color palette consists of warm earth tones, deep shadows, and subtle highlights."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9-dj6DTryZiLd-h7AN_iD7XIgzyYIIzvZSLfcezI_Rr-eWz87OQGjbEVlcwDtS858kiIwTdeNuotwcRx5diJHjHTtRM1YkVAmo3B2HnMl4H93lYOoLPj6S9rei2bk8NTGLmDfRJF1jDeydnxpnAe0UCYY-OXVFp_YO44CJe93_fuFplulCHVty60c4dduK3_yEyNruxm3PrYn1CYY286XZen5eXe95m3DWJeB8ACOEtofGu_Ahy22pukyFI96ueItkwVzIJUeS7A" />
+                </div>
+            </div>
+        </section>
+        <!-- Related Products (Minimalist Grid) -->
+        <section class="bg-surface-bright py-xl border-t border-surface-container">
+            <div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
+                <div class="flex justify-between items-end mb-lg">
+                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">You may also
+                        like</h2>
+                    <a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed transition-colors hidden md:block"
+                        href="#">View Collection</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter">
+                    <!-- Product Card 1 -->
+                    <a class="group block bg-surface-container-lowest rounded-xl ambient-shadow overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+                        href="#">
+                        <div class="w-full aspect-square bg-surface-container overflow-hidden">
+                            <img alt="Related Item 1"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                data-alt="A minimalist product photograph of a silver crucifix pendant lying flat on a stark white surface. Soft, diffused lighting creates a serene, premium aesthetic. The composition is highly structured, focusing on the simple, reverent beauty of the object against an expansive negative space, maintaining the light-mode, sober identity of the brand."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmmHIR38fA-quaqUXot2ZKW2k44B4o_MkX0RCvfS03K1qu7Sa8GoaMBWwGyX8LeSeynXkHyg1SeibQQY-7_7JSrWtwE3HG3NhN-_aH313rxKRxCA2tr9jZ-gcec2J0FxXQF0JkR64ysNbSK1H2x5mvOqH78tJejui7rDw6sIycAFy6GCaQY4UyQS1SAbf94ZKJstmFd1qNmd8WBlJfp_2Rhv2JLPKnHWAZxn-IW2Q2MhxbK7SVGgPv5MZTzyowWzZ7t3GKwxjJOFQ" />
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-headline-md text-[18px] leading-tight text-primary mb-1">Silver Crucifix
+                                Pendant</h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">$85.00</p>
+                        </div>
+                    </a>
+                    <!-- Product Card 2 -->
+                    <a class="group block bg-surface-container-lowest rounded-xl ambient-shadow overflow-hidden transition-transform duration-300 hover:-translate-y-1"
+                        href="#">
+                        <div class="w-full aspect-square bg-surface-container overflow-hidden">
+                            <img alt="Related Item 2"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                data-alt="A clean, top-down product shot of a small, leather-bound prayer book placed on a light grey stone texture. The lighting is gentle and natural, casting minimal shadows to evoke a sense of quiet devotion. The design adheres strictly to a minimalist, high-end editorial style with a muted color palette of soft greys, pure whites, and warm brown leather accents."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO1dPYzOm-Pobvi-aS1nMFmqx_emcRGatddtvQuYe4kdtg0MMGVPr6FdZj5RN0hMF4W9oR-8osSnfKkISYvCrho8MnBtihMoxOmztISb2H509wfL5SF6eNT4XpnTJ-5ang6EAJfY2VsHg2Z7lL-c3fUXZVASt233HamB8nEt-UI2frJu6UWDLUU3xqvK5LWKMiLG1snU4WKgChkziRDzPqA9ftHLfaGwsfRNN1s4K7kxnfDtaXt3G_HC0yvToc2_H-GMJGjlXxXMo" />
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-headline-md text-[18px] leading-tight text-primary mb-1">Leather Prayer Book
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">$35.00</p>
+                        </div>
+                    </a>
+                    <!-- Product Card 3 -->
+                    <a class="group block bg-surface-container-lowest rounded-xl ambient-shadow overflow-hidden transition-transform duration-300 hover:-translate-y-1 hidden sm:block"
+                        href="#">
+                        <div class="w-full aspect-square bg-surface-container overflow-hidden">
+                            <div class="w-full h-full flex items-center justify-center text-outline-variant">
+                                <!-- Placeholder using pattern to avoid data URIs as requested, simulating a missing image cleanly -->
+                                <div class="w-full h-full bg-gradient-to-br from-surface-container to-surface-variant">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-headline-md text-[18px] leading-tight text-primary mb-1">Olive Wood Cross
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">$25.00</p>
+                        </div>
+                    </a>
+                    <!-- Product Card 4 -->
+                    <a class="group block bg-surface-container-lowest rounded-xl ambient-shadow overflow-hidden transition-transform duration-300 hover:-translate-y-1 hidden md:block"
+                        href="#">
+                        <div class="w-full aspect-square bg-surface-container overflow-hidden">
+                            <div class="w-full h-full flex items-center justify-center text-outline-variant">
+                                <div class="w-full h-full bg-gradient-to-br from-surface-container to-surface-variant">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-headline-md text-[18px] leading-tight text-primary mb-1">Beeswax Candles Set
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">$40.00</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer
+        class="bg-surface-container-lowest dark:bg-surface-container-high border-t border-surface-container dark:border-outline-variant w-full transition-all duration-300 relative bottom-0">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-xl max-w-[1200px] mx-auto">
+            <!-- Brand & Copyright -->
+            <div class="flex flex-col space-y-md col-span-1 md:col-span-2 lg:col-span-1">
+                <span class="font-headline-md text-headline-md text-primary">Taller De Maria</span>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
+                    © 2024 Taller De Maria. All rights reserved. Sacred Arts &amp; Tradition.
+                </p>
+            </div>
+            <!-- Empty Column for spacing on large screens -->
+            <div class="hidden lg:block"></div>
+            <!-- Links Column 1 -->
+            <div class="flex flex-col space-y-sm">
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors"
+                    href="#">Privacy Policy</a>
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors"
+                    href="#">Terms of Service</a>
+            </div>
+            <!-- Links Column 2 -->
+            <div class="flex flex-col space-y-sm">
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors"
+                    href="#">Shipping &amp; Returns</a>
+                <a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors"
+                    href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Simple micro-interaction for nav bar shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('top-nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-[0_4px_20px_rgba(0,0,0,0.03)]');
+            } else {
+                nav.classList.remove('shadow-[0_4px_20px_rgba(0,0,0,0.03)]');
+            }
+        });
+    </script>
+</body>
+
+</html>
