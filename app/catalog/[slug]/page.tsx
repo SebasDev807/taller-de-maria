@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   </div>
                   {/* Add to Cart Button */}
                   <div className="flex-1">
-                    <AddToCartButton variant="full" />
+                    <AddToCartButton variant="full" product={product} />
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-2 text-on-surface-variant mt-2">

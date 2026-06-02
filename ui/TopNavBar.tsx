@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { SearchInput } from "./SearchInput";
+import { useCart } from "@/store/shopping-cart";
 
 /**
  * Componente TopNavBar que representa la barra de navegación superior principal.
@@ -43,8 +44,11 @@ export const TopNavBar = () => {
           <button className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">notifications</span>
           </button>
-          <Link href="/cart" className="p-2 hover:bg-surface-variant rounded-full transition-colors group cursor-pointer">
+          <Link href="/cart" className="p-2 hover:bg-surface-variant rounded-full transition-colors group cursor-pointer relative text-secondary">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">shopping_cart</span>
+            {useCart((state) => state.totalItems()) > 0 && (
+              <span className="absolute top-1 right-1 w-2 h-2 bg-secondary-container rounded-full"></span>
+            )}
           </Link>
           <Link href="/admin" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">admin_panel_settings</span>

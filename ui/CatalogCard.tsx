@@ -52,7 +52,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
             </span>
           </div>
           <div className="relative z-20">
-            <AddToCartButton variant="full" />
+            <AddToCartButton variant="full" product={product} />
           </div>
         </div>
       </article>
@@ -88,7 +88,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
               ${product.price.toFixed(2)}
             </span>
             <div className="relative z-20">
-              <AddToCartButton variant="icon" />
+              <AddToCartButton variant="icon" product={product} />
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
             ${product.price.toFixed(2)}
           </span>
           <div className="relative z-20">
-            <AddToCartButton variant="icon" />
+            <AddToCartButton variant="icon" product={product} />
           </div>
         </div>
       </div>

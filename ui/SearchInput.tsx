@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { useSearch } from "@/hooks/useSearch";
+import { useSearch } from "@/hooks/use-search";
 
 /**
  * Componente interno de búsqueda con debounce y actualización dinámica.

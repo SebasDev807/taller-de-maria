@@ -1,53 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { TopNavBar, Footer } from "@/ui";
-
-const initialCartItems = [
-  {
-    id: 1,
-    name: "Rosario de Madera de Olivo",
-    description: "Detalles en plata 925, engarzado a mano.",
-    price: 45.00,
-    quantity: 1,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuB65Y0hCYajU6OwDokuu2Mg6Vk5TNNBMjCZajYKl8u52HzArmU1FUFQvQGF-tK7Fz3W9odp7j9vLzKjmvyhwEWE3iJNc42C7bUQgXhf8_bItrw-brr5FU0ut0sSHDX49UX8fGn701_I9JzhrFMaXjiZoAWW31wYn11Gqdr06bUmx0Dd9BJ32TxhJQLatWoI5oGhRWbAqQkesmAhjniwQffAbA-Mvw6hROdLW4nl8FWaEjgpV92LffWQGcaquZA_vixiFMpo_peTYOE",
-    alt: "Handcrafted Rosary",
-  },
-  {
-    id: 2,
-    name: "Cruz de San Benito",
-    description: "Bronce macizo, 12cm.",
-    price: 35.00,
-    quantity: 2,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDHfnMLMC3B3OwYm4dqTARWEPZBgTIz1b0CItvSQY5Xsvc5AgMYOmqgvUOzN4qtKUd4oKDF5VvFNzmL75DkKYxt-p5fl9egAxSgeHDGpSmVV-FSHjiP6fM2Hlv4C9pgkBB0rrolEzGfQ_KUgoJM0ATv-tvwN7OyW6ExZyyL0-WGGzu4XsZd4XLF247izyEqwF2OE07XycR83yvi0j9Xf4KMIjuy4HDkXIGgS7wmhDfxLRDdvgcojuIk_y3PGbhzYr9rFkBs5DeMel0",
-    alt: "San Benito Crucifix",
-  },
-];
+import { useCart } from "@/store/shopping-cart";
 
 export default function CartPage() {
-  const [items, setItems] = useState(initialCartItems);
-
-  const updateQuantity = (id: number, delta: number) => {
-    setItems((currentItems) =>
-      currentItems.map((item) => {
-        if (item.id === id) {
-          const newQuantity = item.quantity + delta;
-          // Prevent negative or zero quantity if we want to keep it in the cart, minimum 1
-          return { ...item, quantity: Math.max(1, newQuantity) };
-        }
-        return item;
-      })
-    );
-  };
-
-  const removeItem = (id: number) => {
-    setItems((currentItems) => currentItems.filter((item) => item.id !== id));
-  };
-
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
+  const { items, updateQuantity, removeItem, totalItems, subtotal } = useCart();
+  const currentTotalItems = totalItems();
+  const currentSubtotal = subtotal();
   return (
     <>
       <TopNavBar />
@@ -114,15 +74,15 @@ export default function CartPage() {
               ))
             )}
           </div>
-          
+
           {/* Right Column: Order Summary */}
           <div className="lg:col-span-5 relative">
             <div className="bg-surface-container-lowest rounded-lg ambient-shadow p-md lg:p-lg border border-surface-container-high sticky top-[104px]">
               <h2 className="font-headline-md text-headline-md text-primary mb-md border-b border-surface-container-high pb-sm">Resumen de la Orden</h2>
               <div className="flex flex-col gap-sm font-body-md text-body-md text-on-surface-variant mb-md">
                 <div className="flex justify-between">
-                  <span>Subtotal ({totalItems} {totalItems === 1 ? 'artículo' : 'artículos'})</span>
-                  <span className="text-primary font-medium">${subtotal.toFixed(2)}</span>
+                  <span>Subtotal ({currentTotalItems} {currentTotalItems === 1 ? 'artículo' : 'artículos'})</span>
+                  <span className="text-primary font-medium">${currentSubtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Envío</span>
@@ -131,7 +91,7 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between items-end border-t border-surface-container-high pt-sm mb-lg">
                 <span className="font-headline-md text-headline-md text-primary">Total Estimado</span>
-                <span className="font-headline-lg text-headline-lg text-primary">${subtotal.toFixed(2)}</span>
+                <span className="font-headline-lg text-headline-lg text-primary">${currentSubtotal.toFixed(2)}</span>
               </div>
               {/* WhatsApp Information Box */}
               <div className="bg-surface-container p-sm rounded flex items-start gap-sm mb-md">
