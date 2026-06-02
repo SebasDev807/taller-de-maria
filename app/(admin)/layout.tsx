@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Lato } from "next/font/google";
-import "./globals.css";
-import { Footer, TopNavBar } from "@/ui";
+import "../globals.css";
+import { AdminLayoutShell } from "@/ui";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -15,11 +15,11 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Taller De Maria - Inicio",
-  description: "Paz y devoción en cada detalle.",
+  title: "Admin Dashboard - Taller De Maria",
+  description: "Management Console for Taller De Maria",
 };
 
-export default function RootLayout({
+export default function AdminRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -32,10 +32,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed min-h-full flex flex-col">
-        <TopNavBar />
-        {children}
-        <Footer />
+      <body className="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-full">
+        <AdminLayoutShell>
+          {children}
+        </AdminLayoutShell>
       </body>
     </html>
   );

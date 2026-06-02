@@ -11,3 +11,4 @@ export * from "./SearchInput";
 export * from "./ProductGallery";
 export * from "./ProductAddToCart";
 export * from "./ShoppingCart";
+export * from "./AdminLayoutShell";
