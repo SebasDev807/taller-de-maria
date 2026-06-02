@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sobre Nosotros - Taller De Maria</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#e3beb8",
+                        "surface": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#2c160e",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#5b403c",
+                        "secondary-fixed": "#ffdeac",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ae8d87",
+                        "surface-container-high": "#e8e8e8",
+                        "on-primary": "#ffffff",
+                        "primary": "#271310",
+                        "outline-variant": "#d3c3c0",
+                        "on-secondary-container": "#6a4800",
+                        "on-secondary-fixed": "#281900",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "tertiary-fixed": "#ffdbd0",
+                        "inverse-on-surface": "#f0f1f1",
+                        "secondary-container": "#feb300",
+                        "primary-container": "#3e2723",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "on-background": "#1a1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary-fixed": "#2b1613",
+                        "inverse-surface": "#2f3131",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "inverse-primary": "#e3beb8",
+                        "tertiary": "#28120b",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dadada",
+                        "background": "#f9f9f9",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-container": "#b18c81",
+                        "secondary": "#7e5700",
+                        "secondary-fixed-dim": "#ffba38",
+                        "error-container": "#ffdad6",
+                        "outline": "#827472",
+                        "primary-fixed": "#ffdad4",
+                        "on-surface-variant": "#504442",
+                        "tertiary-container": "#40261e",
+                        "surface-tint": "#745853",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#604100",
+                        "surface-container-low": "#f3f3f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "48px",
+                        "md": "24px",
+                        "base": "8px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "xl": "80px",
+                        "margin-desktop": "64px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Libre Caslon Text"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Libre Caslon Text"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface border-b border-surface-container-high dark:border-outline-variant">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-[1200px] mx-auto">
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tight transition-opacity hover:opacity-80" href="#">
+                Taller De Maria
+            </a>
+<!-- Navigation Links (Desktop Only) -->
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors hover:text-secondary dark:hover:text-secondary-fixed-dim transition-all" href="#">
+                    Home
+                </a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors hover:text-secondary dark:hover:text-secondary-fixed-dim transition-all" href="#">
+                    Catalog
+                </a>
+<a class="font-label-md text-label-md text-secondary dark:text-secondary-fixed-dim border-b-2 border-secondary pb-1 hover:text-secondary dark:hover:text-secondary-fixed-dim transition-all scale-95 duration-200 ease-in-out" href="#">
+                    About Us
+                </a>
+</nav>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-sm text-primary dark:text-inverse-primary">
+<button aria-label="person" class="p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button aria-label="notifications" class="p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="shopping_cart" class="p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button aria-label="admin_panel_settings" class="hidden md:block p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-[100px] pb-xl flex flex-col gap-xl">
+<!-- Hero Section: History -->
+<section class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
+<!-- Text Content -->
+<div class="lg:col-span-5 flex flex-col gap-md">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Nuestra Historia</span>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary text-balance">
+                        Forjando devoción a través del trabajo artesanal.
+                    </h1>
+<div class="font-body-lg text-body-lg text-on-surface-variant flex flex-col gap-sm">
+<p>
+                            El Taller De Maria nació de una profunda vocación de servicio y amor por el arte sacro. Desde nuestros inicios, nos hemos dedicado a crear piezas que no solo adornan, sino que elevan el espíritu y acompañan en la oración diaria.
+                        </p>
+<p>
+                            Cada rosario, cada imagen, y cada ornamento es trabajado con reverencia en nuestro taller. Utilizamos materiales nobles y técnicas tradicionales, asegurando que el carácter sagrado de cada objeto se preserve desde la concepción hasta que llega a sus manos.
+                        </p>
+</div>
+</div>
+<!-- Asymmetric Image Layout -->
+<div class="lg:col-span-7 grid grid-cols-2 gap-sm relative h-[500px]">
+<div class="h-full rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.04)] transform translate-y-8">
+<img alt="Artesano" class="w-full h-full object-cover grayscale-[20%]" data-alt="A close-up, highly detailed shot of an artisan's aged hands carefully carving a piece of dark wood in a softly lit, minimalist workshop space. The scene is bathed in natural, diffused daylight coming from an unseen window, creating a modern, light-mode aesthetic. The color palette relies on pristine whites of the work surface, the rich browns of the wood, and subtle skin tones, exuding a mood of serene devotion, tradition, and meticulous craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmTob960YzrDkqzeqzmkQSlaqOZpDAu0D1UT0nRy9fIQpw657aGlIViUiKsgN98Kn2NNuRiUhoShksMQtefIQKVJDQSI8r5NH5xe5XAjto7atbrpG5BO7X-5iWfeKPEFbh_lFL9oorNM5pC1hsg2Wu-nvB4O-9ezRBQ46ZY0mGWRWIeTuvEImJsXKKnwd1Uk1cjxqNFL6mxUc9qLg23e_24gs5AiqMDvF1s62eKzs6oFdA8QPo-REI75fRjcNnx082X21xHaLyUic"/>
+</div>
+<div class="h-full rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.06)] transform -translate-y-4">
+<img alt="Rosario" class="w-full h-full object-cover sepia-[10%]" data-alt="A macro photograph of an elegantly crafted wooden rosario resting on a pristine, flat white surface. The image is captured with shallow depth of field, blurring the background into a soft, bright canvas that highlights the smooth texture of the beads and the delicate silver crucifix. The lighting is high-key and ambient, throwing incredibly soft, low-opacity shadows that give the piece a subtle lift, aligning perfectly with a modern, elegant, and reverent Catholic e-commerce aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZchB_iDewXsmVxcQaGD4XrRo75QQgO1J_sAxORLyU0AgsZRzaZnqW6D06tMXVBsmMIhVnyOlvD3-wjVaCFEwMLeKCezb453AXOybbE-F4ZcKMxA5A3NhpS_DNwj-hqb0wwM6mpjSoepF34XfBo2shIzJsW8_hXCs3DdI6czrlcgImMqE6lsfbIwDU9XUXUb0OxmVdfIZeTr2JjZMuxv0MXtItD4GGqleMs-FR5lKLwuC_U8rnLjgcQIzb3x8qTg4RA2HBg37GUTE"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Values -->
+<section class="w-full bg-surface-container-low py-xl">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-lg">
+<h2 class="font-headline-md text-headline-md text-primary">Pilares del Taller</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl mx-auto">
+                        Nuestra filosofía de trabajo se sostiene en tres virtudes que guían cada incisión, cada nudo y cada entrega.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-surface-container-high flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2 text-xl">Devoción</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                Trabajamos en estado de gracia y oración. Nuestras manos son solo instrumentos; el verdadero creador reside en el silencio del taller y en la fe que depositamos en cada obra.
+                            </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-surface-container-high flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2 text-xl">Tradición</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                Respetamos y preservamos los métodos heredados de generaciones de artesanos. La estética clásica y la sobriedad son nuestras guías para honrar la historia sacra.
+                            </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-surface-container-high flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="handyman">handyman</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2 text-xl">Artesanía</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                Renunciamos a la producción masiva. Privilegiamos la calidad sobre la cantidad, asegurando que los materiales nobles sean tratados con la dignidad que merecen.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Location & Contact -->
+<section class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop w-full pb-xl">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl bg-surface-container-lowest rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.05)] border border-surface-container-high overflow-hidden">
+<!-- Info Side -->
+<div class="p-lg md:p-xl flex flex-col justify-center gap-lg">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
+                            Encuéntrenos
+                        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                            Nuestro taller está abierto para aquellos que buscan un momento de paz o desean encargar una pieza especial en persona. Le invitamos a visitarnos.
+                        </p>
+</div>
+<div class="flex flex-col gap-md">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary mt-1" data-icon="location_on">location_on</span>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-1">Dirección</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                    Calle del Silencio 14, Barrio Antiguo<br/>
+                                    41004 Sevilla, España
+                                </p>
+</div>
+</div>
+<div class="w-full h-[1px] bg-surface-container-high my-2"></div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary mt-1" data-icon="schedule">schedule</span>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-1">Horario de Atención</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                    Lunes a Viernes: 10:00 - 14:00 | 17:00 - 20:00<br/>
+                                    Sábados: 10:00 - 14:00 (Solo con cita previa)
+                                </p>
+</div>
+</div>
+<div class="w-full h-[1px] bg-surface-container-high my-2"></div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary mt-1" data-icon="mail">mail</span>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-1">Contacto</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                    taller@tallerdemaria.com<br/>
+                                    +34 954 123 456
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Side -->
+<div class="relative min-h-[400px] bg-surface-container-low">
+<img alt="Mapa de Ubicación" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A clean, minimalist street map rendering of Seville, Spain, viewed from a top-down perspective. The map style is highly stylized and elegant, utilizing a soft, light-mode color palette dominated by pristine whites, pale greys, and subtle hints of warm amber (#FFB300) to highlight main arteries. The aesthetic is modern, uncluttered, and perfectly aligns with a premium, sober editorial design system, avoiding any harsh or overly saturated colors." data-location="Sevilla, España" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-27utUo4XyV-l8zcJgpt4BwNy1CCD6txvanjQCIqxFufOJO_uNpu7aA09IPzXOCv1KeKHWDtoytWlUz-2KAvQHt8Kr5k4-liXS8W1Xep-ZrYtpfHqFXXz1pvZWPjCKdTPTOgDRzAlbIn0eocj3SffCYGC2IYyvGDXSpAGV0LEe4KfeJakCJxf6OuTPzT5_i4ZXdxdMzYP9lnqI_OS34mHAv9TlMBoKdWk6MBTGWM6U51kzGVx6RH5lJuSUwdadFm9ZkqlNhLs1BE"/>
+<!-- Faux Map Pin -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="church">church</span>
+</div>
+<div class="mt-2 bg-surface-container-lowest px-3 py-1 rounded shadow-sm border border-surface-container-high">
+<span class="font-label-sm text-label-sm text-primary">Taller De Maria</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Responsive Pivot) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface border-t border-surface-container-high z-50 px-margin-mobile py-sm flex justify-between items-center shadow-[0_-10px_30px_rgba(0,0,0,0.03)]">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-[10px]">Catalog</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-secondary" href="#">
+<div class="bg-secondary-fixed px-4 py-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="info" data-weight="fill" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+<span class="font-label-sm text-[10px] font-bold">About Us</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-[10px]">Profile</span>
+</a>
+</nav>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-xl px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-surface-container-high bg-surface dark:bg-surface-dim mb-16 md:mb-0">
+<!-- Brand / Copyright -->
+<div class="flex flex-col items-center md:items-start gap-sm">
+<span class="font-headline-md text-headline-md text-primary">
+                Taller De Maria
+            </span>
+<span class="font-body-md text-body-md text-on-surface dark:text-on-surface-variant text-center md:text-left">
+                © 2024 Taller De Maria. Handcrafted Devotion.
+            </span>
+</div>
+<!-- Links -->
+<div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline decoration-secondary underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">
+                Privacy Policy
+            </a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline decoration-secondary underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">
+                Terms of Service
+            </a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline decoration-secondary underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">
+                Shipping &amp; Returns
+            </a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline decoration-secondary underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">
+                Contact
+            </a>
+</div>
+</footer>
+</body></html>
