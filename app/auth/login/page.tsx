@@ -4,8 +4,6 @@ import Link from "next/link";
 
 export default function AdminLoginPage() {
 
-
-
   return (
     <main className="fade-in min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop">
       {/* Card */}
