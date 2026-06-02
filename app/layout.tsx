@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Lato } from "next/font/google";
 import "./globals.css";
+import { Footer, TopNavBar } from "@/ui";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -32,7 +33,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed min-h-full flex flex-col">
+        <TopNavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );

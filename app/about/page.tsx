@@ -66,148 +66,148 @@ export default function AboutPage() {
   const { history, values, contact } = aboutMocks;
 
   return (
-    <>
-      <TopNavBar />
-      <main className="pt-[100px] pb-xl flex flex-col gap-xl">
-        {/* Hero Section: History */}
-        <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
-            {/* Text Content */}
-            <div className="lg:col-span-5 flex flex-col gap-md">
-              <span className="font-label-md text-label-md text-secondary uppercase tracking-widest">{history.tagline}</span>
-              <h1 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary text-balance">
-                {history.title}
-              </h1>
-              <div className="font-body-lg text-body-lg text-on-surface-variant flex flex-col gap-sm">
-                {history.paragraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-            </div>
-            {/* Asymmetric Image Layout */}
-            <div className="lg:col-span-7 grid grid-cols-2 gap-sm relative h-[500px]">
-              <div className="h-full rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.04)] transform translate-y-8 relative">
-                <Image
-                  alt="Artesano"
-                  className="w-full h-full object-cover grayscale-[20%]"
-                  src={history.image1}
-                  fill
-                  unoptimized
-                />
-              </div>
-              <div className="h-full rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.06)] transform -translate-y-4 relative">
-                <Image
-                  alt="Rosario"
-                  className="w-full h-full object-cover sepia-[10%]"
-                  src={history.image2}
-                  fill
-                  unoptimized
-                />
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Bento Grid: Values */}
-        <section className="w-full bg-surface-container-low py-xl">
-          <div className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
-            <div className="text-center mb-lg">
-              <h2 className="font-headline-md text-headline-md text-primary">{values.title}</h2>
-              <p className="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl mx-auto">
-                {values.subtitle}
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-              {values.items.map(item => (
-                <div key={item.id} className="bg-surface-container-lowest p-lg rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-surface-container-high flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
-                  <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary">
-                    <span className="material-symbols-outlined">{item.icon}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-headline-md text-headline-md text-primary mb-2 text-xl">{item.title}</h3>
-                    <p className="font-body-md text-body-md text-on-surface-variant">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
+
+    <main className="fade-in pt-[100px] pb-xl flex flex-col gap-xl">
+      {/* Hero Section: History */}
+      <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
+          {/* Text Content */}
+          <div className="lg:col-span-5 flex flex-col gap-md">
+            <span className="font-label-md text-label-md text-secondary uppercase tracking-widest">{history.tagline}</span>
+            <h1 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary text-balance">
+              {history.title}
+            </h1>
+            <div className="font-body-lg text-body-lg text-on-surface-variant flex flex-col gap-sm">
+              {history.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
               ))}
             </div>
           </div>
-        </section>
-
-        {/* Location & Contact */}
-        <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop w-full pb-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl bg-surface-container-lowest rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.05)] border border-surface-container-high overflow-hidden">
-            {/* Info Side */}
-            <div className="p-lg md:p-xl flex flex-col justify-center gap-lg">
-              <div>
-                <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
-                  {contact.title}
-                </h2>
-                <p className="font-body-md text-body-md text-on-surface-variant mb-8">
-                  {contact.description}
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-md">
-                <div className="flex items-start gap-4">
-                  <span className="material-symbols-outlined text-secondary mt-1">location_on</span>
-                  <div>
-                    <h4 className="font-label-md text-label-md text-primary mb-1">Dirección</h4>
-                    <p className="font-body-md text-body-md text-on-surface-variant">
-                      {contact.address.street}<br />
-                      {contact.address.city}
-                    </p>
-                  </div>
-                </div>
-                <div className="w-full h-[1px] bg-surface-container-high my-2"></div>
-                <div className="flex items-start gap-4">
-                  <span className="material-symbols-outlined text-secondary mt-1">schedule</span>
-                  <div>
-                    <h4 className="font-label-md text-label-md text-primary mb-1">Horario de Atención</h4>
-                    <p className="font-body-md text-body-md text-on-surface-variant">
-                      {contact.hours.weekdays}<br />
-                      {contact.hours.weekends}
-                    </p>
-                  </div>
-                </div>
-                <div className="w-full h-[1px] bg-surface-container-high my-2"></div>
-                <div className="flex items-start gap-4">
-                  <span className="material-symbols-outlined text-secondary mt-1">mail</span>
-                  <div>
-                    <h4 className="font-label-md text-label-md text-primary mb-1">Contacto</h4>
-                    <p className="font-body-md text-body-md text-on-surface-variant">
-                      {contact.info.email}<br />
-                      {contact.info.phone}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Map Side */}
-            <div className="relative min-h-[400px] bg-surface-container-low">
+          {/* Asymmetric Image Layout */}
+          <div className="lg:col-span-7 grid grid-cols-2 gap-sm relative h-[500px]">
+            <div className="h-full rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.04)] transform translate-y-8 relative">
               <Image
-                alt="Mapa de Ubicación"
-                className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply"
-                src={contact.mapImage}
+                alt="Artesano"
+                className="w-full h-full object-cover grayscale-[20%]"
+                src={history.image1}
                 fill
                 unoptimized
               />
-              {/* Faux Map Pin */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                <div className="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
-                  <span className="material-symbols-outlined text-on-secondary-container">church</span>
+            </div>
+            <div className="h-full rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.06)] transform -translate-y-4 relative">
+              <Image
+                alt="Rosario"
+                className="w-full h-full object-cover sepia-[10%]"
+                src={history.image2}
+                fill
+                unoptimized
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bento Grid: Values */}
+      <section className="w-full bg-surface-container-low py-xl">
+        <div className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
+          <div className="text-center mb-lg">
+            <h2 className="font-headline-md text-headline-md text-primary">{values.title}</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl mx-auto">
+              {values.subtitle}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+            {values.items.map(item => (
+              <div key={item.id} className="bg-surface-container-lowest p-lg rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-surface-container-high flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
+                <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary">
+                  <span className="material-symbols-outlined">{item.icon}</span>
                 </div>
-                <div className="mt-2 bg-surface-container-lowest px-3 py-1 rounded shadow-sm border border-surface-container-high">
-                  <span className="font-label-sm text-label-sm text-primary">Taller De Maria</span>
+                <div>
+                  <h3 className="font-headline-md text-headline-md text-primary mb-2 text-xl">{item.title}</h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Location & Contact */}
+      <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop w-full pb-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-xl bg-surface-container-lowest rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.05)] border border-surface-container-high overflow-hidden">
+          {/* Info Side */}
+          <div className="p-lg md:p-xl flex flex-col justify-center gap-lg">
+            <div>
+              <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">
+                {contact.title}
+              </h2>
+              <p className="font-body-md text-body-md text-on-surface-variant mb-8">
+                {contact.description}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-md">
+              <div className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-secondary mt-1">location_on</span>
+                <div>
+                  <h4 className="font-label-md text-label-md text-primary mb-1">Dirección</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    {contact.address.street}<br />
+                    {contact.address.city}
+                  </p>
+                </div>
+              </div>
+              <div className="w-full h-[1px] bg-surface-container-high my-2"></div>
+              <div className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-secondary mt-1">schedule</span>
+                <div>
+                  <h4 className="font-label-md text-label-md text-primary mb-1">Horario de Atención</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    {contact.hours.weekdays}<br />
+                    {contact.hours.weekends}
+                  </p>
+                </div>
+              </div>
+              <div className="w-full h-[1px] bg-surface-container-high my-2"></div>
+              <div className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-secondary mt-1">mail</span>
+                <div>
+                  <h4 className="font-label-md text-label-md text-primary mb-1">Contacto</h4>
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    {contact.info.email}<br />
+                    {contact.info.phone}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+
+          {/* Map Side */}
+          <div className="relative min-h-[400px] bg-surface-container-low">
+            <Image
+              alt="Mapa de Ubicación"
+              className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply"
+              src={contact.mapImage}
+              fill
+              unoptimized
+            />
+            {/* Faux Map Pin */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+              <div className="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
+                <span className="material-symbols-outlined text-on-secondary-container">church</span>
+              </div>
+              <div className="mt-2 bg-surface-container-lowest px-3 py-1 rounded shadow-sm border border-surface-container-high">
+                <span className="font-label-sm text-label-sm text-primary">Taller De Maria</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
   );
 }

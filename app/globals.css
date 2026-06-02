@@ -2,7 +2,8 @@
 
 @theme inline {
   --color-primary-fixed-dim: #e3beb8;
-  --color-surface: var(--bg-primary); /* Overridden by GUIDELINES */
+  --color-surface: var(--bg-primary);
+  /* Overridden by GUIDELINES */
   --color-on-secondary: #ffffff;
   --color-on-tertiary-fixed: #2c160e;
   --color-error: #ba1a1a;
@@ -12,7 +13,8 @@
   --color-on-primary-container: #ae8d87;
   --color-surface-container-high: #e8e8e8;
   --color-on-primary: #ffffff;
-  --color-primary: var(--text-primary); /* Overridden by GUIDELINES */
+  --color-primary: var(--text-primary);
+  /* Overridden by GUIDELINES */
   --color-outline-variant: #d3c3c0;
   --color-on-secondary-container: #6a4800;
   --color-on-secondary-fixed: #281900;
@@ -35,7 +37,8 @@
   --color-background: var(--bg-primary);
   --color-surface-bright: #f9f9f9;
   --color-on-tertiary-container: #b18c81;
-  --color-secondary: var(--text-secondary); /* Overridden by GUIDELINES */
+  --color-secondary: var(--text-secondary);
+  /* Overridden by GUIDELINES */
   --color-secondary-fixed-dim: var(--accent-amber);
   --color-error-container: #ffdad6;
   --color-outline: #827472;
@@ -51,7 +54,7 @@
 
   --color-accent-yellow: var(--accent-yellow);
 
-  --shadow-ambient: 0 10px 40px -10px rgba(0,0,0,0.06);
+  --shadow-ambient: 0 10px 40px -10px rgba(0, 0, 0, 0.06);
 
   --font-headline-xl: var(--font-lora);
   --font-headline-lg: var(--font-lora);
@@ -129,4 +132,34 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }

@@ -21,7 +21,7 @@ export default async function SearchPage({
   const filteredProducts = mockProducts.filter((product) => {
     // Check search query using partial terms (must match all terms)
     const searchTerms = q.split(" ").filter(term => term.trim().length > 0);
-    const matchesQuery = searchTerms.length === 0 || searchTerms.every(term => 
+    const matchesQuery = searchTerms.length === 0 || searchTerms.every(term =>
       product.name.toLowerCase().includes(term) ||
       (product.shortDescription && product.shortDescription.toLowerCase().includes(term))
     );
@@ -34,10 +34,10 @@ export default async function SearchPage({
 
   return (
     <>
-      <TopNavBar />
 
-      <main className="flex-grow w-full max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-lg md:py-xl pt-24 md:pt-32 min-h-[70vh]">
-        
+
+      <main className="fade-in flex-grow w-full max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-lg md:py-xl pt-24 md:pt-32 min-h-[70vh]">
+
         <header className="mb-lg text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-md border-b border-surface-container-high pb-md">
           <div className="w-full md:w-auto">
             <h1 className="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-primary mb-xs">
@@ -70,7 +70,7 @@ export default async function SearchPage({
         )}
       </main>
 
-      <Footer />
+
     </>
   );
 }
