@@ -9,3 +9,5 @@ export * from "./CatalogFilters";
 export * from "./Pagination";
 export * from "./SearchInput";
 export * from "./ProductGallery";
+export * from "./ProductAddToCart";
+export * from "./ShoppingCart";

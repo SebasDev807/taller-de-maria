@@ -7,6 +7,7 @@ import { Product } from "@/lib/mockData";
 interface AddToCartButtonProps {
   variant?: "icon" | "full";
   product?: Product;
+  quantity?: number;
 }
 
 /**
@@ -18,9 +19,10 @@ interface AddToCartButtonProps {
  * @param {AddToCartButtonProps} props - Propiedades del botón.
  * @param {"icon" | "full"} [props.variant="icon"] - Variante visual del botón.
  * @param {Product} [props.product] - Producto a agregar al carrito.
+ * @param {number} [props.quantity] - Cantidad a agregar (por defecto 1).
  * @returns {React.JSX.Element} El botón interactivo de añadir al carrito.
  */
-export const AddToCartButton = ({ variant = "icon", product }: AddToCartButtonProps) => {
+export const AddToCartButton = ({ variant = "icon", product, quantity = 1 }: AddToCartButtonProps) => {
   const [added, setAdded] = useState(false);
   const addItem = useCart(state => state.addItem);
 
@@ -33,7 +35,7 @@ export const AddToCartButton = ({ variant = "icon", product }: AddToCartButtonPr
         name: product.name,
         description: product.shortDescription || "",
         price: product.price,
-        quantity: 1,
+        quantity: quantity,
         image: product.imageUrl || "",
         alt: product.imageAlt || product.name,
       });

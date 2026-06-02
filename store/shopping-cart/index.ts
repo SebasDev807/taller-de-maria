@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export type CartItem = {
   id: string | number;
@@ -19,47 +20,52 @@ interface CartState {
   subtotal: () => number;
 }
 
-const initialCartItems: CartItem[] = [
+const initialCartItems: CartItem[] = [];
 
-];
+export const useCart = create<CartState>()(
+  persist(
+    (set, get) => ({
+      items: initialCartItems,
 
-export const useCart = create<CartState>((set, get) => ({
-  items: initialCartItems,
-
-  addItem: (newItem) => set((state) => {
-    const existing = state.items.find(item => item.id === newItem.id);
-    if (existing) {
-      return {
-        items: state.items.map(item =>
-          item.id === newItem.id
-            ? { ...item, quantity: item.quantity + newItem.quantity }
-            : item
-        )
-      };
-    }
-    return { items: [...state.items, newItem] };
-  }),
-
-  updateQuantity: (id, delta) => set((state) => ({
-    items: state.items
-      .map((item) => {
-        if (item.id === id) {
-          return { ...item, quantity: item.quantity + delta };
+      addItem: (newItem) => set((state) => {
+        const existing = state.items.find(item => item.id === newItem.id);
+        if (existing) {
+          return {
+            items: state.items.map(item =>
+              item.id === newItem.id
+                ? { ...item, quantity: item.quantity + newItem.quantity }
+                : item
+            )
+          };
         }
-        return item;
-      })
-      .filter((item) => item.quantity > 0)
-  })),
+        return { items: [...state.items, newItem] };
+      }),
 
-  removeItem: (id) => set((state) => ({
-    items: state.items.filter((item) => item.id !== id)
-  })),
+      updateQuantity: (id, delta) => set((state) => ({
+        items: state.items
+          .map((item) => {
+            if (item.id === id) {
+              return { ...item, quantity: item.quantity + delta };
+            }
+            return item;
+          })
+          .filter((item) => item.quantity > 0)
+      })),
 
-  totalItems: () => {
-    return get().items.reduce((sum, item) => sum + item.quantity, 0);
-  },
+      removeItem: (id) => set((state) => ({
+        items: state.items.filter((item) => item.id !== id)
+      })),
 
-  subtotal: () => {
-    return get().items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  }
-}));
+      totalItems: () => {
+        return get().items.reduce((sum, item) => sum + item.quantity, 0);
+      },
+
+      subtotal: () => {
+        return get().items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      }
+    }),
+    {
+      name: "shopping-cart-storage", // name of the item in the storage (must be unique)
+    }
+  )
+);
