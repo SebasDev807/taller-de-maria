@@ -1,65 +1,76 @@
-import Image from "next/image";
+import React from "react";
+import Link from "next/link";
+import { TopNavBar } from "./ui/TopNavBar";
+import { Footer } from "./ui/Footer";
+import { DailyContentBox } from "./ui/DailyContentBox";
+import { ProductCard } from "./ui/ProductCard";
+import { mockProducts, mockDailyContent } from "./lib/mockData";
 
 export default function Home() {
+
+  const evangelio = mockDailyContent.find(c => c.type === "evangelio");
+  const oracion = mockDailyContent.find(c => c.type === "oracion");
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <TopNavBar />
+
+      {/* Main Content Canvas */}
+      <main className="pt-20 pb-xl min-h-screen">
+
+        {/* Hero Section */}
+        <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-xl md:py-24 text-center">
+          <span className="font-label-md text-label-md text-secondary tracking-widest uppercase mb-4 block">
+            Santuario Digital
+          </span>
+          <h1 className="font-headline-xl text-headline-xl md:text-[64px] leading-tight text-primary max-w-3xl mx-auto mb-lg">
+            Paz y devoción en cada detalle.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[576px] mx-auto mb-12">
+            Encuentra un momento de serenidad. Descubre nuestra colección de artículos artesanales creados con respeto y fe.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        </section>
+
+        {/* Spiritual Focus (Evangelio & Oración) - Bento Style Layout */}
+        <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop mb-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+            {evangelio && <DailyContentBox content={evangelio} />}
+            {oracion && <DailyContentBox content={oracion} />}
+          </div>
+        </section>
+
+        {/* Products Introduction */}
+        <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-lg gap-4">
+            <div>
+              <h3 className="font-headline-lg text-headline-lg text-primary mb-2">Artesanía Sagrada</h3>
+              <p className="font-body-md text-body-md text-on-surface-variant">
+                Obras elaboradas a mano, diseñadas para acompañar tu fe.
+              </p>
+            </div>
+            <Link
+              href="/catalog"
+              className="font-label-md text-label-md text-secondary hover:underline underline-offset-4 decoration-secondary transition-all"
+            >
+              Ver todo el catálogo
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            {mockProducts.map((product, index) => (
+              <div
+                key={product.id}
+                className={`${index === 2 ? 'md:hidden lg:block' : ''}`} // replicate the third item hiding on md
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        </section>
+
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }
