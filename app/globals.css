@@ -51,6 +51,8 @@
 
   --color-accent-yellow: var(--accent-yellow);
 
+  --shadow-ambient: 0 10px 40px -10px rgba(0,0,0,0.06);
+
   --font-headline-xl: var(--font-lora);
   --font-headline-lg: var(--font-lora);
   --font-headline-md: var(--font-lora);

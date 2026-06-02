@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TopNavBar, Footer, DailyContentBox, ProductCard } from "@/ui";
+import { TopNavBar, Footer, DailyContentBox, CatalogCard } from "@/ui";
 import { mockProducts, mockDailyContent } from "@/lib/mockData";
 
 /**
@@ -60,12 +60,12 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-            {mockProducts.map((product, index) => (
+            {mockProducts.slice(0, 3).map((product, index) => (
               <div
                 key={product.id}
                 className={`${index === 2 ? 'md:hidden lg:block' : ''}`} // replicate the third item hiding on md
               >
-                <ProductCard product={product} />
+                <CatalogCard product={product} />
               </div>
             ))}
           </div>

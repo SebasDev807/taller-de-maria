@@ -1,0 +1,60 @@
+"use client";
+
+import { useState } from "react";
+
+interface AddToCartButtonProps {
+  variant?: "icon" | "full";
+}
+
+/**
+ * Componente de cliente para el botón de "Añadir al Carrito".
+ * Maneja el estado local para mostrar un feedback visual (animación a "check")
+ * tras ser pulsado, regresando a su estado original después de un breve periodo.
+ *
+ * @param {AddToCartButtonProps} props - Propiedades del botón.
+ * @param {"icon" | "full"} [props.variant="icon"] - Variante visual del botón.
+ * @returns {React.JSX.Element} El botón interactivo de añadir al carrito.
+ */
+export const AddToCartButton = ({ variant = "icon" }: AddToCartButtonProps) => {
+  const [added, setAdded] = useState(false);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  };
+
+  if (variant === "full") {
+    return (
+      <button
+        onClick={handleClick}
+        className={`w-full font-label-md text-label-md py-3 rounded transition-all flex items-center justify-center gap-2 group-hover:bg-surface-container-low ${
+          added
+            ? "bg-secondary-container text-on-secondary-container border border-secondary-container"
+            : "bg-surface border border-outline-variant text-on-surface-variant hover:border-secondary hover:text-secondary"
+        }`}
+      >
+        <span className="material-symbols-outlined text-[18px]">
+          {added ? "check" : "shopping_cart"}
+        </span>
+        {added ? "Added!" : "Add to Cart"}
+      </button>
+    );
+  }
+
+  return (
+    <button
+      aria-label="Add to cart"
+      onClick={handleClick}
+      className={`p-2 rounded-full transition-all focus:outline-none ${
+        added
+          ? "bg-secondary-container text-on-secondary-container border border-secondary-container"
+          : "border border-outline-variant text-on-surface-variant hover:text-secondary hover:border-secondary"
+      }`}
+    >
+      <span className="material-symbols-outlined">
+        {added ? "check" : "add_shopping_cart"}
+      </span>
+    </button>
+  );
+};

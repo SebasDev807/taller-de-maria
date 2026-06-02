@@ -3,3 +3,7 @@ export * from "./DailyContentBox";
 export * from "./Footer";
 export * from "./ProductCard";
 export * from "./TopNavBar";
+export * from "./AddToCartButton";
+export * from "./CatalogCard";
+export * from "./CatalogFilters";
+export * from "./Pagination";
