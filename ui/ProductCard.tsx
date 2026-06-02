@@ -1,22 +1,22 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../lib/mockData";
+import { Product } from "@/lib/mockData";
 
 interface ProductCardProps {
   product: Product;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <Link 
+    <Link
       href={`/shop/${product.id}`}
       className="group block bg-[#FFFFFF] rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-300 h-full"
     >
       <div className="aspect-square bg-surface-container-low overflow-hidden relative">
-        <img 
-          src={product.imageUrl} 
-          alt={product.imageAlt} 
+        <img
+          src={product.imageUrl}
+          alt={product.imageAlt}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
         />
         {product.badge && (

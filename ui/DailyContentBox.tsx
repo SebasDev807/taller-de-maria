@@ -1,13 +1,12 @@
-import React from "react";
 import Link from "next/link";
-import { DailyContent } from "../lib/mockData";
+import { DailyContent } from "@/lib/mockData";
 import { ActionBtn } from "./ActionBtn";
 
 interface DailyContentBoxProps {
   content: DailyContent;
 }
 
-export const DailyContentBox: React.FC<DailyContentBoxProps> = ({ content }) => {
+export const DailyContentBox = ({ content }: DailyContentBoxProps) => {
   if (content.type === "evangelio") {
     return (
       <article className="col-span-1 lg:col-span-7 bg-[#FFFFFF] rounded-xl p-lg shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative overflow-hidden flex flex-col justify-center min-h-[400px]">
@@ -22,7 +21,7 @@ export const DailyContentBox: React.FC<DailyContentBoxProps> = ({ content }) => 
           <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8">
             {content.text}
           </p>
-          <Link 
+          <Link
             href={content.link || "#"}
             className="inline-flex items-center gap-2 font-label-md text-label-md text-secondary hover:text-secondary-fixed-dim transition-colors group"
           >

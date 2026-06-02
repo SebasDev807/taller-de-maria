@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
-export const TopNavBar: React.FC = () => {
+export const TopNavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -43,7 +43,7 @@ export const TopNavBar: React.FC = () => {
           </Link>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className="md:hidden p-2 hover:bg-surface-variant rounded-full transition-colors group"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
@@ -56,36 +56,35 @@ export const TopNavBar: React.FC = () => {
       </header>
 
       {/* Mobile Navigation Menu */}
-      <div 
-        className={`fixed top-20 left-0 w-full bg-surface border-b border-surface-container-high z-40 transition-all duration-300 ease-in-out md:hidden overflow-hidden ${
-          isMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
-        }`}
+      <div
+        className={`fixed top-20 left-0 w-full bg-surface border-b border-surface-container-high z-40 transition-all duration-300 ease-in-out md:hidden overflow-hidden ${isMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+          }`}
       >
         <nav className="flex flex-col px-margin-mobile py-4 gap-4">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="font-label-md text-label-lg text-on-surface hover:text-primary transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Inicio
           </Link>
-          <Link 
-            href="/catalog" 
+          <Link
+            href="/catalog"
             className="font-label-md text-label-lg text-on-surface hover:text-primary transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Productos
           </Link>
-          <Link 
-            href="/about" 
+          <Link
+            href="/about"
             className="font-label-md text-label-lg text-on-surface hover:text-primary transition-colors"
             onClick={() => setIsMenuOpen(false)}
           >
             Sobre Nosotros
           </Link>
-          
+
           <div className="h-[1px] w-full bg-surface-container-high my-2" />
-          
+
           <button className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-outlined">person</span>
             <span className="font-label-md text-label-lg">Mi Perfil</span>

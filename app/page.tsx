@@ -1,15 +1,14 @@
-import React from "react";
 import Link from "next/link";
-import { TopNavBar } from "./ui/TopNavBar";
-import { Footer } from "./ui/Footer";
-import { DailyContentBox } from "./ui/DailyContentBox";
-import { ProductCard } from "./ui/ProductCard";
-import { mockProducts, mockDailyContent } from "./lib/mockData";
+import { TopNavBar } from "@/ui/TopNavBar";
+import { Footer } from "@/ui/Footer";
+import { DailyContentBox } from "@/ui/DailyContentBox";
+import { ProductCard } from "@/ui/ProductCard";
+import { mockProducts, mockDailyContent } from "@/lib/mockData";
 
 export default function Home() {
 
-  const evangelio = mockDailyContent.find(c => c.type === "evangelio");
-  const oracion = mockDailyContent.find(c => c.type === "oracion");
+  const evangelio = mockDailyContent.find(content => content.type === "evangelio");
+  const oracion = mockDailyContent.find(content => content.type === "oracion");
 
   return (
     <>
