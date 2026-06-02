@@ -1,4 +1,4 @@
-import React from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/mockData";
@@ -23,10 +23,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       className="group block bg-[#FFFFFF] rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-300 h-full"
     >
       <div className="aspect-square bg-surface-container-low overflow-hidden relative">
-        <img
+        <Image
           src={product.imageUrl}
           alt={product.imageAlt}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {product.badge && (
           <div className="absolute top-4 left-4 bg-[#FFE082] text-[#3E2723] px-3 py-1 rounded-full font-label-sm text-label-sm shadow-sm">
