@@ -7,3 +7,4 @@ export * from "./AddToCartButton";
 export * from "./CatalogCard";
 export * from "./CatalogFilters";
 export * from "./Pagination";
+export * from "./SearchInput";
