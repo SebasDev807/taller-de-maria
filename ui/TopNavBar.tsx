@@ -43,9 +43,9 @@ export const TopNavBar = () => {
           <button className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">notifications</span>
           </button>
-          <button className="p-2 hover:bg-surface-variant rounded-full transition-colors group">
+          <Link href="/cart" className="p-2 hover:bg-surface-variant rounded-full transition-colors group cursor-pointer">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">shopping_cart</span>
-          </button>
+          </Link>
           <Link href="/admin" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">admin_panel_settings</span>
           </Link>

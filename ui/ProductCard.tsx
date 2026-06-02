@@ -24,8 +24,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     >
       <div className="aspect-square bg-surface-container-low overflow-hidden relative">
         <Image
-          src={product.imageUrl}
-          alt={product.imageAlt}
+          src={product.imageUrl || "/placeholder.jpg"}
+          alt={product.imageAlt || "Product image"}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
