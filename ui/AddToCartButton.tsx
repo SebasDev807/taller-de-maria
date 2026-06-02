@@ -46,13 +46,13 @@ export const AddToCartButton = ({ variant = "icon" }: AddToCartButtonProps) => {
     <button
       aria-label="Add to cart"
       onClick={handleClick}
-      className={`p-2 rounded-full transition-all focus:outline-none ${
+      className={`w-10 h-10 flex items-center justify-center rounded-full transition-all focus:outline-none ${
         added
           ? "bg-secondary-container text-on-secondary-container border border-secondary-container"
           : "border border-outline-variant text-on-surface-variant hover:text-secondary hover:border-secondary"
       }`}
     >
-      <span className="material-symbols-outlined">
+      <span className="material-symbols-outlined text-[20px]">
         {added ? "check" : "add_shopping_cart"}
       </span>
     </button>
