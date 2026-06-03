@@ -5,3 +5,7 @@ export * from "./ProductGallery";
 export * from "./ShoppingCart";
 export * from "./ProductAddToCart";
 export * from "./AddToCartButton";
+export * from "./ProductBreadcrumb";
+export * from "./ProductInfo";
+export * from "./ProductSpecifications";
+export * from "./RelatedProducts";
