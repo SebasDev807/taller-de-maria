@@ -25,7 +25,7 @@ interface AdminLayoutShellProps {
  *
  * @example
  * ```tsx
- * import { AdminLayoutShell } from "@/ui/AdminLayoutShell";
+ * import { AdminLayoutShell } from "@/components/admin";
  *
  * export default function DashboardPage() {
  *   return (

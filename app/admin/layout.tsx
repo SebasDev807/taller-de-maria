@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Lato } from "next/font/google";
 import "../globals.css";
-import { AdminLayoutShell } from "@/ui";
+import { AdminLayoutShell } from "@/components";
 
 const lora = Lora({
   variable: "--font-lora",

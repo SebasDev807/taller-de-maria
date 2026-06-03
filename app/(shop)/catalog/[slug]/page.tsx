@@ -1,8 +1,8 @@
-import { TopNavBar, Footer, CatalogCard, ProductGallery, ProductAddToCart } from "@/ui";
+import { TopNavBar, Footer, CatalogCard, ProductGallery, ProductAddToCart } from "@/components";
 import { mockProducts } from "@/lib/mockData";
 import Link from "next/link";
 import Image from "next/image";
-import { AddToCartButton } from "@/ui/AddToCartButton";
+import { AddToCartButton } from "@/components/catalog";
 import { notFound } from "next/navigation";
 import { formatCurrency } from "@/helpers";
 

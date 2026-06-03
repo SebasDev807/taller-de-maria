@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { SearchInput } from "./SearchInput";
+import { SearchInput } from "../shared/SearchInput";
 import { useCart } from "@/store/shopping-cart";
 import { usePathname } from "next/navigation";
 import { mergeClassNames } from "@/helpers";

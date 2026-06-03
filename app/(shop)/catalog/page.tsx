@@ -1,4 +1,4 @@
-import { TopNavBar, Footer, CatalogCard, CatalogFilters, Pagination } from "@/ui";
+import { TopNavBar, Footer, CatalogCard, CatalogFilters, Pagination } from "@/components";
 import { mockProducts } from "@/lib/mockData";
 
 /**

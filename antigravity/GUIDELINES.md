@@ -34,7 +34,7 @@
 
 - Navbar Único: El sistema debe tener un solo Navbar que se adapte si el usuario está en la vista pública.
 
-- Estructura de carpetas: Maneja carpetas y subcarpetas enfocadas en dominios (ej. /shop para el catálogo y carrito, /admin para el, page/[slug], dashboard de stock y CRUD, /ui para componentes base).
+- Estructura de carpetas: Maneja carpetas y subcarpetas enfocadas en dominios (ej. /shop para el catálogo y carrito, /admin para el, page/[slug], dashboard de stock y CRUD, /components para componentes base).
 
 - Control de dependencias: No hagas configuraciones ni instalaciones de librerías externas (como UI kits complejos o manejadores de estado pesados) sin consultar primero. Todo debe ser minimalista y ceñirse al MVP.
 

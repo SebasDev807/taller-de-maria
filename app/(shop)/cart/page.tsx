@@ -1,4 +1,4 @@
-import { TopNavBar, Footer, ShoppingCart } from "@/ui";
+import { TopNavBar, Footer, ShoppingCart } from "@/components";
 
 export default function CartPage() {
 
