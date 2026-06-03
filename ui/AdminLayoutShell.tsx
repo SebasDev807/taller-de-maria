@@ -3,11 +3,39 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { logoutUser } from "@/actions/auth.actions";
 
+/**
+ * Propiedades para el componente {@link AdminLayoutShell}.
+ */
 interface AdminLayoutShellProps {
+  /**
+   * Los componentes o páginas hijos que se renderizarán dentro del área de contenido principal del panel de administración.
+   */
   children: React.ReactNode;
 }
 
+/**
+ * Componente de diseño (layout shell) para el panel de administración.
+ * Proporciona una estructura de página consistente que incluye una barra de navegación lateral responsiva (sidebar),
+ * una barra superior móvil, sección de perfil de usuario y soporte para cierre de sesión.
+ *
+ * @param props - Propiedades del componente, representadas por {@link AdminLayoutShellProps}.
+ * @returns Un elemento JSX que representa la estructura completa del panel de administración con navegación y el área de contenido principal.
+ *
+ * @example
+ * ```tsx
+ * import { AdminLayoutShell } from "@/ui/AdminLayoutShell";
+ *
+ * export default function DashboardPage() {
+ *   return (
+ *     <AdminLayoutShell>
+ *       <h1>Panel de Control</h1>
+ *     </AdminLayoutShell>
+ *   );
+ * }
+ * ```
+ */
 export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -101,8 +129,24 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
           })}
         </div>
 
+        {/* Logout Button */}
+        <form action={logoutUser} className="px-3 pb-2">
+          <button
+            type="submit"
+            className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-error/10 hover:text-error transition-all duration-150 group cursor-pointer"
+          >
+            <span
+              className="material-symbols-outlined text-[22px] transition-colors"
+              style={{ fontVariationSettings: "'FILL' 0" }}
+            >
+              logout
+            </span>
+            <span className="font-label-md text-label-md">Cerrar Sesión</span>
+          </button>
+        </form>
+
         {/* Admin User Avatar Section */}
-        <div className="p-6 border-t border-outline-variant mt-auto flex items-center gap-4">
+        <div className="p-6 border-t border-outline-variant flex items-center gap-4">
           <img
             alt="Admin User Avatar"
             className="w-10 h-10 rounded-full object-cover"

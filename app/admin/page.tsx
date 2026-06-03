@@ -27,7 +27,7 @@ export default function AdminDashboard() {
             Bienvenido de vuelta. Aquí está el estado actual del taller.
           </p>
         </div>
-        <button className="flex items-center gap-2 bg-secondary-container text-primary-container px-6 py-3 rounded hover:scale-95 transition-transform duration-200 cursor-pointer">
+        <button className="flex items-center justify-center gap-2 bg-secondary-container text-primary-container px-6 py-3 rounded hover:scale-95 transition-transform duration-200 cursor-pointer w-full sm:w-auto">
           <span className="material-symbols-outlined text-[20px]">add</span>
           <span className="font-label-md text-label-md">Nuevo Producto</span>
         </button>
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
           </div>
 
           <div className="mt-6 flex justify-end">
-            <button className="bg-primary text-on-primary px-8 py-3 rounded hover:scale-95 transition-transform duration-200 font-label-md text-label-md cursor-pointer">
+            <button className="bg-primary text-on-primary px-8 py-3 rounded hover:scale-95 transition-transform duration-200 font-label-md text-label-md cursor-pointer w-full sm:w-auto">
               Actualizar Contenido
             </button>
           </div>
