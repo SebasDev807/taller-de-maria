@@ -1,6 +1,7 @@
 import { GospelForm } from "./GospelForm";
 import { PrayerForm } from "./PrayerForm";
 import { getGospelHistory } from "@/actions/gospel.actions";
+import { getPrayerHistory } from "@/actions/prayer.actions";
 
 /**
  * Muestra el widget de Reflexión Diaria en el panel de administración,
@@ -11,6 +12,9 @@ import { getGospelHistory } from "@/actions/gospel.actions";
 export const DailyReflectionWidget = async () => {
   const historyResult = await getGospelHistory();
   const history = historyResult.success && historyResult.data ? historyResult.data : [];
+
+  const prayerHistoryResult = await getPrayerHistory();
+  const prayerHistory = prayerHistoryResult.success && prayerHistoryResult.data ? prayerHistoryResult.data : [];
 
   return (
     <section className="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-ambient flex flex-col border border-surface-container-high">
@@ -23,7 +27,7 @@ export const DailyReflectionWidget = async () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
         <GospelForm history={history} />
-        <PrayerForm />
+        <PrayerForm history={prayerHistory} />
       </div>
     </section>
   );
