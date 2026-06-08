@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { getGospel } from "@/actions/gospel.actions";
+import { GospelClientContent } from "./GospelClientContent";
 
 /**
  * Componente que muestra el evangelio del día.
@@ -9,31 +9,21 @@ import { getGospel } from "@/actions/gospel.actions";
  */
 export const GospelWidget = async () => {
   const result = await getGospel();
-  const dbGospel = result.success ? result.data : null;
+  const dbGospel = result?.success ? result.data : null;
 
   const displayTitle = dbGospel?.title || "Evangelio de hoy";
   const displayText = dbGospel?.text || "La reflexión del evangelio para el día de hoy no se encuentra disponible. Por favor, regresa más tarde.";
 
   return (
     <article className="col-span-1 lg:col-span-7 bg-[#FFFFFF] rounded-xl p-lg shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative overflow-hidden flex flex-col justify-center min-h-[400px]">
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-center gap-sm mb-6 text-on-surface-variant">
           <span className="material-symbols-outlined text-secondary">menu_book</span>
           <span className="font-label-md text-label-md uppercase tracking-wider">Evangelio del Día</span>
         </div>
-        <h2 className="font-headline-lg text-headline-lg md:font-headline-lg-mobile md:text-headline-lg-mobile text-primary mb-6 before:content-['\22'] after:content-['\22']">
-          {displayTitle}
-        </h2>
-        <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8 whitespace-pre-wrap">
-          {displayText}
-        </p>
-        <Link
-          href="#"
-          className="inline-flex items-center gap-2 font-label-md text-label-md text-secondary hover:text-secondary-fixed-dim transition-colors group"
-        >
-          Leer reflexión completa
-          <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </Link>
+        
+        <GospelClientContent title={displayTitle} text={displayText} />
+
       </div>
       <div className="absolute -bottom-20 -right-20 opacity-5 pointer-events-none">
         <span className="material-symbols-outlined text-[300px]">auto_awesome</span>
