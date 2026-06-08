@@ -9,6 +9,8 @@ export interface IGospel {
   title: string;
   /** Texto completo del evangelio */
   text: string;
+  /** Referencia bíblica u origen (opcional) */
+  reference?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -27,7 +27,7 @@ export async function getGospel(): Promise<ActionResult<GospelData | null>> {
 
     return {
       success: true,
-      data: { title: gospel.title, text: gospel.text },
+      data: { title: gospel.title, text: gospel.text, reference: gospel.reference },
     };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error inesperado.";
@@ -48,6 +48,7 @@ export async function createGospel(
   const validated = gospelSchema.safeParse({
     title: formData.get("title"),
     text: formData.get("text"),
+    reference: formData.get("reference") || undefined,
   });
 
   if (!validated.success) {
@@ -55,7 +56,7 @@ export async function createGospel(
     return { success: false, error: firstError };
   }
 
-  const { title, text } = validated.data;
+  const { title, text, reference } = validated.data;
 
   try {
     await dbConnect();
@@ -74,12 +75,12 @@ export async function createGospel(
       // Actualizar el existente (mongoose actualizará updatedAt automáticamente)
       gospel = await Gospel.findByIdAndUpdate(
         existing._id,
-        { title, text },
+        { title, text, reference },
         { new: true }
       );
     } else {
       // Crear uno nuevo
-      gospel = await Gospel.create({ title, text });
+      gospel = await Gospel.create({ title, text, reference });
     }
 
     revalidatePath("/");
@@ -87,7 +88,7 @@ export async function createGospel(
 
     return {
       success: true,
-      data: { title: gospel.title, text: gospel.text },
+      data: { title: gospel.title, text: gospel.text, reference: gospel.reference },
     };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error inesperado.";
@@ -110,6 +111,7 @@ export async function getGospelHistory(): Promise<ActionResult<GospelHistoryData
       id: g._id.toString(),
       title: g.title,
       text: g.text,
+      reference: g.reference,
       createdAt: (g as any).updatedAt?.toISOString() || new Date().toISOString(),
     }));
 

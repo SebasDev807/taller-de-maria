@@ -10,4 +10,5 @@ export const gospelSchema = z.object({
     .string({ error: "El texto del evangelio es obligatorio" })
     .min(1, "El texto del evangelio es obligatorio")
     .trim(),
+  reference: z.string().trim().optional(),
 });

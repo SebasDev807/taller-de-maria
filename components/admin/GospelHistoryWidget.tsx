@@ -22,8 +22,13 @@ export const GospelHistoryWidget = async () => {
         ) : (
           gospels.map((gospel) => (
             <div key={gospel.id} className="p-4 border border-outline-variant rounded-lg flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-              <div>
-                <h4 className="font-headline-sm text-primary mb-1 uppercase">{gospel.title}</h4>
+              <div className="relative flex-1 w-full">
+                <div className="flex justify-between items-start w-full">
+                  <h4 className="font-headline-sm text-primary mb-1 uppercase pr-4">{gospel.title}</h4>
+                  {gospel.reference && (
+                    <span className="text-label-sm text-secondary italic text-right shrink-0">{gospel.reference}</span>
+                  )}
+                </div>
                 <p className="text-body-sm text-on-surface-variant line-clamp-2 max-w-xl">{gospel.text}</p>
                 <span className="text-label-sm text-outline mt-2 block">
                   Publicado: {new Date(gospel.createdAt).toLocaleDateString()}

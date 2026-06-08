@@ -1,6 +1,10 @@
 import { model, models, Schema } from "mongoose";
 import { IGospel } from "./gospel.interface";
 
+if (process.env.NODE_ENV === "development" && models.Gospel) {
+  delete models.Gospel;
+}
+
 const GospelSchema = new Schema<IGospel>(
   {
     title: {
@@ -11,6 +15,10 @@ const GospelSchema = new Schema<IGospel>(
     text: {
       type: String,
       required: [true, "El texto del evangelio es obligatorio"],
+      trim: true,
+    },
+    reference: {
+      type: String,
       trim: true,
     },
   },

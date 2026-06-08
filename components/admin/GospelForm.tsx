@@ -67,6 +67,7 @@ export const GospelForm = ({ history = [] }: GospelWidgetProps) => {
         defaultValues: {
             title: "",
             text: "",
+            reference: "",
         },
     });
 
@@ -78,6 +79,9 @@ export const GospelForm = ({ history = [] }: GospelWidgetProps) => {
 
         formData.set("title", values.title);
         formData.set("text", values.text);
+        if (values.reference) {
+            formData.set("reference", values.reference);
+        }
 
         const result = await createGospel(formData);
 
@@ -85,12 +89,12 @@ export const GospelForm = ({ history = [] }: GospelWidgetProps) => {
             setServerError(result.error ?? "Error inesperado.");
         } else {
             setSuccess(true);
-            reset({ title: "", text: "" });
+            reset({ title: "", text: "", reference: "" });
         }
     };
 
     const handleSelectHistory = (item: GospelHistoryData) => {
-        reset({ title: item.title, text: item.text });
+        reset({ title: item.title, text: item.text, reference: item.reference || "" });
         setSuccess(false);
     };
 
@@ -163,6 +167,25 @@ export const GospelForm = ({ history = [] }: GospelWidgetProps) => {
                     aria-describedby={errors.title ? "gospel-title-error" : undefined}
                 />
                 <FieldError id="gospel-title-error" message={errors.title?.message} />
+            </div>
+
+            {/* Campo: Referencia */}
+            <div className="flex flex-col gap-2">
+                <label
+                    className="font-label-md text-label-md text-on-surface"
+                    htmlFor="gospel-reference"
+                >
+                    Referencia (Opcional)
+                </label>
+                <input
+                    {...register("reference")}
+                    className={inputBase}
+                    id="gospel-reference"
+                    type="text"
+                    placeholder="Ej. Juan 3, 16"
+                    aria-describedby={errors.reference ? "gospel-reference-error" : undefined}
+                />
+                <FieldError id="gospel-reference-error" message={errors.reference?.message} />
             </div>
 
             {/* Campo: Texto */}
