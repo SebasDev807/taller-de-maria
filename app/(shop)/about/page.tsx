@@ -1,4 +1,3 @@
-import { TopNavBar, Footer } from "@/components";
 import Image from "next/image";
 import { Metadata } from "next";
 

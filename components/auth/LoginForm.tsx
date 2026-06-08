@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "@/hooks/use-auth";
+import { useLogin } from "@/hooks";
 
 interface LoginFields {
     email: string;
@@ -11,9 +10,13 @@ interface LoginFields {
 
 export const LoginForm = () => {
 
-    const { login } = useAuth();
-    const [showPassword, setShowPassword] = useState(false);
-    const [serverError, setServerError] = useState<string | null>(null);
+    const {
+        login,
+        setServerError,
+        serverError,
+        showPassword,
+        togglePassword
+    } = useLogin();
 
     const {
         register,
@@ -150,7 +153,7 @@ export const LoginForm = () => {
                         type="button"
                         id="toggle-password-visibility"
                         aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-                        onClick={() => setShowPassword((v) => !v)}
+                        onClick={togglePassword}
                         className="absolute right-0 bottom-[10px] text-outline hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-secondary focus-visible:rounded"
                     >
                         <span

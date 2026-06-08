@@ -14,6 +14,7 @@ export default async function SearchPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+
   const params = await searchParams;
   const q = typeof params.q === "string" ? params.q.toLowerCase() : "";
   const category = typeof params.category === "string" ? params.category : "All Items";

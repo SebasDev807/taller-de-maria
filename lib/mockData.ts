@@ -69,7 +69,7 @@ export const mockProducts: Product[] = [
 
 export interface DailyContent {
   id: string;
-  type: "evangelio" | "oracion";
+  type: "gospel" | "prayer";
   title: string;
   text: string;
   icon: string;
@@ -79,7 +79,7 @@ export interface DailyContent {
 export const mockDailyContent: DailyContent[] = [
   {
     id: "dc-001",
-    type: "evangelio",
+    type: "gospel",
     title: '"Yo soy el camino, la verdad y la vida."',
     text: "En aquel tiempo, Jesús dijo a sus discípulos: «No se inquieten. Crean en Dios y crean también en mí. En la casa de mi Padre hay muchas habitaciones; si no fuera así, se lo habría dicho, porque voy a prepararles un lugar...»",
     icon: "menu_book",
@@ -87,7 +87,7 @@ export const mockDailyContent: DailyContent[] = [
   },
   {
     id: "dc-002",
-    type: "oracion",
+    type: "prayer",
     title: '"Señor, concédeme la serenidad para aceptar las cosas que no puedo cambiar, valor para cambiar aquellas que puedo, y sabiduría para reconocer la diferencia."',
     text: "",
     icon: "folded_hands"
