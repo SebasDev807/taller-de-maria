@@ -1,2 +1,2 @@
 export * from "./DailyContentBox";
-export * from "./ActionBtn";
+export * from "./ActionButton";

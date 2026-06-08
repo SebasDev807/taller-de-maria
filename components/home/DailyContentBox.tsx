@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DailyContent } from "@/lib/mockData";
-import { ActionBtn } from "./ActionBtn";
+import { ActionButton } from "./ActionButton";
 
 interface DailyContentBoxProps {
   content: DailyContent;
@@ -57,9 +57,9 @@ export const DailyContentBox = ({ content }: DailyContentBoxProps) => {
         </p>
       </div>
       <div className="mt-auto">
-        <ActionBtn variant="secondary" icon="favorite">
+        <ActionButton variant="secondary" icon="favorite">
           Guardar Oración
-        </ActionBtn>
+        </ActionButton>
       </div>
     </article>
   );

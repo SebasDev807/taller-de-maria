@@ -18,7 +18,7 @@ interface ActionBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
  * @param {string} [props.className=""] - Clases CSS adicionales para personalizar el estilo.
  * @returns {React.JSX.Element} El botón renderizado.
  */
-export const ActionBtn = ({
+export const ActionButton = ({
   children,
   icon,
   variant = "primary",
@@ -34,7 +34,7 @@ export const ActionBtn = ({
 
   return (
     <button
-      className={`${baseClasses} ${variants[variant]} ${className}`}
+      className={`cursor-pointer ${baseClasses} ${variants[variant]} ${className}`}
       {...props}
     >
       {icon && <span className="material-symbols-outlined text-sm">{icon}</span>}
