@@ -1,6 +1,7 @@
 import { getGospelHistory, republishGospel, deleteGospel } from "@/actions/gospel.actions";
 
 export const GospelHistoryWidget = async () => {
+
   const result = await getGospelHistory();
   const gospels = result.success && result.data ? result.data : [];
 

@@ -60,8 +60,27 @@ export async function createGospel(
   try {
     await dbConnect();
 
-    // 2. Crear un nuevo documento
-    const gospel = await Gospel.create({ title, text });
+    // 2. Normalizar el título para buscar duplicados (sin espacios y en mayúsculas)
+    const normalizedNewTitle = title.replace(/\s+/g, '').toUpperCase();
+    
+    // Traer los títulos existentes para comparar
+    const allGospels = await Gospel.find().select('_id title').lean();
+    const existing = allGospels.find(
+      (g) => g.title.replace(/\s+/g, '').toUpperCase() === normalizedNewTitle
+    );
+
+    let gospel;
+    if (existing) {
+      // Actualizar el existente y poner su fecha de creación al momento actual para que aparezca primero
+      gospel = await Gospel.findByIdAndUpdate(
+        existing._id,
+        { title, text, createdAt: new Date() },
+        { new: true }
+      );
+    } else {
+      // Crear uno nuevo
+      gospel = await Gospel.create({ title, text });
+    }
 
     revalidatePath("/");
     revalidatePath("/admin");

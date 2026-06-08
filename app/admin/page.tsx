@@ -9,8 +9,6 @@ import {
 
 export default function AdminDashboard() {
 
-  // Evangelio
-  const gospel = mockDailyContent.find((content) => content.type === "gospel");
 
   // Oración
   const prayer = mockDailyContent.find((content) => content.type === "prayer");
@@ -20,7 +18,7 @@ export default function AdminDashboard() {
       <AdminPageHeader />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-        <DailyReflectionWidget gospel={gospel} prayer={prayer} />
+        <DailyReflectionWidget prayer={prayer} />
         <StockAlertsWidget />
         <RecentProductsWidget products={mockProducts} />
         <CategoriesWidget />

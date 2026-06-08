@@ -7,10 +7,7 @@ import { getGospelHistory } from "@/actions/gospel.actions";
  * Propiedades para el componente DailyReflectionWidget.
  */
 interface DailyReflectionWidgetProps {
-  /**
-   * El contenido diario que representa el evangelio.
-   */
-  gospel?: DailyContent;
+
   /**
    * El contenido diario que representa la oración.
    */
@@ -24,7 +21,7 @@ interface DailyReflectionWidgetProps {
  * @param props - Las propiedades del componente que contienen los datos del contenido diario.
  * @returns El componente DailyReflectionWidget renderizado.
  */
-export const DailyReflectionWidget = async ({ gospel, prayer }: DailyReflectionWidgetProps) => {
+export const DailyReflectionWidget = async ({ prayer }: DailyReflectionWidgetProps) => {
   const historyResult = await getGospelHistory();
   const history = historyResult.success && historyResult.data ? historyResult.data : [];
 
@@ -38,7 +35,7 @@ export const DailyReflectionWidget = async ({ gospel, prayer }: DailyReflectionW
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
-        <GospelForm gospel={gospel} history={history} />
+        <GospelForm history={history} />
         <PrayerWidget prayer={prayer} />
       </div>
     </section>

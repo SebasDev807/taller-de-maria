@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { DailyContent } from "@/lib/mockData";
+
 import { CustomButton, FieldError } from "../shared";
 import { createGospel, deleteGospel } from "@/actions/gospel.actions";
 import { gospelSchema } from "@/actions/schemas";
@@ -27,10 +27,7 @@ type GospelFormValues = z.infer<typeof gospelSchema>;
  * Propiedades para el componente GospelWidget.
  */
 interface GospelWidgetProps {
-    /**
-     * El contenido diario que representa el evangelio.
-     */
-    gospel?: DailyContent;
+
     /**
      * Historial de evangelios publicados.
      */
@@ -55,7 +52,7 @@ const inputBase =
  * @param props - Las propiedades del componente que contienen los datos del evangelio y el historial.
  * @returns El componente GospelForm renderizado.
  */
-export const GospelForm = ({ gospel, history = [] }: GospelWidgetProps) => {
+export const GospelForm = ({ history = [] }: GospelWidgetProps) => {
 
     const [serverError, setServerError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
@@ -68,8 +65,8 @@ export const GospelForm = ({ gospel, history = [] }: GospelWidgetProps) => {
     } = useForm<GospelFormValues>({
         resolver: gospelResolver,
         defaultValues: {
-            title: gospel?.title ?? "",
-            text: gospel?.text ?? "",
+            title: "",
+            text: "",
         },
     });
 
@@ -88,6 +85,7 @@ export const GospelForm = ({ gospel, history = [] }: GospelWidgetProps) => {
             setServerError(result.error ?? "Error inesperado.");
         } else {
             setSuccess(true);
+            reset({ title: "", text: "" });
         }
     };
 
