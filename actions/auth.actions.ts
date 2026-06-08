@@ -1,42 +1,13 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import dbConnect from "@/lib/mongodb";
 import { User } from "@/models";
 import { UserRole } from "@/models/user/user.interface";
 import { comparePassword } from "@/helpers/password";
 import { createSession, deleteSession } from "@/lib/session";
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-export interface SessionUser {
-  id: string;
-  name: string;
-  email: string;
-  role: UserRole;
-}
-
-export type AuthActionResult =
-  | { success: true; data: SessionUser }
-  | { success: false; error: string };
-
-// ---------------------------------------------------------------------------
-// Validation schema
-// ---------------------------------------------------------------------------
-
-const loginSchema = z.object({
-  email: z
-    .string({ error: "El email es obligatorio" })
-    .email("Ingresa un email válido")
-    .trim()
-    .toLowerCase(),
-  password: z
-    .string({ error: "La contraseña es obligatoria" })
-    .min(1, "La contraseña es obligatoria"),
-});
+import { loginSchema } from "./schemas";
+import type { AuthActionResult, SessionUser } from "./types";
 
 // ---------------------------------------------------------------------------
 // Actions
@@ -96,7 +67,12 @@ export async function loginUser(
     };
 
     // 6. Crear sesión JWT en cookie HttpOnly
-    await createSession({ userId: sessionUser.id, name: sessionUser.name, email: sessionUser.email, role: sessionUser.role });
+    await createSession({
+      userId: sessionUser.id,
+      name: sessionUser.name,
+      email: sessionUser.email,
+      role: sessionUser.role,
+    });
 
     return { success: true, data: sessionUser };
   } catch (err) {

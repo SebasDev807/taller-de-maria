@@ -1,28 +1,11 @@
 "use server";
 
-import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/mongodb";
 import { User } from "@/models";
-import { IUser, UserRole } from "@/models/user/user.interface";
+import { UserRole } from "@/models/user/user.interface";
 import { mockUsers } from "@/models/user/user.seed";
 import { hashPassword } from "@/helpers";
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-export type CreateUserInput = Pick<IUser, "name" | "email" | "password"> &
-  Partial<Pick<IUser, "role">>;
-
-export type ActionResult<T = void> =
-  | { success: true; data: T }
-  | { success: false; error: string };
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-
+import type { ActionResult, CreateUserInput } from "./types";
 
 // ---------------------------------------------------------------------------
 // Actions

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { loginUser, logoutUser } from "@/actions/auth.actions";
-import type { SessionUser } from "@/actions/auth.actions";
+import type { SessionUser } from "@/actions/types/auth.types";
 import { useAuthStore } from "@/store/auth";
 import { useState } from "react";
 
