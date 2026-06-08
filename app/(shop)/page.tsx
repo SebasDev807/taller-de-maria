@@ -11,8 +11,8 @@ import { mockProducts, mockDailyContent } from "@/lib/mockData";
  */
 export default function Home() {
 
-  const evangelio = mockDailyContent.find(content => content.type === "evangelio");
-  const oracion = mockDailyContent.find(content => content.type === "oracion");
+  const evangelio = mockDailyContent.find(content => content.type === "gospel");
+  const oracion = mockDailyContent.find(content => content.type === "prayer");
 
   return (
 

@@ -15,7 +15,7 @@ interface DailyContentBoxProps {
  * @returns {React.JSX.Element} La tarjeta de contenido diario renderizada.
  */
 export const DailyContentBox = ({ content }: DailyContentBoxProps) => {
-  if (content.type === "evangelio") {
+  if (content.type === "gospel") {
     return (
       <article className="col-span-1 lg:col-span-7 bg-[#FFFFFF] rounded-xl p-lg shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative overflow-hidden flex flex-col justify-center min-h-[400px]">
         <div className="relative z-10">

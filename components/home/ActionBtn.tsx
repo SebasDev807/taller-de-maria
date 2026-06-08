@@ -29,7 +29,7 @@ export const ActionBtn = ({
 
   const variants = {
     primary: "bg-[#FFE082] text-[#3E2723] hover:bg-[#FFB300]", // Using accent colors from GUIDELINES
-    secondary: "bg-[#FFFFFF] border border-outline-variant text-[#3E2723] hover:bg-surface-variant"
+    secondary: "bg-[#FFFFFF] border border-outline-variant text-primary hover:bg-surface-variant"
   };
 
   return (
