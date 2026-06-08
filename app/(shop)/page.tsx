@@ -11,7 +11,6 @@ import { mockProducts, mockDailyContent } from "@/lib/mockData";
  */
 export default function Home() {
 
-  const gospel = mockDailyContent.find(content => content.type === "gospel");
   const prayer = mockDailyContent.find(content => content.type === "prayer");
 
   return (
@@ -31,10 +30,9 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Spiritual Focus (Evangelio & Oración) - Bento Style Layout */}
       <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop mb-xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-          {gospel && <GospelWidget content={gospel} />}
+          <GospelWidget />
           {prayer && <PrayerWidget content={prayer} />}
         </div>
       </section>
