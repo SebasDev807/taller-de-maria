@@ -6,4 +6,5 @@ export type GospelData = Pick<IGospel, "title" | "text" | "reference">;
 export interface GospelHistoryData extends GospelData {
   id: string;
   createdAt: string;
+  updatedAt: string;
 }

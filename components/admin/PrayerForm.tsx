@@ -9,6 +9,7 @@ import { prayerSchema } from "@/actions/schemas";
 import type { z } from "zod";
 import { prayerResolver } from "@/helpers";
 import type { PrayerHistoryData } from "@/actions/types";
+import { AdminHistoryPopover } from "./AdminHistoryPopover";
 
 // ---------------------------------------------------------------------------
 // Tipos
@@ -105,58 +106,11 @@ export const PrayerForm = ({ history = [] }: PrayerFormProps) => {
       {/* Header del Formulario y Toggle de Historial */}
       <div className="flex justify-between items-center mb-2 relative">
         <span className="font-label-md text-on-surface">Oración Actual</span>
-        {history.length > 0 && (
-          <div className="relative group">
-            <button
-              type="button"
-              className="cursor-pointer flex items-center gap-1 text-secondary text-label-sm font-label-sm transition-colors py-1"
-            >
-              <span className="material-symbols-outlined text-sm">history</span>
-            </button>
-
-            {/* Popover desplegable */}
-            <div className="absolute right-0 top-full pt-1 w-80 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-              <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-3 max-h-[300px] overflow-y-auto flex flex-col gap-2 shadow-[0_10px_40px_rgba(0,0,0,0.1)]">
-                {history.map(item => (
-                  <div
-                    key={item.id}
-                    onClick={() => handleSelectHistory(item)}
-                    className="p-3 bg-surface-container-lowest rounded border border-outline-variant cursor-pointer hover:border-secondary hover:bg-surface-variant/30 transition-colors group/item flex justify-between items-start"
-                  >
-                    <div className="flex-1 min-w-0 pr-2">
-                      {item.title && (
-                        <h5 className="font-headline-sm text-primary text-sm uppercase mb-0.5 truncate">
-                          {item.title}
-                        </h5>
-                      )}
-                      <p className="font-body-sm text-on-surface text-sm truncate">
-                        {item.text.length > 60
-                          ? item.text.slice(0, 60) + "..."
-                          : item.text}
-                      </p>
-                      {item.reference && (
-                        <span className="text-label-sm text-secondary italic block mt-0.5">
-                          {item.reference}
-                        </span>
-                      )}
-                      <span className="text-label-sm text-outline block mt-1">
-                        {new Date(item.updatedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={(e) => handleDelete(e, item.id)}
-                      className="cursor-pointer text-error opacity-0 group-hover/item:opacity-100 transition-opacity rounded shrink-0"
-                      title="Eliminar registro"
-                    >
-                      <span className="material-symbols-outlined text-sm">delete</span>
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+        <AdminHistoryPopover
+          items={history}
+          onSelect={handleSelectHistory}
+          onDelete={handleDelete}
+        />
       </div>
 
       {/* Campo: Título (Opcional) */}

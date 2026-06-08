@@ -113,6 +113,7 @@ export async function getGospelHistory(): Promise<ActionResult<GospelHistoryData
       text: g.text,
       reference: g.reference,
       createdAt: (g as any).updatedAt?.toISOString() || new Date().toISOString(),
+      updatedAt: (g as any).updatedAt?.toISOString() || new Date().toISOString(),
     }));
 
     return { success: true, data };

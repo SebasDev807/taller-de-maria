@@ -64,7 +64,7 @@ export async function getPrayerHistory(): Promise<ActionResult<PrayerHistoryData
 /**
  * Crea o actualiza una oración.
  *
- * Si ya existe una oración con el mismo texto (normalizado), la actualiza
+ * Si ya existe una oración con el mismo título o texto (normalizado), la actualiza
  * en lugar de crear un duplicado — de lo contrario, crea una nueva.
  *
  * @param formData - FormData proveniente del formulario con los campos `text` y `reference`.
@@ -90,13 +90,23 @@ export async function createPrayer(
   try {
     await dbConnect();
 
-    // 2. Normalizar el texto para buscar duplicados
-    const normalizedNew = text.replace(/\s+/g, " ").trim().toUpperCase();
+    // 2. Buscar duplicados por título o por texto
+    const allPrayers = await Prayer.find().select("_id title text").lean();
+    let existing;
 
-    const allPrayers = await Prayer.find().select("_id text").lean();
-    const existing = allPrayers.find(
-      (p) => p.text.replace(/\s+/g, " ").trim().toUpperCase() === normalizedNew
-    );
+    if (title) {
+      const normalizedTitle = title.replace(/\s+/g, " ").trim().toUpperCase();
+      existing = allPrayers.find(
+        (p) => p.title && p.title.replace(/\s+/g, " ").trim().toUpperCase() === normalizedTitle
+      );
+    }
+
+    if (!existing) {
+      const normalizedText = text.replace(/\s+/g, " ").trim().toUpperCase();
+      existing = allPrayers.find(
+        (p) => p.text && p.text.replace(/\s+/g, " ").trim().toUpperCase() === normalizedText
+      );
+    }
 
     let prayer;
     if (existing) {
