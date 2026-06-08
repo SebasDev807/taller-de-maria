@@ -11,6 +11,7 @@ export const PrayerWidget = async () => {
   const result = await getPrayer();
   const prayer = result?.success ? result.data : null;
 
+  const displayTitle = prayer?.title;
   const displayText =
     prayer?.text ||
     "La oración del día no se encuentra disponible. Por favor, regresa más tarde.";
@@ -24,6 +25,11 @@ export const PrayerWidget = async () => {
           <span className="material-symbols-outlined text-secondary">folded_hands</span>
           <span className="font-label-md text-label-md uppercase tracking-wider">Oración Diaria</span>
         </div>
+        {displayTitle && (
+          <h2 className="font-headline-sm text-headline-sm text-primary uppercase tracking-wide mb-2">
+            {displayTitle}
+          </h2>
+        )}
         <p className="font-headline-md text-headline-md text-primary italic leading-relaxed mb-6">
           {displayText}
         </p>

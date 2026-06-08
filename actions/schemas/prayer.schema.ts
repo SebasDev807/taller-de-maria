@@ -2,6 +2,7 @@ import { z } from "zod";
 
 /** Esquema de validación para el formulario de la oración. */
 export const prayerSchema = z.object({
+  title: z.string().trim().optional(),
   text: z
     .string({ error: "El texto de la oración es obligatorio" })
     .min(1, "El texto de la oración es obligatorio")

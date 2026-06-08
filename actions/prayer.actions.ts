@@ -27,7 +27,7 @@ export async function getPrayer(): Promise<ActionResult<PrayerData | null>> {
 
     return {
       success: true,
-      data: { text: prayer.text, reference: prayer.reference },
+      data: { title: prayer.title, text: prayer.text, reference: prayer.reference },
     };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error inesperado.";
@@ -48,6 +48,7 @@ export async function getPrayerHistory(): Promise<ActionResult<PrayerHistoryData
 
     const data: PrayerHistoryData[] = prayers.map((p) => ({
       id: p._id.toString(),
+      title: p.title,
       text: p.text,
       reference: p.reference,
       updatedAt: (p as any).updatedAt?.toISOString() || new Date().toISOString(),
@@ -74,6 +75,7 @@ export async function createPrayer(
 ): Promise<ActionResult<PrayerData>> {
   // 1. Validar campos
   const validated = prayerSchema.safeParse({
+    title: formData.get("title") || undefined,
     text: formData.get("text"),
     reference: formData.get("reference") || undefined,
   });
@@ -83,7 +85,7 @@ export async function createPrayer(
     return { success: false, error: firstError };
   }
 
-  const { text, reference } = validated.data;
+  const { title, text, reference } = validated.data;
 
   try {
     await dbConnect();
@@ -101,12 +103,12 @@ export async function createPrayer(
       // Actualizar la existente (mongoose actualizará updatedAt automáticamente)
       prayer = await Prayer.findByIdAndUpdate(
         existing._id,
-        { text, reference },
+        { title, text, reference },
         { new: true }
       );
     } else {
       // Crear una nueva
-      prayer = await Prayer.create({ text, reference });
+      prayer = await Prayer.create({ title, text, reference });
     }
 
     // Revalidar las rutas que dependen de la oración
@@ -115,7 +117,7 @@ export async function createPrayer(
 
     return {
       success: true,
-      data: { text: prayer!.text, reference: prayer!.reference },
+      data: { title: prayer!.title, text: prayer!.text, reference: prayer!.reference },
     };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error inesperado.";

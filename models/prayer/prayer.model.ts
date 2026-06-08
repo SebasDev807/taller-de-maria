@@ -7,6 +7,10 @@ if (process.env.NODE_ENV === "development" && models.Prayer) {
 
 const PrayerSchema = new Schema<IPrayer>(
   {
+    title: {
+      type: String,
+      trim: true,
+    },
     text: {
       type: String,
       required: [true, "El texto de la oración es obligatorio"],

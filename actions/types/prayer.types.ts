@@ -1,7 +1,7 @@
 import { IPrayer } from "@/models/prayer/prayer.interface";
 
 /** Datos de la oración expuestos por las Server Actions. */
-export type PrayerData = Pick<IPrayer, "text" | "reference">;
+export type PrayerData = Pick<IPrayer, "title" | "text" | "reference">;
 
 /** Datos de la oración incluidos en el historial. */
 export interface PrayerHistoryData extends PrayerData {
