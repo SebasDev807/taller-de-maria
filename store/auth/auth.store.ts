@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { SessionUser } from "@/actions/auth.actions";
+import type { SessionUser } from "@/actions/types";
 
 // ---------------------------------------------------------------------------
 // Types

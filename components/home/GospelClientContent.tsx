@@ -18,7 +18,7 @@ export const GospelClientContent = ({ title, text }: GospelClientContentProps) =
 
   return (
     <>
-      <h2 className="font-headline-lg text-headline-lg md:font-headline-lg-mobile md:text-headline-lg-mobile text-primary mb-6 before:content-['\22'] after:content-['\22']">
+      <h2 className="uppercase font-headline-lg text-headline-lg md:font-headline-lg-mobile md:text-headline-lg-mobile text-primary mb-6 before:content-['\22'] after:content-['\22']">
         {title}
       </h2>
       <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8 whitespace-pre-wrap">

@@ -1,6 +1,7 @@
 import { DailyContent } from "@/lib/mockData";
 import { GospelForm } from "./GospelForm";
 import { PrayerWidget } from "./PrayerWidget";
+import { getGospelHistory } from "@/actions/gospel.actions";
 
 /**
  * Propiedades para el componente DailyReflectionWidget.
@@ -23,7 +24,10 @@ interface DailyReflectionWidgetProps {
  * @param props - Las propiedades del componente que contienen los datos del contenido diario.
  * @returns El componente DailyReflectionWidget renderizado.
  */
-export const DailyReflectionWidget = ({ gospel, prayer }: DailyReflectionWidgetProps) => {
+export const DailyReflectionWidget = async ({ gospel, prayer }: DailyReflectionWidgetProps) => {
+  const historyResult = await getGospelHistory();
+  const history = historyResult.success && historyResult.data ? historyResult.data : [];
+
   return (
     <section className="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-ambient flex flex-col border border-surface-container-high">
       <div className="flex items-center gap-3 mb-6">
@@ -34,7 +38,7 @@ export const DailyReflectionWidget = ({ gospel, prayer }: DailyReflectionWidgetP
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
-        <GospelForm gospel={gospel} />
+        <GospelForm gospel={gospel} history={history} />
         <PrayerWidget prayer={prayer} />
       </div>
     </section>

@@ -3,7 +3,8 @@
 import dbConnect from "@/lib/mongodb";
 import { Gospel } from "@/models";
 import { gospelSchema } from "./schemas";
-import type { ActionResult, GospelData } from "./types";
+import type { ActionResult, GospelData, GospelHistoryData } from "./types";
+import { revalidatePath } from "next/cache";
 
 // ---------------------------------------------------------------------------
 // Actions
@@ -35,13 +36,12 @@ export async function getGospel(): Promise<ActionResult<GospelData | null>> {
 }
 
 /**
- * Crea o actualiza el evangelio del día.
- * Usa `findOneAndUpdate` con `upsert: true` para garantizar un único documento.
+ * Crea un nuevo registro de evangelio en el historial.
  *
  * @param formData - FormData proveniente del formulario con los campos `title` y `text`.
  * @returns Los datos del evangelio guardado o un mensaje de error.
  */
-export async function upsertGospel(
+export async function createGospel(
   formData: FormData
 ): Promise<ActionResult<GospelData>> {
   // 1. Validar campos
@@ -60,17 +60,83 @@ export async function upsertGospel(
   try {
     await dbConnect();
 
-    // 2. Actualizar el documento más reciente o crear uno nuevo
-    const gospel = await Gospel.findOneAndUpdate(
-      {},
-      { title, text },
-      { upsert: true, new: true, sort: { createdAt: -1 } }
-    ).lean();
+    // 2. Crear un nuevo documento
+    const gospel = await Gospel.create({ title, text });
+
+    revalidatePath("/");
+    revalidatePath("/admin");
 
     return {
       success: true,
-      data: { title: gospel!.title, text: gospel!.text },
+      data: { title: gospel.title, text: gospel.text },
     };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Obtiene el historial completo de evangelios, ordenados por fecha descendente.
+ *
+ * @returns Una lista de evangelios.
+ */
+export async function getGospelHistory(): Promise<ActionResult<GospelHistoryData[]>> {
+  try {
+    await dbConnect();
+
+    const gospels = await Gospel.find().sort({ createdAt: -1 }).lean();
+
+    const data: GospelHistoryData[] = gospels.map((g) => ({
+      id: g._id.toString(),
+      title: g.title,
+      text: g.text,
+      createdAt: (g as any).createdAt?.toISOString() || new Date().toISOString(),
+    }));
+
+    return { success: true, data };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Elimina un evangelio del historial.
+ *
+ * @param id - El ID del evangelio a eliminar.
+ */
+export async function deleteGospel(id: string): Promise<ActionResult<null>> {
+  try {
+    await dbConnect();
+    await Gospel.findByIdAndDelete(id);
+
+    revalidatePath("/");
+    revalidatePath("/admin");
+
+    return { success: true, data: null };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Vuelve a publicar un evangelio del historial actualizando su fecha de creación.
+ *
+ * @param id - El ID del evangelio a volver a publicar.
+ */
+export async function republishGospel(id: string): Promise<ActionResult<null>> {
+  try {
+    await dbConnect();
+    
+    // Actualizamos createdAt para que aparezca como el más reciente.
+    await Gospel.findByIdAndUpdate(id, { createdAt: new Date() });
+
+    revalidatePath("/");
+    revalidatePath("/admin");
+
+    return { success: true, data: null };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error inesperado.";
     return { success: false, error: message };
