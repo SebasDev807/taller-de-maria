@@ -28,7 +28,7 @@ export const PrayerWidget = async () => {
         </div>
 
         {displayTitle && (
-          <h2 className="uppercase font-headline-sm text-headline-sm text-primary mb-2 tracking-wide">
+          <h2 className="uppercase font-bold font-headline-sm text-headline-sm text-primary mb-2 tracking-wide">
             {displayTitle}
           </h2>
         )}
