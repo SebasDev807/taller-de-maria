@@ -20,7 +20,7 @@ export const PrayerWidget = async () => {
   const displayReference = prayer?.reference;
 
   return (
-    <article className="col-span-1 lg:col-span-5 bg-surface-container-low rounded-xl p-lg flex flex-col justify-between min-h-[400px] border border-surface-container-highest relative overflow-hidden">
+    <article className="col-span-1 lg:col-span-5 bg-surface-container-low rounded-xl p-lg flex flex-col justify-between min-h-[400px] border border-surface-container-highest relative overflow-hidden self-start">
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-center gap-sm mb-6 text-on-surface-variant">
           <span className="material-symbols-outlined text-secondary">folded_hands</span>
