@@ -49,9 +49,9 @@ const inputBase =
  * por react-hook-form. Al enviarlo invoca el server action `upsertGospel`.
  *
  * @param props - Las propiedades del componente que contienen los datos del evangelio.
- * @returns El componente GospelWidget renderizado.
+ * @returns El componente GospelForm renderizado.
  */
-export const GospelWidget = ({ gospel }: GospelWidgetProps) => {
+export const GospelForm = ({ gospel }: GospelWidgetProps) => {
 
     const [serverError, setServerError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
@@ -73,6 +73,7 @@ export const GospelWidget = ({ gospel }: GospelWidgetProps) => {
         setSuccess(false);
 
         const formData = new FormData();
+
         formData.set("title", values.title);
         formData.set("text", values.text);
 

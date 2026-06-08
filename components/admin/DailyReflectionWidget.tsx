@@ -1,5 +1,5 @@
 import { DailyContent } from "@/lib/mockData";
-import { GospelWidget } from "./GospelWidget";
+import { GospelForm } from "./GospelForm";
 import { PrayerWidget } from "./PrayerWidget";
 
 /**
@@ -34,7 +34,7 @@ export const DailyReflectionWidget = ({ gospel, prayer }: DailyReflectionWidgetP
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
-        <GospelWidget gospel={gospel} />
+        <GospelForm gospel={gospel} />
         <PrayerWidget prayer={prayer} />
       </div>
     </section>
