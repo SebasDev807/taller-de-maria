@@ -5,7 +5,7 @@ import {
   StockAlertsWidget,
   RecentProductsWidget,
   CategoriesWidget,
-} from "@/components/admin";
+} from "@/components";
 
 export default function AdminDashboard() {
   const evangelio = mockDailyContent.find((content) => content.type === "evangelio");
