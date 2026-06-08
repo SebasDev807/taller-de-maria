@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TopNavBar, Footer, DailyContentBox, CatalogCard } from "@/components";
+import { TopNavBar, Footer, GospelWidget, PrayerWidget, CatalogCard } from "@/components";
 import { mockProducts, mockDailyContent } from "@/lib/mockData";
 
 /**
@@ -11,13 +11,10 @@ import { mockProducts, mockDailyContent } from "@/lib/mockData";
  */
 export default function Home() {
 
-  const evangelio = mockDailyContent.find(content => content.type === "gospel");
-  const oracion = mockDailyContent.find(content => content.type === "prayer");
+  const gospel = mockDailyContent.find(content => content.type === "gospel");
+  const prayer = mockDailyContent.find(content => content.type === "prayer");
 
   return (
-
-
-
 
     <main className="fade-in pt-20 pb-xl min-h-screen">
 
@@ -37,8 +34,8 @@ export default function Home() {
       {/* Spiritual Focus (Evangelio & Oración) - Bento Style Layout */}
       <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop mb-xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-          {evangelio && <DailyContentBox content={evangelio} />}
-          {oracion && <DailyContentBox content={oracion} />}
+          {gospel && <GospelWidget content={gospel} />}
+          {prayer && <PrayerWidget content={prayer} />}
         </div>
       </section>
 
