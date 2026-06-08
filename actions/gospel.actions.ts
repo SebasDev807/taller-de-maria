@@ -19,7 +19,7 @@ export async function getGospel(): Promise<ActionResult<GospelData | null>> {
   try {
     await dbConnect();
 
-    const gospel = await Gospel.findOne().sort({ createdAt: -1 }).lean();
+    const gospel = await Gospel.findOne().sort({ updatedAt: -1 }).lean();
 
     if (!gospel) {
       return { success: true, data: null };
@@ -71,10 +71,10 @@ export async function createGospel(
 
     let gospel;
     if (existing) {
-      // Actualizar el existente y poner su fecha de creación al momento actual para que aparezca primero
+      // Actualizar el existente (mongoose actualizará updatedAt automáticamente)
       gospel = await Gospel.findByIdAndUpdate(
         existing._id,
-        { title, text, createdAt: new Date() },
+        { title, text },
         { new: true }
       );
     } else {
@@ -104,13 +104,13 @@ export async function getGospelHistory(): Promise<ActionResult<GospelHistoryData
   try {
     await dbConnect();
 
-    const gospels = await Gospel.find().sort({ createdAt: -1 }).lean();
+    const gospels = await Gospel.find().sort({ updatedAt: -1 }).lean();
 
     const data: GospelHistoryData[] = gospels.map((g) => ({
       id: g._id.toString(),
       title: g.title,
       text: g.text,
-      createdAt: (g as any).createdAt?.toISOString() || new Date().toISOString(),
+      createdAt: (g as any).updatedAt?.toISOString() || new Date().toISOString(),
     }));
 
     return { success: true, data };
@@ -149,8 +149,8 @@ export async function republishGospel(id: string): Promise<ActionResult<null>> {
   try {
     await dbConnect();
     
-    // Actualizamos createdAt para que aparezca como el más reciente.
-    await Gospel.findByIdAndUpdate(id, { createdAt: new Date() });
+    // Actualizamos updatedAt para que aparezca como el más reciente.
+    await Gospel.findByIdAndUpdate(id, { updatedAt: new Date() });
 
     revalidatePath("/");
     revalidatePath("/admin");
