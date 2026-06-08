@@ -3,12 +3,26 @@
 import { useState } from "react";
 import { ActionButton } from "./ActionButton";
 
+/**
+ * Propiedades para el componente GospelClientContent.
+ */
 interface GospelClientContentProps {
+  /** El título del evangelio. */
   title: string;
+  /** El texto o contenido principal del evangelio. */
   text: string;
+  /** Referencia bíblica opcional del evangelio. */
   reference?: string;
 }
 
+/**
+ * Componente de cliente que muestra el contenido del evangelio.
+ * Maneja la lógica para expandir o contraer textos largos y
+ * provee la interfaz para interactuar con la lectura.
+ * 
+ * @param props Las propiedades del componente.
+ * @returns El contenido renderizado del evangelio.
+ */
 export const GospelClientContent = ({ title, text, reference }: GospelClientContentProps) => {
 
   const [isExpanded, setIsExpanded] = useState(false);

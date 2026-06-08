@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TopNavBar, Footer, GospelWidget, PrayerWidget, CatalogCard } from "@/components";
-import { mockProducts, mockDailyContent } from "@/lib/mockData";
+import { mockProducts } from "@/lib/mockData";
 
 /**
  * Componente principal de la página de inicio (Home).
@@ -10,8 +10,6 @@ import { mockProducts, mockDailyContent } from "@/lib/mockData";
  * @returns {React.JSX.Element} La página de inicio renderizada.
  */
 export default function Home() {
-
-  const prayer = mockDailyContent.find(content => content.type === "prayer");
 
   return (
 
@@ -33,7 +31,7 @@ export default function Home() {
       <section className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop mb-xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
           <GospelWidget />
-          {prayer && <PrayerWidget content={prayer} />}
+          <PrayerWidget />
         </div>
       </section>
 

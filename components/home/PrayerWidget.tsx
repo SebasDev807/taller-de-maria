@@ -1,29 +1,37 @@
-import { DailyContent } from "@/lib/mockData";
+import { getPrayer } from "@/actions/prayer.actions";
 import { ActionButton } from "./ActionButton";
-
-interface PrayerWidgetProps {
-  content: DailyContent;
-}
 
 /**
  * Componente que muestra la oración diaria.
- * Renderiza una tarjeta de contenido secundario con una oración y botón de acción.
+ * Obtiene la oración más reciente directamente de la base de datos.
  *
- * @param {PrayerWidgetProps} props - Propiedades del componente PrayerWidget.
- * @param {DailyContent} props.content - Objeto que contiene la información de la oración.
- * @returns {React.JSX.Element} La tarjeta de oración renderizada.
+ * @returns {Promise<React.JSX.Element>} La tarjeta de oración renderizada.
  */
-export const PrayerWidget = ({ content }: PrayerWidgetProps) => {
+export const PrayerWidget = async () => {
+  const result = await getPrayer();
+  const prayer = result?.success ? result.data : null;
+
+  const displayText =
+    prayer?.text ||
+    "La oración del día no se encuentra disponible. Por favor, regresa más tarde.";
+
+  const displayReference = prayer?.reference;
+
   return (
     <article className="col-span-1 lg:col-span-5 bg-surface-container-low rounded-xl p-lg flex flex-col justify-between min-h-[400px] border border-surface-container-highest">
       <div>
         <div className="flex items-center gap-sm mb-6 text-on-surface-variant">
-          <span className="material-symbols-outlined text-secondary">{content.icon}</span>
+          <span className="material-symbols-outlined text-secondary">folded_hands</span>
           <span className="font-label-md text-label-md uppercase tracking-wider">Oración Diaria</span>
         </div>
         <p className="font-headline-md text-headline-md text-primary italic leading-relaxed mb-6">
-          {content.title}
+          {displayText}
         </p>
+        {displayReference && (
+          <span className="text-label-sm text-secondary font-label-sm italic block -mt-2">
+            — {displayReference}
+          </span>
+        )}
       </div>
       <div className="mt-auto">
         <ActionButton variant="secondary" icon="favorite">

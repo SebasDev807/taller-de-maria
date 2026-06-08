@@ -1,23 +1,11 @@
-import { DailyContent } from "@/lib/mockData";
 import { CustomButton } from "../shared"
 
 /**
- * Propiedades para el componente PrayerWidget.
- */
-interface PrayerWidgetProps {
-  /**
-   * El contenido diario que representa la oración.
-   */
-  prayer?: DailyContent;
-}
-
-/**
- * Muestra el widget de la Oración del Día, permitiendo al usuario actualizar su texto.
+ * Formulario para crear o actualizar la oración del día.
  *
- * @param props - Las propiedades del componente que contienen los datos de la oración.
- * @returns El componente PrayerWidget renderizado.
+ * @returns El componente PrayerForm renderizado.
  */
-export const PrayerWidget = ({ prayer }: PrayerWidgetProps) => {
+export const PrayerForm = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
@@ -29,7 +17,6 @@ export const PrayerWidget = ({ prayer }: PrayerWidgetProps) => {
           id="prayer"
           placeholder="Ingrese la oración diaria aquí..."
           rows={5}
-          defaultValue={prayer?.text || ""}
         />
       </div>
       <div className="flex justify-end">
