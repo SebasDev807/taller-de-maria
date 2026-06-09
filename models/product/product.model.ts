@@ -10,6 +10,13 @@ const ProductSchema = new Schema<IProduct>(
       uppercase: true,
       trim: true,
     },
+    slug: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
+      sparse: true,
+    },
     price: {
       type: Number,
       required: [true, "El precio es obligatorio"],

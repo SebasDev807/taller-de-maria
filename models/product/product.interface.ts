@@ -4,6 +4,7 @@ import { ICategory } from "../category/category.interface";
 export interface IProduct {
   _id?: Types.ObjectId;
   sku: string;
+  slug?: string;
   price: number;
   description?: string;
   stock: number;
