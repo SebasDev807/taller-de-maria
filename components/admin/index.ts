@@ -1,5 +1,6 @@
 export * from "./AdminLayoutShell";
 export * from "./AdminPageHeader";
+export * from "./DashboardHeader";
 export * from "./AdminHistoryPopover";
 export * from "./CategoriesWidget";
 export * from "./DailyReflectionWidget";
