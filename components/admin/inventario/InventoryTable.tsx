@@ -114,7 +114,7 @@ export const InventoryTable = () => {
               </td>
               <td className={`py-4 px-6 text-right font-label-md text-label-md ${item.status === 'out-of-stock' ? 'text-outline' : ''}`}>${item.price.toFixed(2)}</td>
               <td className="py-4 px-6 text-center">
-                <button className="text-outline hover:text-primary transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+                <button className="cursor-pointer text-outline hover:text-primary transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
                   <span className="material-symbols-outlined">more_vert</span>
                 </button>
               </td>

@@ -1,5 +1,5 @@
 import { AdminPageHeader } from "@/components/admin";
-import { InventoryToolbar, InventoryTable, InventoryPagination } from "@/components/admin";
+import { InventoryToolbar, InventoryTable } from "@/components/admin";
 
 export default function InventarioPage() {
   return (
