@@ -18,6 +18,7 @@ export const ProductFormModal = ({ isOpen, onClose }: ProductFormModalProps) => 
 
   const handleAddFeature = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
+
     if (featureInput.trim() && !features.includes(featureInput.trim())) {
       setFeatures([...features, featureInput.trim()]);
       setFeatureInput("");

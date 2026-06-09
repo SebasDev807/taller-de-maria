@@ -49,7 +49,7 @@ export const ProductItem = ({ item }: ProductItemProps) => {
             </td>
             <td className={`py-4 px-6 text-right font-label-md text-label-md ${item.status === 'out-of-stock' ? 'text-outline' : ''}`}>${item.price.toFixed(2)}</td>
             <td className="py-4 px-6 text-center">
-                <div className="flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                <div className="flex items-center justify-center gap-3">
                     <div className="relative group/edit flex justify-center">
                         <button type="button" className="cursor-pointer text-outline hover:text-yellow-500 transition-colors flex items-center justify-center">
                             <span className="material-symbols-outlined text-[20px]">edit</span>
