@@ -105,20 +105,19 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
         <div className="flex flex-col flex-1 mt-6">
           {navigationItems.map((item) => {
             const isActive = pathname === item.href || (item.name === "Dashboard" && pathname === "/admin");
-            
+
             return (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsSidebarOpen(false)}
-                className={`p-4 flex items-center gap-2 transition-all duration-150 border-r-4 ${
-                  isActive
-                    ? "text-secondary font-bold border-secondary bg-surface-container-high translate-x-1"
-                    : "text-on-surface-variant border-transparent hover:bg-surface-variant"
-                }`}
+                className={`p-4 flex items-center gap-2 transition-all duration-150 border-r-4 ${isActive
+                  ? "text-secondary font-bold border-secondary bg-surface-container-high translate-x-1"
+                  : "text-on-surface-variant border-transparent hover:bg-surface-variant"
+                  }`}
               >
-                <span 
-                  className="material-symbols-outlined" 
+                <span
+                  className="material-symbols-outlined"
                   style={{ fontVariationSettings: isActive ? "'FILL' 1" : undefined }}
                 >
                   {item.icon}
@@ -160,7 +159,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
       </nav>
 
       {/* Main Content Area Layout */}
-      <div className="flex-1 min-h-screen flex flex-col">
+      <div className="md:flex-1 min-h-screen flex flex-col">
         {children}
       </div>
     </div>
