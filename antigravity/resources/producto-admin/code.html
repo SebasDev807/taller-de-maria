@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Detalle de Producto | Taller De Maria Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #1a1c1c;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .tonal-card {
+            background: #ffffff;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            border-radius: 0.125rem;
+        }
+
+        .divider-light {
+            border-top: 0.5px solid #f3f3f3;
+        }
+
+        .transition-soft {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "on-primary-fixed-variant": "#5b403c",
+                        "on-background": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#604100",
+                        "on-primary-container": "#ae8d87",
+                        "on-surface": "#1a1c1c",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-container": "#eeeeee",
+                        "surface": "#f9f9f9",
+                        "outline": "#827472",
+                        "on-primary-fixed": "#2b1613",
+                        "outline-variant": "#d3c3c0",
+                        "surface-bright": "#f9f9f9",
+                        "primary-fixed-dim": "#e3beb8",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#281900",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#745853",
+                        "tertiary": "#28120b",
+                        "primary-fixed": "#ffdad4",
+                        "surface-variant": "#e2e2e2",
+                        "primary-container": "#3e2723",
+                        "surface-dim": "#dadada",
+                        "on-secondary-container": "#6a4800",
+                        "background": "#f9f9f9",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#b18c81",
+                        "secondary-fixed": "#ffdeac",
+                        "on-surface-variant": "#504442",
+                        "tertiary-container": "#40261e",
+                        "secondary": "#7e5700",
+                        "secondary-container": "#feb300",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-low": "#f3f3f3",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#ffba38",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f0f1f1",
+                        "inverse-primary": "#e3beb8",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary": "#271310",
+                        "on-tertiary-fixed": "#2c160e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "xs": "4px",
+                        "lg": "48px",
+                        "margin-desktop": "64px",
+                        "xl": "80px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Libre Caslon Text"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Libre Caslon Text"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Libre Caslon Text"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background">
+    <!-- SideNavBar -->
+    <aside
+        class="fixed left-0 top-0 h-full flex flex-col pt-20 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant w-64 z-40">
+        <div class="px-md mb-lg">
+            <h1 class="font-headline-md text-headline-md text-primary">Admin Portal</h1>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Management Console</p>
+        </div>
+        <nav class="flex-1 overflow-y-auto">
+            <!-- Dashboard -->
+            <a class="text-on-surface-variant dark:text-outline p-4 flex items-center gap-base hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors group"
+                href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-md text-label-md">Dashboard</span>
+            </a>
+            <!-- Inventory (Active) -->
+            <a class="text-secondary dark:text-secondary-fixed font-bold border-r-4 border-secondary bg-surface-container-high p-4 flex items-center gap-base translate-x-1 duration-150"
+                href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                <span class="font-label-md text-label-md">Inventory</span>
+            </a>
+            <!-- Orders -->
+            <a class="text-on-surface-variant dark:text-outline p-4 flex items-center gap-base hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors group"
+                href="#">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="font-label-md text-label-md">Orders</span>
+            </a>
+            <!-- Customers -->
+            <a class="text-on-surface-variant dark:text-outline p-4 flex items-center gap-base hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors group"
+                href="#">
+                <span class="material-symbols-outlined">group</span>
+                <span class="font-label-md text-label-md">Customers</span>
+            </a>
+            <!-- Settings -->
+            <a class="text-on-surface-variant dark:text-outline p-4 flex items-center gap-base hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors group"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-md text-label-md">Settings</span>
+            </a>
+        </nav>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 min-h-screen p-margin-desktop max-w-[1200px] mx-auto">
+        <!-- Navigation / Actions Row -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg">
+            <div class="flex flex-col gap-sm">
+                <button
+                    class="flex items-center gap-xs text-on-surface-variant hover:text-secondary transition-soft group">
+                    <span
+                        class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    <span class="font-label-md text-label-md">Volver al Inventario</span>
+                </button>
+                <div class="flex items-center gap-base">
+                    <h2 class="font-headline-lg text-headline-lg text-primary">Rosario de Madera de Olivo</h2>
+                    <span
+                        class="px-sm py-xs bg-secondary-container text-on-secondary-container font-label-sm text-label-sm rounded-full">En
+                        Stock</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-base">
+                <button
+                    class="px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded shadow-sm hover:opacity-90 active:scale-95 transition-soft">
+                    Editar Producto
+                </button>
+                <button
+                    class="px-md py-sm border border-error text-error font-label-md text-label-md rounded hover:bg-error-container/20 active:scale-95 transition-soft">
+                    Eliminar Producto
+                </button>
+            </div>
+        </div>
+        <!-- Content Grid (Bento Style) -->
+        <div class="grid grid-cols-12 gap-gutter">
+            <!-- Left: Main Image and Visual Identity -->
+            <div class="col-span-12 lg:col-span-5 flex flex-col gap-gutter">
+                <div class="tonal-card overflow-hidden">
+                    <img alt="Rosario de madera de olivo hecho a mano" class="w-full h-[500px] object-cover"
+                        data-alt="A highly detailed, professional studio photograph of a handcrafted wooden rosary made from olive wood, laid gracefully on a clean, off-white linen surface. The lighting is soft and ethereal, capturing the natural grain and warm textures of the wood against a bright, minimalist background. The composition is serene and focused, evoking a sense of sacred simplicity and timeless devotion consistent with a high-end religious catalog."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuApLzAeytesLZVs7mZlcHbs17nlgh-hrfV7GPyWXzUjVFR1fMxgW-A7GxIsoBKvhlO1xQh3wU5L-CpAoYEqeA-kFZInMMMyp4gPk7Ie9jc9RCu55HnbIKH4ucVbfpF2obXP_VpahCr_A4YdzIn1DSXMFRfzAnSGiWBkPaXJXJWj23QL_pwHmj0McW3gfh-ho5d9DXDohjIZrIqt6bXS4GlL8iKWsXc_mAnJ_TYh8frITI1vyhW4tk6aEChpDLc-xWH2b3H9UgrHZ7M" />
+                </div>
+                <!-- Technical Specifications Card -->
+                <div class="tonal-card p-md">
+                    <h3
+                        class="font-label-md text-label-md text-primary border-b border-surface-container pb-base mb-md">
+                        Especificaciones Técnicas</h3>
+                    <div class="space-y-sm">
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Material</span>
+                            <span class="font-body-md text-body-md text-on-surface">Madera de Olivo, Cuerda</span>
+                        </div>
+                        <div class="divider-light"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Dimensiones</span>
+                            <span class="font-body-md text-body-md text-on-surface">55 cm de largo</span>
+                        </div>
+                        <div class="divider-light"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Peso</span>
+                            <span class="font-body-md text-body-md text-on-surface">45g</span>
+                        </div>
+                        <div class="divider-light"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Origen</span>
+                            <span class="font-body-md text-body-md text-on-surface">Belén, Tierra Santa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right: Metadata and Description -->
+            <div class="col-span-12 lg:col-span-7 flex flex-col gap-gutter">
+                <!-- Metadata Grid -->
+                <div class="tonal-card p-md grid grid-cols-1 md:grid-cols-3 gap-md">
+                    <div class="flex flex-col gap-xs">
+                        <span class="font-label-sm text-label-sm text-on-surface-variant">SKU</span>
+                        <code
+                            class="font-label-md text-label-md bg-surface-container px-base py-xs rounded text-primary">RSY-001</code>
+                    </div>
+                    <div class="flex flex-col gap-xs">
+                        <span class="font-label-sm text-label-sm text-on-surface-variant">Slug</span>
+                        <span class="font-label-md text-label-md text-on-surface truncate">rosario-madera-olivo</span>
+                    </div>
+                    <div class="flex flex-col gap-xs">
+                        <span class="font-label-sm text-label-sm text-on-surface-variant">Categoría</span>
+                        <span
+                            class="px-sm py-xs bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm border border-outline-variant/30 text-center">Rosarios</span>
+                    </div>
+                </div>
+                <!-- Price and Stock Summary -->
+                <div class="tonal-card p-md flex items-center justify-between border-l-4 border-secondary">
+                    <div>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant">Precio al Público</p>
+                        <p class="font-headline-md text-headline-md text-primary">$350.00 MXN</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-label-sm text-label-sm text-on-surface-variant">Existencias</p>
+                        <p class="font-headline-md text-headline-md text-on-surface">42 unidades</p>
+                    </div>
+                </div>
+                <!-- Rich Text Description -->
+                <div class="tonal-card p-md flex-1">
+                    <h3
+                        class="font-label-md text-label-md text-primary border-b border-surface-container pb-base mb-md uppercase tracking-widest">
+                        Descripción del Producto</h3>
+                    <div class="font-body-md text-body-md text-on-surface-variant space-y-md leading-relaxed">
+                        <p>
+                            Este rosario tradicional está meticulosamente tallado a mano por artesanos cristianos en
+                            Belén, utilizando madera de olivo genuina de la región. Cada cuenta conserva las vetas
+                            naturales de la madera, haciendo que cada pieza sea única e irrepetible.
+                        </p>
+                        <p>
+                            La calidez de la madera y su aroma sutil invitan a la oración contemplativa y al
+                            recogimiento. El diseño es minimalista pero robusto, unido por una cuerda de alta
+                            resistencia que garantiza durabilidad a través de los años de devoción diaria.
+                        </p>
+                        <ul class="list-disc pl-md space-y-sm">
+                            <li>Cuentas pulidas de 8mm para un tacto suave.</li>
+                            <li>Crucifijo de madera tallado con detalle.</li>
+                            <li>Empaque sustentable de lino incluido.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Quick Inventory History / Audit -->
+                <div class="tonal-card p-md">
+                    <div class="flex items-center justify-between mb-sm">
+                        <h3 class="font-label-md text-label-md text-primary">Actividad Reciente</h3>
+                        <span class="material-symbols-outlined text-on-surface-variant">history</span>
+                    </div>
+                    <div class="space-y-sm">
+                        <div class="flex items-center justify-between text-on-surface-variant">
+                            <span class="font-label-sm text-label-sm">Venta #1094</span>
+                            <span class="font-body-md text-body-md text-error">-1 unidad</span>
+                            <span class="font-label-sm text-label-sm">Hace 2 horas</span>
+                        </div>
+                        <div class="divider-light"></div>
+                        <div class="flex items-center justify-between text-on-surface-variant">
+                            <span class="font-label-sm text-label-sm">Reabastecimiento</span>
+                            <span class="font-body-md text-body-md text-secondary">+20 unidades</span>
+                            <span class="font-label-sm text-label-sm">Ayer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer
+        class="ml-64 w-full py-xl px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface border-t border-surface-container-high">
+        <div class="flex flex-col gap-xs">
+            <span class="font-headline-sm text-headline-sm text-primary">Taller De Maria</span>
+            <p class="font-body-md text-body-md text-on-surface-variant">© 2024 Taller De Maria. Handcrafted Devotion.
+            </p>
+        </div>
+        <div class="flex gap-md">
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline-offset-4 hover:underline transition-all"
+                href="#">Privacy Policy</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline-offset-4 hover:underline transition-all"
+                href="#">Terms of Service</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline-offset-4 hover:underline transition-all"
+                href="#">Contact</a>
+        </div>
+    </footer>
+    <script>
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Subtle parallax or hover effect for the main product image
+        const productImg = document.querySelector('img[data-alt]');
+        if (productImg) {
+            productImg.parentElement.addEventListener('mousemove', (e) => {
+                const { left, top, width, height } = productImg.getBoundingClientRect();
+                const x = (e.clientX - left) / width;
+                const y = (e.clientY - top) / height;
+                productImg.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+                productImg.style.transform = 'scale(1.05)';
+            });
+            productImg.parentElement.addEventListener('mouseleave', () => {
+                productImg.style.transform = 'scale(1)';
+            });
+            productImg.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+        }
+    </script>
+</body>
+
+</html>
