@@ -5,7 +5,6 @@ const ProductSchema = new Schema<IProduct>(
   {
     sku: {
       type: String,
-      required: [true, "El SKU es obligatorio"],
       unique: true,
       uppercase: true,
       trim: true,
@@ -16,6 +15,12 @@ const ProductSchema = new Schema<IProduct>(
       lowercase: true,
       trim: true,
       sparse: true,
+    },
+    name: {
+      type: String,
+      required: [true, "El nombre es obligatorio"],
+      unique: true,
+      trim: true,
     },
     price: {
       type: Number,

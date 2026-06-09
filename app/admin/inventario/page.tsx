@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import { AdminPageHeader } from "@/components/admin";
-import { InventoryToolbar, InventoryTable } from "@/components/admin";
+import { InventoryToolbar, InventoryTable, ProductFormModal } from "@/components/admin";
 
 export default function InventarioPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <main className="flex-1 md:ml-64 pt-16 md:pt-0 min-h-screen bg-surface">
       {/* Header Section */}
@@ -12,6 +17,7 @@ export default function InventarioPage() {
             description="Administra tu catálogo, rastrea niveles de stock, y actualiza detalles de productos."
             actionLabel="Nuevo Producto"
             actionIcon="add"
+            onActionClick={() => setIsModalOpen(true)}
           />
         </div>
       </div>
@@ -24,6 +30,12 @@ export default function InventarioPage() {
           <InventoryTable />
         </div>
       </div>
+
+      {/* Modal */}
+      <ProductFormModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </main>
   );
 }
