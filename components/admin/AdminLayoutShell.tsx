@@ -42,7 +42,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
 
   const navigationItems = [
     { name: "Dashboard", href: "/admin", icon: "dashboard" },
-    { name: "Inventario", href: "#", icon: "inventory_2" },
+    { name: "Inventario", href: "/admin/inventario", icon: "inventory_2" },
     { name: "Pedidos", href: "#", icon: "receipt_long" },
     { name: "Clientes", href: "#", icon: "group" },
     { name: "Ajustes", href: "#", icon: "settings" },
