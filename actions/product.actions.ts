@@ -97,3 +97,82 @@ export async function getRelatedProducts(currentProductId: string, limit: number
     return [];
   }
 }
+
+import { productSchema } from "./schemas";
+import type { ActionResult } from "./types";
+import { generateSlug, generateSku } from "@/helpers";
+
+/**
+ * Crea un nuevo producto.
+ * 
+ * @param formData - FormData proveniente del formulario de creación.
+ * @returns Los datos del producto guardado o un mensaje de error.
+ */
+export async function createProduct(formData: FormData): Promise<ActionResult<SerializedProduct>> {
+  try {
+    const rawName = formData.get("name") as string || "";
+    const name = rawName.trim();
+    const description = formData.get("description") as string || "";
+    const price = Number(formData.get("price") || 0);
+    const stock = Number(formData.get("stock") || 0);
+    const category = formData.get("category") as string || "";
+    
+    // Parse features and imageUrls
+    const featuresRaw = formData.get("features") as string;
+    const features = featuresRaw ? JSON.parse(featuresRaw) : [];
+    
+    const imageUrlsRaw = formData.get("imageUrls") as string;
+    const imageUrls = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
+
+    const slug = generateSlug(name);
+    const sku = generateSku(name);
+
+    const validated = productSchema.safeParse({
+      name,
+      sku,
+      slug,
+      price,
+      description,
+      stock,
+      imageUrls,
+      category,
+      features,
+      tags: [],
+    });
+
+    if (!validated.success) {
+      const firstError = validated.error.issues[0]?.message ?? "Datos inválidos";
+      return { success: false, error: firstError };
+    }
+
+    await dbConnect();
+
+    // Check for duplicates
+    const existing = await Product.findOne({
+      $or: [
+        { name: validated.data.name },
+        { slug: validated.data.slug },
+        { sku: validated.data.sku }
+      ]
+    }).lean();
+
+    if (existing) {
+      return { success: false, error: "Ya existe un producto con ese nombre o SKU." };
+    }
+
+    const product = await Product.create(validated.data);
+
+    revalidatePath("/admin");
+    revalidatePath("/admin/inventario");
+    revalidatePath("/catalog");
+
+    return {
+      success: true,
+      data: mapToSerializedProduct(product),
+    };
+  } catch (error) {
+    console.error("Error creating product:", error);
+    const message = error instanceof Error ? error.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}
