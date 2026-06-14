@@ -63,8 +63,8 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
   if (variant === "icon") {
     return (
       <article className="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full relative cursor-pointer">
-        <div className="w-full aspect-[4/5] bg-surface-variant relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-tr from-surface-dim to-surface flex items-center justify-center">
+        <div className="w-full aspect-4/5 bg-surface-variant relative overflow-hidden">
+          <div className="absolute inset-0 bg-linear-to-tr from-surface-dim to-surface flex items-center justify-center">
             <span className="material-symbols-outlined text-[64px] text-outline-variant font-light">
               {product.icon || "import_contacts"}
             </span>
@@ -75,7 +75,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
             </div>
           )}
         </div>
-        <div className="p-4 flex flex-col flex-grow">
+        <div className="p-4 flex flex-col grow">
           <h2 className="font-headline-md text-headline-md text-primary mb-1 text-lg">
             <Link href={`/catalog/${product.slug}`} className="hover:underline before:absolute before:inset-0 before:z-10">
               {product.name}
@@ -99,7 +99,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
 
   return (
     <article className="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full relative cursor-pointer">
-      <div className="w-full aspect-[4/5] bg-surface-variant relative overflow-hidden">
+      <div className="w-full aspect-4/5 bg-surface-variant relative overflow-hidden">
         {product.imageUrls && product.imageUrls.length > 0 && (
           <Image
             src={product.imageUrls[0]}
@@ -115,7 +115,7 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col flex-grow">
+      <div className="p-4 flex flex-col grow">
         <h2 className="font-headline-md text-headline-md text-primary mb-1 text-lg">
           <Link href={`/catalog/${product.slug}`} className="hover:underline before:absolute before:inset-0 before:z-10">
             {product.name}

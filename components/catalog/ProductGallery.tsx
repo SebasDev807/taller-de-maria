@@ -19,7 +19,7 @@ export const ProductGallery = ({ images, altText, fallbackIcon }: ProductGallery
   return (
     <div className="md:col-span-7 lg:col-span-8 flex flex-col gap-sm">
       {/* Main Image */}
-      <div className="w-full aspect-[4/5] md:aspect-square bg-surface-container-lowest rounded-xl shadow-ambient overflow-hidden relative group">
+      <div className="w-full aspect-4/5 md:aspect-square bg-surface-container-lowest rounded-xl shadow-ambient overflow-hidden relative group">
         {currentImage ? (
           <Image
             alt={`${altText} - Imagen ${selectedIndex + 1}`}
@@ -43,7 +43,7 @@ export const ProductGallery = ({ images, altText, fallbackIcon }: ProductGallery
             <button
               key={idx}
               onClick={() => setSelectedIndex(idx)}
-              className={`cursor-pointer w-20 h-20 flex-shrink-0 bg-surface-container-lowest rounded-lg overflow-hidden relative transition-all border-2 ${selectedIndex === idx
+              className={`cursor-pointer w-20 h-20 shrink-0 bg-surface-container-lowest rounded-lg overflow-hidden relative transition-all border-2 ${selectedIndex === idx
                 ? "border-secondary opacity-100"
                 : "border-transparent opacity-60 hover:opacity-100"
                 }`}
@@ -57,7 +57,7 @@ export const ProductGallery = ({ images, altText, fallbackIcon }: ProductGallery
               />
             </button>
           ))}
-          <button className="w-20 h-20 flex-shrink-0 bg-surface-container-lowest rounded-lg border border-transparent overflow-hidden opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center">
+          <button className="w-20 h-20 shrink-0 bg-surface-container-lowest rounded-lg border border-transparent overflow-hidden opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center">
             <div className="w-full h-full bg-surface-container flex items-center justify-center text-on-surface-variant">
               <span className="material-symbols-outlined">zoom_in</span>
             </div>

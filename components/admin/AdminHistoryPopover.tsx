@@ -58,7 +58,7 @@ export const AdminHistoryPopover = <T extends HistoryItem>({
 
       {/* Popover desplegable */}
       <div className="absolute right-0 top-full pt-1 w-80 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-        <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-3 max-h-[300px] overflow-y-auto flex flex-col gap-2 shadow-[0_10px_40px_rgba(0,0,0,0.1)]">
+        <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-3 max-h-75 overflow-y-auto flex flex-col gap-2 shadow-[0_10px_40px_rgba(0,0,0,0.1)]">
           {items.map((item) => (
             <div
               key={item.id}

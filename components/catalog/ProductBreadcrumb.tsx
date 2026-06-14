@@ -19,7 +19,7 @@ interface ProductBreadcrumbProps {
  */
 export const ProductBreadcrumb = ({ name }: ProductBreadcrumbProps) => {
   return (
-    <div className="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-sm mt-4">
+    <div className="max-w-300 mx-auto px-margin-mobile md:px-margin-desktop py-sm mt-4">
       <nav aria-label="Breadcrumb" className="flex text-on-surface-variant font-label-sm text-label-sm">
         <ol className="inline-flex items-center space-x-1 md:space-x-2">
           <li className="inline-flex items-center">

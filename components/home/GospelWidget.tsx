@@ -16,7 +16,7 @@ export const GospelWidget = async () => {
   const displayReference = dbGospel?.reference;
 
   return (
-    <article className="col-span-1 lg:col-span-7 bg-[#FFFFFF] rounded-xl p-lg shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative overflow-hidden flex flex-col justify-center min-h-[400px] self-start">
+    <article className="col-span-1 lg:col-span-7 bg-[#FFFFFF] rounded-xl p-lg shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative overflow-hidden flex flex-col justify-center min-h-100 self-start">
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-center gap-sm mb-6 text-on-surface-variant">
           <span className="material-symbols-outlined text-secondary">menu_book</span>

@@ -24,7 +24,7 @@ export const ProductAddToCart = ({ product }: { product: SerializedProduct }) =>
         </button>
         <input
           aria-label="Quantity"
-          className="w-full h-full text-center border-none bg-transparent font-label-md text-label-md text-primary focus:ring-0 p-0 m-0 [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+          className="w-full h-full text-center border-none bg-transparent font-label-md text-label-md text-primary focus:ring-0 p-0 m-0 [-moz-appearance:textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
           min="1"
           type="number"
           value={quantity}
