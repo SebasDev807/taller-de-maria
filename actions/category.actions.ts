@@ -6,6 +6,7 @@ import { categorySchema } from "./schemas";
 import type { ActionResult } from "./types";
 import type { CategoryData } from "./types";
 import { revalidatePath } from "next/cache";
+import { generateSlug } from "@/helpers";
 
 /**
  * Crea una nueva categoría.
@@ -18,7 +19,6 @@ export async function createCategory(
 ): Promise<ActionResult<CategoryData>> {
   const validated = categorySchema.safeParse({
     name: formData.get("name") || "",
-    slug: formData.get("slug") || "",
   });
 
   if (!validated.success) {
@@ -26,18 +26,18 @@ export async function createCategory(
     return { success: false, error: firstError };
   }
 
-  const { name, slug } = validated.data;
+  const { name } = validated.data;
 
   try {
     await dbConnect();
 
     // Buscar duplicados
-    const existing = await Category.findOne({ slug }).lean();
+    const existing = await Category.findOne({ name }).lean();
     if (existing) {
-      return { success: false, error: "Ya existe una categoría con este slug." };
+      return { success: false, error: "Ya existe una categoría con este nombre." };
     }
 
-    const category = await Category.create({ name, slug });
+    const category = await Category.create({ name, slug: generateSlug(name) });
 
     revalidatePath("/admin/inventario");
     revalidatePath("/catalog");
