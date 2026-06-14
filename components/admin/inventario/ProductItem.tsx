@@ -1,4 +1,7 @@
+"use client";
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { InventoryItem } from '@/interfaces';
 
 interface ProductItemProps {
@@ -6,10 +9,21 @@ interface ProductItemProps {
 }
 
 export const ProductItem = ({ item }: ProductItemProps) => {
+    const router = useRouter();
+    
+    // Generamos un slug simple a partir del nombre o usamos el id si preferimos
+    // Para cumplir con el requerimiento, usamos un slug basado en el nombre
+    const slug = item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
+    const handleRowClick = () => {
+        router.push(`/admin/inventario/${slug}`);
+    };
+
     return (
         <tr
             key={item.id}
-            className={`hover:bg-surface-container-low transition-colors group ${item.status === 'out-of-stock' ? 'bg-surface-dim/30' : ''}`}
+            onClick={handleRowClick}
+            className={`hover:bg-surface-container-low transition-colors group cursor-pointer ${item.status === 'out-of-stock' ? 'bg-surface-dim/30' : ''}`}
         >
             <td className="py-4 px-6">
                 <div className={`w-12 h-12 rounded bg-surface-variant overflow-hidden border border-outline-variant/30 ${item.status === 'out-of-stock' ? 'opacity-50' : ''}`}>
@@ -51,14 +65,28 @@ export const ProductItem = ({ item }: ProductItemProps) => {
             <td className="py-4 px-6 text-center">
                 <div className="flex items-center justify-center gap-3">
                     <div className="relative group/edit flex justify-center">
-                        <button type="button" className="cursor-pointer text-outline hover:text-yellow-500 transition-colors flex items-center justify-center">
+                        <button 
+                            type="button" 
+                            className="cursor-pointer text-outline hover:text-yellow-500 transition-colors flex items-center justify-center"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                // Aquí irá la lógica de editar
+                            }}
+                        >
                             <span className="material-symbols-outlined text-[20px]">edit</span>
                         </button>
 
                     </div>
                     <div className="relative group/delete flex justify-center">
 
-                        <button type="button" className="cursor-pointer text-outline hover:text-red-500 transition-colors group/btn flex items-center justify-center">
+                        <button 
+                            type="button" 
+                            className="cursor-pointer text-outline hover:text-red-500 transition-colors group/btn flex items-center justify-center"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                // Aquí irá la lógica de eliminar
+                            }}
+                        >
                             <span className="material-symbols-outlined text-[20px] group-hover/btn:[font-variation-settings:'FILL'_1]">delete</span>
                         </button>
 
