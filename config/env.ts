@@ -18,6 +18,20 @@ const envSchema = z.object({
       error: "NODE_ENV debe ser 'development', 'production' o 'test'",
     })
     .default("development"),
+
+  // Cloudinary
+  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z
+    .string({ error: "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME es requerida" })
+    .min(1, "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME no puede estar vacía"),
+  CLOUDINARY_API_KEY: z
+    .string({ error: "CLOUDINARY_API_KEY es requerida" })
+    .min(1, "CLOUDINARY_API_KEY no puede estar vacía"),
+  CLOUDINARY_API_SECRET: z
+    .string({ error: "CLOUDINARY_API_SECRET es requerida" })
+    .min(1, "CLOUDINARY_API_SECRET no puede estar vacía"),
+  CLOUDINARY_URL: z
+    .string({ error: "CLOUDINARY_URL es requerida" })
+    .startsWith("cloudinary://", "CLOUDINARY_URL debe empezar con cloudinary://"),
 });
 
 export type Env = z.infer<typeof envSchema>;
