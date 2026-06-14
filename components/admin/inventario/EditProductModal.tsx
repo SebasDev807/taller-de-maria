@@ -23,6 +23,7 @@ export const EditProductModal = ({ isOpen, onClose, product }: EditProductModalP
   const [preview, setPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -39,8 +40,18 @@ export const EditProductModal = ({ isOpen, onClose, product }: EditProductModalP
       setPreview(product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls[0] : null);
       setError(null);
       setIsSubmitting(false);
+      setSelectedCategoryId("");
     }
   }, [isOpen, product]);
+
+  useEffect(() => {
+    if (categories.length > 0) {
+      const match = categories.find(c => c.name === product.category);
+      if (match) {
+        setSelectedCategoryId(match.id);
+      }
+    }
+  }, [categories, product.category]);
 
   if (!isOpen) return null;
 
@@ -132,10 +143,8 @@ export const EditProductModal = ({ isOpen, onClose, product }: EditProductModalP
       formData.append("features", JSON.stringify(features));
       formData.append("imageUrls", JSON.stringify(imageUrls));
 
-      let categoryValue = formData.get("category");
-      if (!categoryValue) {
-         const matchingCat = categories.find(c => c.name === product.category);
-         if (matchingCat) formData.set("category", matchingCat.id);
+      if (selectedCategoryId) {
+        formData.set("category", selectedCategoryId);
       }
 
       const result = await updateProduct(product.id, formData);
@@ -152,9 +161,7 @@ export const EditProductModal = ({ isOpen, onClose, product }: EditProductModalP
     }
   };
 
-  // Find category id for defaultValue
-  const selectedCat = categories.find(c => c.name === product.category);
-  const defaultCategory = selectedCat ? selectedCat.id : "";
+  // Removed defaultCategory logic since we now use selectedCategoryId state
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto" onClick={onClose}>
@@ -239,7 +246,8 @@ export const EditProductModal = ({ isOpen, onClose, product }: EditProductModalP
                   name="category"
                   required
                   className="w-full bg-surface-container p-3 rounded-lg border border-surface-container-highest focus:outline-none focus:ring-2 focus:ring-primary text-body-lg appearance-none cursor-pointer" 
-                  defaultValue={defaultCategory}
+                  value={selectedCategoryId}
+                  onChange={(e) => setSelectedCategoryId(e.target.value)}
                 >
                   <option value="" disabled>Selecciona una categoría</option>
                   {categories.map((cat) => (
