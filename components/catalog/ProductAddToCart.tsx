@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { AddToCartButton } from "./AddToCartButton";
-import { Product } from "@/lib/mockData";
+import { SerializedProduct } from "@/actions/types/product.types";
 
-export const ProductAddToCart = ({ product }: { product: Product }) => {
+export const ProductAddToCart = ({ product }: { product: SerializedProduct }) => {
 
   const [quantity, setQuantity] = useState(1);
 

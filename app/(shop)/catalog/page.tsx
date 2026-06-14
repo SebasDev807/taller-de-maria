@@ -1,5 +1,5 @@
 import { TopNavBar, Footer, CatalogCard, CatalogFilters, Pagination } from "@/components";
-import { mockProducts } from "@/lib/mockData";
+import { getProducts } from "@/actions/product.actions";
 import { getCategories } from "@/actions/category.actions";
 
 
@@ -23,8 +23,9 @@ export default async function Catalog({
   const categoryResult = await getCategories();
   const categories = categoryResult.success ? categoryResult.data : [];
 
-  const filteredProducts = mockProducts.filter(
-    (product) => category === "All Items" || product.category === category
+  const products = await getProducts();
+  const filteredProducts = products.filter(
+    (product) => category === "All Items" || product.category === category || product.category.toLowerCase() === category.toLowerCase()
   );
 
   return (

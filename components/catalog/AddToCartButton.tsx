@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useCart } from "@/store/shopping-cart";
-import { Product } from "@/lib/mockData";
+import { SerializedProduct } from "@/actions/types/product.types";
 
 interface AddToCartButtonProps {
   variant?: "icon" | "full";
-  product?: Product;
+  product?: SerializedProduct;
   quantity?: number;
 }
 
@@ -33,11 +33,11 @@ export const AddToCartButton = ({ variant = "icon", product, quantity = 1 }: Add
       addItem({
         id: product.id,
         name: product.name,
-        description: product.shortDescription || "",
+        description: product.description || "",
         price: product.price,
         quantity: quantity,
-        image: product.imageUrl || "",
-        alt: product.imageAlt || product.name,
+        image: product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls[0] : "",
+        alt: product.name,
       });
     }
 

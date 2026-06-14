@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/lib/mockData";
+import { SerializedProduct } from "@/actions/types/product.types";
 import { formatCurrency } from "@/helpers";
 
 interface ProductCardProps {
-  product: Product;
+  product: SerializedProduct;
 }
 
 /**
@@ -19,13 +19,13 @@ interface ProductCardProps {
 export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link
-      href={`/shop/${product.id}`}
+      href={`/catalog/${product.slug}`}
       className="group block bg-[#FFFFFF] rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.06)] transition-all duration-300 h-full"
     >
       <div className="aspect-square bg-surface-container-low overflow-hidden relative">
         <Image
-          src={product.imageUrl || "/placeholder.jpg"}
-          alt={product.imageAlt || "Product image"}
+          src={product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls[0] : "/placeholder.jpg"}
+          alt={product.name || "Product image"}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/helpers";
 import { ProductAddToCart } from "@/components/catalog/ProductAddToCart";
-import { Product } from "@/lib/mockData";
+import { SerializedProduct } from "@/actions/types/product.types";
 
 /**
  * Props for the ProductInfo component.
@@ -9,7 +9,7 @@ interface ProductInfoProps {
   /**
    * The product object containing details like name, price, description, etc.
    */
-  product: Product;
+  product: SerializedProduct;
 }
 
 /**
@@ -40,7 +40,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
       <p className="font-headline-md text-headline-md text-primary mb-md">{formatCurrency(product.price)}</p>
       <div className="w-full h-[1px] bg-surface-container my-sm"></div>
       <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg">
-        {product.shortDescription || "Un producto artesanal creado con devoción."}
+        {product.description || "Un producto artesanal creado con devoción."}
       </p>
 
       <div className="mt-auto flex flex-col gap-sm">

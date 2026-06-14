@@ -1,5 +1,5 @@
 import { TopNavBar, Footer, CatalogCard, CatalogFilters } from "@/components";
-import { mockProducts } from "@/lib/mockData";
+import { getProducts } from "@/actions/product.actions";
 import { getCategories } from "@/actions/category.actions";
 
 
@@ -24,16 +24,18 @@ export default async function SearchPage({
   const categoryResult = await getCategories();
   const categories = categoryResult.success ? categoryResult.data : [];
 
-  const filteredProducts = mockProducts.filter((product) => {
+  const products = await getProducts();
+
+  const filteredProducts = products.filter((product) => {
     // Check search query using partial terms (must match all terms)
     const searchTerms = q.split(" ").filter(term => term.trim().length > 0);
     const matchesQuery = searchTerms.length === 0 || searchTerms.every(term =>
       product.name.toLowerCase().includes(term) ||
-      (product.shortDescription && product.shortDescription.toLowerCase().includes(term))
+      (product.description && product.description.toLowerCase().includes(term))
     );
 
     // Check category filter
-    const matchesCategory = category === "All Items" || product.category === category;
+    const matchesCategory = category === "All Items" || product.category === category || product.category.toLowerCase() === category.toLowerCase();
 
     return matchesQuery && matchesCategory;
   });

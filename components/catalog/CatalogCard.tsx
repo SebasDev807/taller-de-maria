@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/lib/mockData";
+import { SerializedProduct } from "@/actions/types/product.types";
 import { AddToCartButton } from "./AddToCartButton";
 import { formatCurrency } from "@/helpers";
 
 interface CatalogCardProps {
-  product: Product;
+  product: SerializedProduct;
   variant?: "featured" | "vertical" | "icon";
 }
 
@@ -23,10 +23,10 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
     return (
       <article className="col-span-1 lg:col-span-2 bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col md:flex-row h-full relative cursor-pointer">
         <div className="w-full md:w-1/2 h-64 md:h-auto bg-surface-variant relative overflow-hidden">
-          {product.imageUrl && (
+          {product.imageUrls && product.imageUrls.length > 0 && (
             <Image
-              src={product.imageUrl}
-              alt={product.imageAlt || product.name}
+              src={product.imageUrls[0]}
+              alt={product.name}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -41,12 +41,12 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
         <div className="p-md flex flex-col justify-between w-full md:w-1/2">
           <div>
             <h2 className="font-headline-lg text-headline-md text-primary mb-2">
-              <Link href={`/catalog/${product.id}`} className="hover:underline before:absolute before:inset-0 before:z-10">
+              <Link href={`/catalog/${product.slug}`} className="hover:underline before:absolute before:inset-0 before:z-10">
                 {product.name}
               </Link>
             </h2>
             <p className="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
-              {product.shortDescription}
+              {product.description}
             </p>
             <span className="block font-headline-md text-headline-md text-tertiary-container mb-md">
               {formatCurrency(product.price)}
@@ -77,12 +77,12 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
         </div>
         <div className="p-4 flex flex-col flex-grow">
           <h2 className="font-headline-md text-headline-md text-primary mb-1 text-lg">
-            <Link href={`/catalog/${product.id}`} className="hover:underline before:absolute before:inset-0 before:z-10">
+            <Link href={`/catalog/${product.slug}`} className="hover:underline before:absolute before:inset-0 before:z-10">
               {product.name}
             </Link>
           </h2>
           <p className="font-body-md text-body-md text-on-surface-variant mb-3 text-sm relative z-20 pointer-events-none">
-            {product.shortDescription}
+            {product.description}
           </p>
           <div className="mt-auto flex items-center justify-between">
             <span className="font-headline-md text-headline-md text-tertiary-container text-xl">
@@ -100,10 +100,10 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
   return (
     <article className="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden group flex flex-col h-full relative cursor-pointer">
       <div className="w-full aspect-[4/5] bg-surface-variant relative overflow-hidden">
-        {product.imageUrl && (
+        {product.imageUrls && product.imageUrls.length > 0 && (
           <Image
-            src={product.imageUrl}
-            alt={product.imageAlt || product.name}
+            src={product.imageUrls[0]}
+            alt={product.name}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -117,12 +117,12 @@ export const CatalogCard = ({ product, variant = "vertical" }: CatalogCardProps)
       </div>
       <div className="p-4 flex flex-col flex-grow">
         <h2 className="font-headline-md text-headline-md text-primary mb-1 text-lg">
-          <Link href={`/catalog/${product.id}`} className="hover:underline before:absolute before:inset-0 before:z-10">
+          <Link href={`/catalog/${product.slug}`} className="hover:underline before:absolute before:inset-0 before:z-10">
             {product.name}
           </Link>
         </h2>
-        <p className="font-body-md text-body-md text-on-surface-variant mb-3 text-sm relative z-20 pointer-events-none">
-          {product.shortDescription}
+        <p className="font-body-md text-body-md text-on-surface-variant mb-3 text-sm relative z-20 pointer-events-none line-clamp-2">
+          {product.description}
         </p>
         <div className="mt-auto flex items-center justify-between">
           <span className="font-headline-md text-headline-md text-tertiary-container text-xl">

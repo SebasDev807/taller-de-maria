@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TopNavBar, Footer, GospelWidget, PrayerWidget, CatalogCard } from "@/components";
-import { mockProducts } from "@/lib/mockData";
+import { getFeaturedProducts } from "@/actions/product.actions";
 
 /**
  * Componente principal de la página de inicio (Home).
@@ -9,10 +9,10 @@ import { mockProducts } from "@/lib/mockData";
  *
  * @returns {React.JSX.Element} La página de inicio renderizada.
  */
-export default function Home() {
+export default async function Home() {
+  const featuredProducts = await getFeaturedProducts(3);
 
   return (
-
     <main className="fade-in pt-20 pb-xl min-h-screen">
 
       {/* Hero Section */}
@@ -53,7 +53,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-          {mockProducts.slice(0, 3).map((product, index) => (
+          {featuredProducts.map((product, index) => (
             <div
               key={product.id}
               className={`${index === 2 ? 'md:hidden lg:block' : ''}`} // replicate the third item hiding on md
@@ -65,7 +65,5 @@ export default function Home() {
       </section>
 
     </main>
-
-
   );
 }

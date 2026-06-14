@@ -5,7 +5,7 @@ import {
   ProductSpecifications,
   RelatedProducts
 } from "@/components/catalog";
-import { mockProducts } from "@/lib/mockData";
+import { getProductBySlug } from "@/actions/product.actions";
 import { notFound } from "next/navigation";
 
 /**
@@ -19,7 +19,7 @@ import { notFound } from "next/navigation";
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
 
   const { slug } = await params;
-  const product = mockProducts.find((product) => product.id === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -34,8 +34,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter lg:gap-lg">
           {/* Product Image Gallery (Left) */}
           <ProductGallery
-            images={product.images || (product.imageUrl ? [product.imageUrl] : [])}
-            altText={product.imageAlt || product.name}
+            images={product.imageUrls || []}
+            altText={product.name}
             fallbackIcon={product.icon}
           />
           {/* Product Details (Right) */}

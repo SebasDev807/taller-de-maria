@@ -1,4 +1,4 @@
-import { Product } from "@/lib/mockData";
+import { SerializedProduct } from "@/actions/types/product.types";
 
 /**
  * Props for the RecentProductsWidget component.
@@ -7,7 +7,7 @@ interface RecentProductsWidgetProps {
   /**
    * The list of recent products to display in the table.
    */
-  products: Product[];
+  products: SerializedProduct[];
 }
 
 /**
@@ -52,12 +52,12 @@ export const RecentProductsWidget = ({ products }: RecentProductsWidgetProps) =>
             {products.slice(0, 4).map((product) => (
               <tr key={product.id} className="hover:bg-surface-container-low transition-colors group">
                 <td className="py-4 flex items-center gap-3">
-                  {product.imageUrl ? (
+                  {product.imageUrls && product.imageUrls.length > 0 ? (
                     <div className="w-10 h-10 bg-surface-variant rounded overflow-hidden flex items-center justify-center border border-outline-variant relative">
                       <img
                         alt={product.name}
                         className="w-full h-full object-cover"
-                        src={product.imageUrl}
+                        src={product.imageUrls[0]}
                       />
                     </div>
                   ) : (

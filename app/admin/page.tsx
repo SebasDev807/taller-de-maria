@@ -1,4 +1,4 @@
-import { mockProducts } from "@/lib/mockData";
+import { getProducts } from "@/actions/product.actions";
 import {
   DashboardHeader,
   DailyReflectionWidget,
@@ -7,7 +7,8 @@ import {
   CategoriesWidget,
 } from "@/components";
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const products = await getProducts();
 
   return (
     <main className="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop min-h-screen">
@@ -15,7 +16,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
         <DailyReflectionWidget />
         <StockAlertsWidget />
-        <RecentProductsWidget products={mockProducts} />
+        <RecentProductsWidget products={products} />
         <CategoriesWidget />
       </div>
     </main>
