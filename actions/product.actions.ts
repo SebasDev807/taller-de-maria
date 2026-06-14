@@ -176,3 +176,48 @@ export async function createProduct(formData: FormData): Promise<ActionResult<Se
     return { success: false, error: message };
   }
 }
+
+/**
+ * Recupera productos paginados con poblamiento opcional de categoría.
+ * 
+ * @param {number} page - Número de página actual (1 indexado).
+ * @param {number} limit - Cantidad de productos por página.
+ */
+export async function getPaginatedProducts(page: number = 1, limit: number = 10): Promise<{
+  products: SerializedProduct[];
+  totalPages: number;
+  currentPage: number;
+  totalCount: number;
+}> {
+  try {
+    await dbConnect();
+    const skip = (page - 1) * limit;
+
+    const [products, totalCount] = await Promise.all([
+      Product.find({})
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .populate("category")
+        .lean(),
+      Product.countDocuments({})
+    ]);
+
+    const totalPages = Math.ceil(totalCount / limit) || 1;
+
+    return {
+      products: products.map(mapToSerializedProduct),
+      totalPages,
+      currentPage: page,
+      totalCount
+    };
+  } catch (error) {
+    console.error("Error fetching paginated products:", error);
+    return {
+      products: [],
+      totalPages: 1,
+      currentPage: 1,
+      totalCount: 0
+    };
+  }
+}

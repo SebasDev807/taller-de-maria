@@ -1,10 +1,29 @@
 import Link from "next/link";
 import { formatCurrency } from "@/helpers/format-currency";
+import { getProductBySlug } from "@/actions/product.actions";
+import { notFound } from "next/navigation";
+import Image from "next/image";
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  // En un caso real, buscaríamos el producto basado en el slug.
-  // Aquí usamos datos mockeados para el diseño.
-  const productPrice = 45000; // Ejemplo: 45000 pesos colombianos
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+
+  if (!product) {
+    notFound();
+  }
+
+  let stockStatus = "En Stock";
+  let stockBadgeClass = "bg-secondary-container text-on-secondary-container";
+
+  if (product.stock === 0) {
+    stockStatus = "Agotado";
+    stockBadgeClass = "bg-error-container text-error";
+  } else if (product.stock <= 5) {
+    stockStatus = "Bajo Stock";
+    stockBadgeClass = "bg-[#FFE082]/20 text-[#604100]";
+  }
+
+  const imageUrl = product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls[0] : null;
 
   return (
     <main className="flex-1 md:ml-64 pt-16 md:pt-0 min-h-screen bg-surface">
@@ -22,9 +41,9 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <span className="font-label-md text-label-md">Volver al Inventario</span>
             </Link>
             <div className="flex items-center gap-base">
-              <h2 className="font-headline-lg text-headline-lg text-primary">Rosario de Madera de Olivo</h2>
-              <span className="px-sm py-xs bg-secondary-container text-on-secondary-container font-label-sm text-label-sm rounded-full">
-                En Stock
+              <h2 className="font-headline-lg text-headline-lg text-primary">{product.name}</h2>
+              <span className={`px-sm py-xs font-label-sm text-label-sm rounded-full ${stockBadgeClass}`}>
+                {stockStatus}
               </span>
             </div>
           </div>
@@ -34,12 +53,21 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         <div className="grid grid-cols-12 gap-gutter">
           {/* Left: Main Image and Actions */}
           <div className="col-span-12 lg:col-span-5 flex flex-col gap-gutter">
-            <div className="bg-surface-container-lowest shadow-sm rounded-xl overflow-hidden border border-surface-container-high">
-              <img
-                alt="Rosario de madera de olivo hecho a mano"
-                className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-500"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuApLzAeytesLZVs7mZlcHbs17nlgh-hrfV7GPyWXzUjVFR1fMxgW-A7GxIsoBKvhlO1xQh3wU5L-CpAoYEqeA-kFZInMMMyp4gPk7Ie9jc9RCu55HnbIKH4ucVbfpF2obXP_VpahCr_A4YdzIn1DSXMFRfzAnSGiWBkPaXJXJWj23QL_pwHmj0McW3gfh-ho5d9DXDohjIZrIqt6bXS4GlL8iKWsXc_mAnJ_TYh8frITI1vyhW4tk6aEChpDLc-xWH2b3H9UgrHZ7M"
-              />
+            <div className="bg-surface-container-lowest shadow-sm rounded-xl overflow-hidden border border-surface-container-high relative min-h-[300px] flex items-center justify-center">
+              {imageUrl ? (
+                <Image
+                  alt={product.name}
+                  className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-500"
+                  src={imageUrl}
+                  width={500}
+                  height={500}
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center text-on-surface-variant p-8">
+                  <span className="material-symbols-outlined text-[64px] opacity-20">image</span>
+                  <p className="mt-4 font-body-md">Sin imagen disponible</p>
+                </div>
+              )}
             </div>
 
             {/* Actions Card replacing Technical Specifications */}
@@ -62,17 +90,17 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <div className="flex flex-col gap-xs">
                 <span className="font-label-sm text-label-sm text-on-surface-variant">SKU</span>
                 <code className="font-label-md text-label-md bg-surface-container px-base py-xs rounded text-primary w-fit">
-                  RSY-001
+                  {product.sku || "N/A"}
                 </code>
               </div>
-              <div className="flex flex-col gap-xs">
+              <div className="flex flex-col gap-xs overflow-hidden">
                 <span className="font-label-sm text-label-sm text-on-surface-variant">Slug</span>
-                <span className="font-label-md text-label-md text-on-surface truncate">{params.slug}</span>
+                <span className="font-label-md text-label-md text-on-surface truncate" title={product.slug}>{product.slug}</span>
               </div>
-              <div className="flex flex-col gap-xs">
+              <div className="flex flex-col gap-xs overflow-hidden">
                 <span className="font-label-sm text-label-sm text-on-surface-variant">Categoría</span>
-                <span className="px-sm py-xs bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm border border-outline-variant/30 text-center rounded-lg">
-                  Rosarios
+                <span className="px-sm py-xs bg-tertiary-container/10 text-on-tertiary-container font-label-sm text-label-sm border border-outline-variant/30 text-center rounded-lg truncate">
+                  {product.category || "General"}
                 </span>
               </div>
             </div>
@@ -81,11 +109,11 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             <div className="bg-surface-container-lowest shadow-sm rounded-xl p-md flex flex-wrap gap-4 items-center justify-between border-l-4 border-l-secondary border-y border-r border-y-surface-container-high border-r-surface-container-high">
               <div>
                 <p className="font-label-sm text-label-sm text-on-surface-variant">Precio al Público</p>
-                <p className="font-headline-md text-headline-md text-primary">{formatCurrency(productPrice)} COP</p>
+                <p className="font-headline-md text-headline-md text-primary">{formatCurrency(product.price)}</p>
               </div>
               <div className="text-right">
                 <p className="font-label-sm text-label-sm text-on-surface-variant">Existencias</p>
-                <p className="font-headline-md text-headline-md text-on-surface">42 unidades</p>
+                <p className="font-headline-md text-headline-md text-on-surface">{product.stock} unidades</p>
               </div>
             </div>
 
@@ -94,22 +122,19 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <h3 className="font-label-md text-label-md text-primary border-b border-surface-container pb-base mb-md uppercase tracking-widest">
                 Descripción del Producto
               </h3>
-              <div className="font-body-md text-body-md text-on-surface-variant space-y-md leading-relaxed">
-                <p>
-                  Este rosario tradicional está meticulosamente tallado a mano por artesanos cristianos en Belén,
-                  utilizando madera de olivo genuina de la región. Cada cuenta conserva las vetas naturales de la madera,
-                  haciendo que cada pieza sea única e irrepetible.
-                </p>
-                <p>
-                  La calidez de la madera y su aroma sutil invitan a la oración contemplativa y al recogimiento. El
-                  diseño es minimalista pero robusto, unido por una cuerda de alta resistencia que garantiza
-                  durabilidad a través de los años de devoción diaria.
-                </p>
-                <ul className="list-disc pl-md space-y-sm">
-                  <li>Cuentas pulidas de 8mm para un tacto suave.</li>
-                  <li>Crucifijo de madera tallado con detalle.</li>
-                  <li>Empaque sustentable de lino incluido.</li>
-                </ul>
+              <div className="font-body-md text-body-md text-on-surface-variant space-y-md leading-relaxed whitespace-pre-wrap">
+                {product.description || "Este producto no tiene una descripción detallada."}
+                
+                {product.features && product.features.length > 0 && (
+                  <>
+                    <h4 className="font-label-md text-label-md text-primary mt-6 mb-2">Características Destacadas</h4>
+                    <ul className="list-disc pl-md space-y-sm">
+                      {product.features.map((feature, idx) => (
+                        <li key={idx}>{feature}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
             </div>
           </div>
