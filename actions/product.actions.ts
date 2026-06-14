@@ -4,6 +4,7 @@ import dbConnect from "@/lib/mongodb";
 import Product from "@/models/product/product.model";
 import { SerializedProduct, mapToSerializedProduct } from "./types/product.types";
 import { revalidatePath } from "next/cache";
+import cloudinary from "@/lib/cloudinary";
 
 /**
  * Recupera todos los productos, con poblamiento opcional de categoría.
@@ -235,6 +236,32 @@ export async function deleteProduct(id: string): Promise<ActionResult<boolean>> 
 
     if (!result) {
       return { success: false, error: "Producto no encontrado." };
+    }
+
+    // Delete images from Cloudinary
+    if (result.imageUrls && result.imageUrls.length > 0) {
+      for (const url of result.imageUrls) {
+        try {
+          const urlParts = url.split('/');
+          const uploadIndex = urlParts.findIndex((part: string) => part === 'upload');
+          
+          if (uploadIndex !== -1) {
+            let startIndex = uploadIndex + 1;
+            if (urlParts[startIndex].match(/^v\d+$/)) {
+              startIndex++;
+            }
+            
+            const publicIdWithExtension = urlParts.slice(startIndex).join('/');
+            const publicId = publicIdWithExtension.substring(0, publicIdWithExtension.lastIndexOf('.'));
+            
+            if (publicId) {
+              await cloudinary.uploader.destroy(publicId);
+            }
+          }
+        } catch (imgError) {
+          console.error("Error deleting image from Cloudinary:", url, imgError);
+        }
+      }
     }
 
     revalidatePath("/admin");

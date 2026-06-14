@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
+import { generateSlug } from "@/helpers";
 
 /**
  * Manejador de la ruta API para subir imágenes a Cloudinary.
@@ -24,6 +25,7 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get("file") as File;
+    const name = formData.get("name") as string || "";
 
     if (!file) {
       return NextResponse.json(
@@ -31,6 +33,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    const slug = name ? generateSlug(name) : "general";
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -40,7 +44,7 @@ export async function POST(request: NextRequest) {
       cloudinary.uploader
         .upload_stream(
           {
-            folder: "taller_de_maria/products",
+            folder: `taller_de_maria/products/${slug}`,
           },
           (error, result) => {
             if (error) {

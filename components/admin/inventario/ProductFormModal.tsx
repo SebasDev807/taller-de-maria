@@ -108,6 +108,8 @@ export const ProductFormModal = ({ isOpen, onClose }: ProductFormModalProps) => 
       if (file) {
         const uploadData = new FormData();
         uploadData.append("file", file);
+        const name = formData.get("name") as string || "";
+        uploadData.append("name", name);
         
         const uploadRes = await fetch("/api/upload", {
           method: "POST",
