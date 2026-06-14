@@ -15,7 +15,7 @@ export default async function AdminDashboard() {
       <DashboardHeader />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
         <DailyReflectionWidget />
-        <StockAlertsWidget />
+        <StockAlertsWidget products={products} />
         <RecentProductsWidget products={products} />
         <CategoriesWidget />
       </div>

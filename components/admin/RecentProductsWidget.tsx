@@ -1,4 +1,5 @@
 import { SerializedProduct } from "@/actions/types/product.types";
+import Link from "next/link";
 
 /**
  * Props for the RecentProductsWidget component.
@@ -32,10 +33,10 @@ export const RecentProductsWidget = ({ products }: RecentProductsWidgetProps) =>
     <section className="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-ambient border border-surface-container-high">
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-headline-md text-[20px] text-primary font-bold">Productos Recientes</h3>
-        <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 cursor-pointer">
+        <Link href="/admin/inventario" className="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 cursor-pointer">
           <span className="font-label-sm text-label-sm">Ver Todos</span>
           <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-        </button>
+        </Link>
       </div>
 
       <div className="overflow-x-auto">
