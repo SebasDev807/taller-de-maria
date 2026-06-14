@@ -221,3 +221,33 @@ export async function getPaginatedProducts(page: number = 1, limit: number = 10)
     };
   }
 }
+
+/**
+ * Elimina un producto por su ID.
+ * 
+ * @param {string} id - El ID del producto a eliminar.
+ * @returns {Promise<ActionResult<boolean>>} El resultado de la operación.
+ */
+export async function deleteProduct(id: string): Promise<ActionResult<boolean>> {
+  try {
+    await dbConnect();
+    const result = await Product.findByIdAndDelete(id);
+
+    if (!result) {
+      return { success: false, error: "Producto no encontrado." };
+    }
+
+    revalidatePath("/admin");
+    revalidatePath("/admin/inventario");
+    revalidatePath("/catalog");
+
+    return {
+      success: true,
+      data: true,
+    };
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    const message = error instanceof Error ? error.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SerializedProduct } from '@/actions/types/product.types';
-
+import { deleteProduct } from '@/actions/product.actions';
 interface ProductItemProps {
     item: SerializedProduct;
 }
@@ -85,9 +85,14 @@ export const ProductItem = ({ item }: ProductItemProps) => {
                         <button 
                             type="button" 
                             className="cursor-pointer text-outline hover:text-red-500 transition-colors group/btn flex items-center justify-center"
-                            onClick={(e) => {
+                            onClick={async (e) => {
                                 e.stopPropagation();
-                                // Aquí irá la lógica de eliminar
+                                if (window.confirm(`¿Estás seguro de que deseas eliminar el producto "${item.name}"?`)) {
+                                    const result = await deleteProduct(item.id);
+                                    if (!result.success) {
+                                        alert(result.error);
+                                    }
+                                }
                             }}
                         >
                             <span className="material-symbols-outlined text-[20px] group-hover/btn:[font-variation-settings:'FILL'_1]">delete</span>
