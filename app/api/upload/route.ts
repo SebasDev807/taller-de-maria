@@ -1,6 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
 
+/**
+ * Manejador de la ruta API para subir imágenes a Cloudinary.
+ * 
+ * Extrae un archivo de la petición (bajo el campo "file"), lo convierte a un 
+ * buffer, y realiza una subida mediante stream hacia la carpeta de productos en Cloudinary.
+ * 
+ * @param request - El objeto de petición entrante (`NextRequest`) de Next.js.
+ * @returns Un `NextResponse` con los datos de Cloudinary en caso de éxito, o 
+ * un mensaje de error en formato JSON si ocurre un fallo o el archivo falta.
+ * 
+ * @example
+ * ```typescript
+ * const formData = new FormData();
+ * formData.append("file", fileObject);
+ * 
+ * const res = await fetch("/api/upload", { method: "POST", body: formData });
+ * const data = await res.json();
+ * ```
+ */
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
