@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaRegImage } from "react-icons/fa";
+import { getCategories } from "@/actions/category.actions";
+import type { CategoryData } from "@/actions/types";
 
 export interface ProductFormModalProps {
   isOpen: boolean;
@@ -12,7 +14,18 @@ export const ProductFormModal = ({ isOpen, onClose }: ProductFormModalProps) => 
 
   const [features, setFeatures] = useState<string[]>([]);
   const [featureInput, setFeatureInput] = useState("");
+  const [categories, setCategories] = useState<CategoryData[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      getCategories().then(res => {
+        if (res.success) {
+          setCategories(res.data);
+        }
+      });
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -82,12 +95,11 @@ export const ProductFormModal = ({ isOpen, onClose }: ProductFormModalProps) => 
             <div>
               <label className="block text-label-lg font-label-lg text-on-surface mb-2">Categoría</label>
               <div className="relative">
-                <select className="w-full bg-surface-container p-3 rounded-lg border border-surface-container-highest focus:outline-none focus:ring-2 focus:ring-primary text-body-lg appearance-none cursor-pointer">
-                  <option value="" disabled selected>Selecciona una categoría</option>
-                  <option value="anillos">Anillos</option>
-                  <option value="collares">Collares</option>
-                  <option value="pulseras">Pulseras</option>
-                  <option value="aretes">Aretes</option>
+                <select className="w-full bg-surface-container p-3 rounded-lg border border-surface-container-highest focus:outline-none focus:ring-2 focus:ring-primary text-body-lg appearance-none cursor-pointer" defaultValue="">
+                  <option value="" disabled>Selecciona una categoría</option>
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.slug}>{cat.name}</option>
+                  ))}
                 </select>
                 <span className="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
               </div>
