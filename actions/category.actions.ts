@@ -17,8 +17,12 @@ import { generateSlug } from "@/helpers";
 export async function createCategory(
   formData: FormData
 ): Promise<ActionResult<CategoryData>> {
+  const name = (formData.get("name") as string) || "";
+  const slug = generateSlug(name);
+
   const validated = categorySchema.safeParse({
-    name: formData.get("name") || "",
+    name,
+    slug,
   });
 
   if (!validated.success) {
@@ -26,19 +30,21 @@ export async function createCategory(
     return { success: false, error: firstError };
   }
 
-  const { name } = validated.data;
+  const validatedName = validated.data.name;
+  const validatedSlug = validated.data.slug;
 
   try {
     await dbConnect();
 
     // Buscar duplicados
-    const existing = await Category.findOne({ name }).lean();
+    const existing = await Category.findOne({ name: validatedName }).lean();
     if (existing) {
       return { success: false, error: "Ya existe una categoría con este nombre." };
     }
 
-    const category = await Category.create({ name, slug: generateSlug(name) });
+    const category = await Category.create({ name: validatedName, slug: validatedSlug });
 
+    revalidatePath("/admin");
     revalidatePath("/admin/inventario");
     revalidatePath("/catalog");
 
@@ -66,6 +72,7 @@ export async function deleteCategory(id: string): Promise<ActionResult<null>> {
     await dbConnect();
     await Category.findByIdAndDelete(id);
 
+    revalidatePath("/admin");
     revalidatePath("/admin/inventario");
     revalidatePath("/catalog");
 
