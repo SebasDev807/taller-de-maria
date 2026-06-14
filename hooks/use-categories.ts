@@ -1,9 +1,13 @@
 import { useState, useTransition } from "react";
-import { createCategory, deleteCategory } from "@/actions/category.actions";
+import { createCategory, deleteCategory, updateCategory } from "@/actions/category.actions";
 
 export const useCategories = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
+  
+  const [editingCategoryId, setEditingCategoryId] = useState<string | null>(null);
+  const [editingCategoryName, setEditingCategoryName] = useState("");
+
   const [isPending, startTransition] = useTransition();
 
   const handleSave = () => {
@@ -39,14 +43,47 @@ export const useCategories = () => {
     setNewCategoryName("");
   };
 
+  const handleEditMode = (id: string, currentName: string) => {
+    setEditingCategoryId(id);
+    setEditingCategoryName(currentName);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingCategoryId(null);
+    setEditingCategoryName("");
+  };
+
+  const handleUpdate = (id: string) => {
+    if (!editingCategoryName.trim()) return;
+
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append("name", editingCategoryName);
+      const result = await updateCategory(id, formData);
+
+      if (result.success) {
+        setEditingCategoryId(null);
+        setEditingCategoryName("");
+      } else {
+        alert(result.error);
+      }
+    });
+  };
+
   return {
     isAdding,
     setIsAdding,
     newCategoryName,
     setNewCategoryName,
+    editingCategoryId,
+    editingCategoryName,
+    setEditingCategoryName,
     isPending,
     handleSave,
     handleDelete,
     handleCancel,
+    handleEditMode,
+    handleCancelEdit,
+    handleUpdate,
   };
 };

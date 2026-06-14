@@ -13,10 +13,16 @@ export function CategoriesClient({ initialCategories }: Props) {
     setIsAdding,
     newCategoryName,
     setNewCategoryName,
+    editingCategoryId,
+    editingCategoryName,
+    setEditingCategoryName,
     isPending,
     handleSave,
     handleDelete,
     handleCancel,
+    handleEditMode,
+    handleCancelEdit,
+    handleUpdate,
   } = useCategories();
 
   return (
@@ -41,19 +47,62 @@ export function CategoriesClient({ initialCategories }: Props) {
               key={category.id}
               className="flex items-center justify-between p-3 rounded hover:bg-surface-container-low transition-colors group border-b border-surface-container-high last:border-0"
             >
-              <span className="font-body-md text-body-md text-on-surface">{category.name}</span>
-              <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button className="text-on-surface-variant hover:text-primary cursor-pointer p-1 disabled:opacity-50">
-                  <span className="material-symbols-outlined text-[18px]">edit</span>
-                </button>
-                <button
-                  onClick={() => handleDelete(category.id)}
-                  disabled={isPending}
-                  className="text-on-surface-variant hover:text-error cursor-pointer p-1 disabled:opacity-50"
-                >
-                  <span className="material-symbols-outlined text-[18px]">delete</span>
-                </button>
-              </div>
+              {editingCategoryId === category.id ? (
+                <>
+                  <input
+                    type="text"
+                    autoFocus
+                    value={editingCategoryName}
+                    onChange={(e) => setEditingCategoryName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleUpdate(category.id);
+                      if (e.key === "Escape") handleCancelEdit();
+                    }}
+                    className="font-body-md text-body-md text-on-surface bg-transparent outline-none w-full border-b border-primary/50 focus:border-primary transition-colors mr-4 py-1"
+                    disabled={isPending}
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleUpdate(category.id)}
+                      disabled={isPending}
+                      className="text-primary hover:text-primary/80 cursor-pointer p-1 disabled:opacity-50"
+                    >
+                      {isPending ? (
+                        <span className="material-symbols-outlined text-[18px] animate-spin">refresh</span>
+                      ) : (
+                        <span className="material-symbols-outlined text-[18px]">check</span>
+                      )}
+                    </button>
+                    <button
+                      onClick={handleCancelEdit}
+                      disabled={isPending}
+                      className="text-error hover:text-error/80 cursor-pointer p-1 disabled:opacity-50"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">close</span>
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <span className="font-body-md text-body-md text-on-surface">{category.name}</span>
+                  <div className={"flex gap-2 transition-opacity " + (editingCategoryId ? "opacity-0 pointer-events-none" : "opacity-0 group-hover:opacity-100")}>
+                    <button 
+                      onClick={() => handleEditMode(category.id, category.name)}
+                      disabled={isPending}
+                      className="text-on-surface-variant hover:text-primary cursor-pointer p-1 disabled:opacity-50"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">edit</span>
+                    </button>
+                    <button
+                      onClick={() => handleDelete(category.id)}
+                      disabled={isPending}
+                      className="text-on-surface-variant hover:text-error cursor-pointer p-1 disabled:opacity-50"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">delete</span>
+                    </button>
+                  </div>
+                </>
+              )}
             </li>
           ))
         )}

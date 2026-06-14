@@ -136,3 +136,65 @@ export async function getCategories(): Promise<ActionResult<CategoryData[]>> {
     return { success: false, error: message };
   }
 }
+
+/**
+ * Actualiza una categoría existente.
+ *
+ * @param id - El ID de la categoría a actualizar.
+ * @param formData - FormData proveniente del formulario con el campo `name`.
+ */
+export async function updateCategory(
+  id: string,
+  formData: FormData
+): Promise<ActionResult<CategoryData>> {
+  const name = (formData.get("name") as string) || "";
+  const slug = generateSlug(name);
+
+  const validated = categorySchema.safeParse({
+    name,
+    slug,
+  });
+
+  if (!validated.success) {
+    const firstError = validated.error.issues[0]?.message ?? "Datos inválidos";
+    return { success: false, error: firstError };
+  }
+
+  const validatedName = validated.data.name;
+  const validatedSlug = validated.data.slug;
+
+  try {
+    await dbConnect();
+
+    const existing = await Category.findOne({ name: validatedName, _id: { $ne: id } }).lean();
+    if (existing) {
+      return { success: false, error: "Ya existe otra categoría con este nombre." };
+    }
+
+    const updated = await Category.findByIdAndUpdate(
+      id,
+      { name: validatedName, slug: validatedSlug },
+      { new: true }
+    ).lean();
+
+    if (!updated) {
+      return { success: false, error: "Categoría no encontrada." };
+    }
+
+    revalidatePath("/admin");
+    revalidatePath("/admin/inventario");
+    revalidatePath("/catalog");
+
+    return {
+      success: true,
+      data: {
+        id: updated._id.toString(),
+        name: updated.name,
+        slug: updated.slug,
+      },
+    };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}
