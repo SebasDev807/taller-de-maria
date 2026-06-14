@@ -1,5 +1,7 @@
 import { TopNavBar, Footer, CatalogCard, CatalogFilters, Pagination } from "@/components";
 import { mockProducts } from "@/lib/mockData";
+import { getCategories } from "@/actions/category.actions";
+
 
 /**
  * Componente principal de la página de catálogo de productos.
@@ -17,6 +19,9 @@ export default async function Catalog({
 }) {
   const params = await searchParams;
   const category = typeof params.category === "string" ? params.category : "All Items";
+
+  const categoryResult = await getCategories();
+  const categories = categoryResult.success ? categoryResult.data : [];
 
   const filteredProducts = mockProducts.filter(
     (product) => category === "All Items" || product.category === category
@@ -37,7 +42,8 @@ export default async function Catalog({
         </div>
 
         {/* Filter Controls */}
-        <CatalogFilters />
+        <CatalogFilters categories={categories} />
+
       </header>
 
       {/* Product Grid (Bento-style layout variations) */}

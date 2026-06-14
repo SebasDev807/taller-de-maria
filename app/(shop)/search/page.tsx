@@ -1,5 +1,7 @@
 import { TopNavBar, Footer, CatalogCard, CatalogFilters } from "@/components";
 import { mockProducts } from "@/lib/mockData";
+import { getCategories } from "@/actions/category.actions";
+
 
 /**
  * Página de búsqueda que muestra los resultados basados en la query de búsqueda (q)
@@ -18,6 +20,9 @@ export default async function SearchPage({
   const params = await searchParams;
   const q = typeof params.q === "string" ? params.q.toLowerCase() : "";
   const category = typeof params.category === "string" ? params.category : "All Items";
+
+  const categoryResult = await getCategories();
+  const categories = categoryResult.success ? categoryResult.data : [];
 
   const filteredProducts = mockProducts.filter((product) => {
     // Check search query using partial terms (must match all terms)
@@ -51,7 +56,7 @@ export default async function SearchPage({
             </p>
           </div>
 
-          <CatalogFilters />
+          <CatalogFilters categories={categories} />
         </header>
 
         {filteredProducts.length > 0 ? (

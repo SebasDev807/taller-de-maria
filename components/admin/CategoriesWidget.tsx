@@ -1,10 +1,15 @@
+import { getCategories } from "@/actions/category.actions";
+
 /**
  * Displays the categories widget on the admin dashboard,
  * allowing the user to manage product categories.
  *
  * @returns The rendered CategoriesWidget component.
  */
-export const CategoriesWidget = () => {
+export const CategoriesWidget = async () => {
+  const result = await getCategories();
+  const categories = result.success ? result.data : [];
+
   return (
     <section className="bg-surface-container-lowest rounded-xl p-8 shadow-ambient border border-surface-container-high">
       <div className="flex items-center justify-between mb-6">
@@ -15,24 +20,23 @@ export const CategoriesWidget = () => {
       </div>
 
       <ul className="flex flex-col gap-1">
-        {[
-          "Rosarios y Devocionales",
-          "Arte Sacro",
-          "Libros y Biblias",
-          "Velas y Aromas",
-        ].map((category, index) => (
-          <li
-            key={index}
-            className="flex items-center justify-between p-3 rounded hover:bg-surface-container-low transition-colors group border-b border-surface-container-high last:border-0"
-          >
-            <span className="font-body-md text-body-md text-on-surface">{category}</span>
-            <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button className="text-on-surface-variant hover:text-primary cursor-pointer p-1">
-                <span className="material-symbols-outlined text-[18px]">edit</span>
-              </button>
-            </div>
-          </li>
-        ))}
+        {categories.length === 0 ? (
+          <li className="p-3 text-on-surface-variant text-sm">No hay categorías</li>
+        ) : (
+          categories.map((category) => (
+            <li
+              key={category.id}
+              className="flex items-center justify-between p-3 rounded hover:bg-surface-container-low transition-colors group border-b border-surface-container-high last:border-0"
+            >
+              <span className="font-body-md text-body-md text-on-surface">{category.name}</span>
+              <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button className="text-on-surface-variant hover:text-primary cursor-pointer p-1">
+                  <span className="material-symbols-outlined text-[18px]">edit</span>
+                </button>
+              </div>
+            </li>
+          ))
+        )}
       </ul>
     </section>
   );
