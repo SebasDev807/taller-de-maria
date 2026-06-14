@@ -1,46 +1,23 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { createCategory, deleteCategory } from "@/actions/category.actions";
 import type { CategoryData } from "@/actions/types";
+import { useCategories } from "@/hooks";
 
 interface Props {
   initialCategories: CategoryData[];
 }
 
 export function CategoriesClient({ initialCategories }: Props) {
-  const [isAdding, setIsAdding] = useState(false);
-  const [newCategoryName, setNewCategoryName] = useState("");
-  const [isPending, startTransition] = useTransition();
-
-  const handleSave = () => {
-    if (!newCategoryName.trim()) return;
-
-    startTransition(async () => {
-
-      const formData = new FormData();
-      formData.append("name", newCategoryName);
-      const result = await createCategory(formData);
-
-      if (result.success) {
-        setIsAdding(false);
-        setNewCategoryName("");
-      } else {
-        alert(result.error);
-      }
-    });
-  };
-
-  const handleDelete = (id: string) => {
-    if (!confirm("¿Seguro que deseas eliminar esta categoría?")) return;
-
-    startTransition(async () => {
-      const result = await deleteCategory(id);
-      if (!result.success) {
-        alert(result.error);
-      }
-    });
-  };
+  const {
+    isAdding,
+    setIsAdding,
+    newCategoryName,
+    setNewCategoryName,
+    isPending,
+    handleSave,
+    handleDelete,
+    handleCancel,
+  } = useCategories();
 
   return (
     <div className="flex flex-col gap-4">
