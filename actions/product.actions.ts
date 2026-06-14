@@ -278,3 +278,93 @@ export async function deleteProduct(id: string): Promise<ActionResult<boolean>> 
     return { success: false, error: message };
   }
 }
+
+/**
+ * Actualiza un producto existente.
+ * 
+ * @param {string} id - ID del producto a actualizar
+ * @param {FormData} formData - FormData proveniente del formulario de edición.
+ * @returns {Promise<ActionResult<SerializedProduct>>} Los datos del producto actualizado o un mensaje de error.
+ */
+export async function updateProduct(id: string, formData: FormData): Promise<ActionResult<SerializedProduct>> {
+  try {
+    const rawName = formData.get("name") as string || "";
+    const name = rawName.trim();
+    const description = formData.get("description") as string || "";
+    const price = Number(formData.get("price") || 0);
+    const stock = Number(formData.get("stock") || 0);
+    const category = formData.get("category") as string || "";
+    
+    const featuresRaw = formData.get("features") as string;
+    const features = featuresRaw ? JSON.parse(featuresRaw) : [];
+    
+    const imageUrlsRaw = formData.get("imageUrls") as string;
+    const imageUrls = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
+
+    const slug = generateSlug(name);
+    const sku = generateSku(name);
+
+    await dbConnect();
+
+    const existingProduct = await Product.findById(id).lean();
+    if (!existingProduct) {
+      return { success: false, error: "Producto no encontrado." };
+    }
+
+    const tags = existingProduct.tags || [];
+
+    const validated = productSchema.safeParse({
+      name,
+      sku,
+      slug,
+      price,
+      description,
+      stock,
+      imageUrls,
+      category,
+      features,
+      tags,
+    });
+
+    if (!validated.success) {
+      const firstError = validated.error.issues[0]?.message ?? "Datos inválidos";
+      return { success: false, error: firstError };
+    }
+
+    // Check for duplicates with different ID
+    const duplicate = await Product.findOne({
+      _id: { $ne: id },
+      $or: [
+        { name: validated.data.name },
+        { slug: validated.data.slug },
+        { sku: validated.data.sku }
+      ]
+    }).lean();
+
+    if (duplicate) {
+      return { success: false, error: "Ya existe otro producto con ese nombre o SKU." };
+    }
+
+    const product = await Product.findByIdAndUpdate(
+      id,
+      validated.data,
+      { new: true }
+    );
+
+    revalidatePath("/admin");
+    revalidatePath("/admin/inventario");
+    revalidatePath(`/admin/inventario/${slug}`);
+    revalidatePath("/catalog");
+    revalidatePath(`/catalog/${slug}`);
+
+    return {
+      success: true,
+      data: mapToSerializedProduct(product),
+    };
+  } catch (error) {
+    console.error("Error updating product:", error);
+    const message = error instanceof Error ? error.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}
+

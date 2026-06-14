@@ -3,6 +3,7 @@ import { formatCurrency } from "@/helpers/format-currency";
 import { getProductBySlug } from "@/actions/product.actions";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { ProductDetailActionsClient } from "@/components/admin/inventario";
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -70,17 +71,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               )}
             </div>
 
-            {/* Actions Card replacing Technical Specifications */}
-            <div className="bg-surface-container-lowest shadow-sm rounded-xl p-md border border-surface-container-high flex flex-col gap-3">
-              <button className="flex items-center justify-center gap-2 w-full px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer">
-                <span className="material-symbols-outlined text-[20px]">edit</span>
-                Editar Producto
-              </button>
-              <button className="flex items-center justify-center gap-2 w-full px-md py-sm border-2 border-error text-error font-label-md text-label-md rounded-lg hover:bg-error-container/20 active:scale-95 transition-all cursor-pointer">
-                <span className="material-symbols-outlined text-[20px]">delete</span>
-                Eliminar Producto
-              </button>
-            </div>
+            {/* Actions Card using Client Component for Edit/Delete */}
+            <ProductDetailActionsClient product={product} />
           </div>
 
           {/* Right: Metadata and Description */}

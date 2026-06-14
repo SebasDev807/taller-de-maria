@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { SerializedProduct } from "@/actions/types/product.types";
+import { deleteProduct } from "@/actions/product.actions";
 import Link from "next/link";
+import { EditProductModal } from "./inventario/EditProductModal";
 
 /**
  * Props for the RecentProductsWidget component.
@@ -19,6 +24,8 @@ interface RecentProductsWidgetProps {
  * @returns The rendered RecentProductsWidget component.
  */
 export const RecentProductsWidget = ({ products }: RecentProductsWidgetProps) => {
+  const [editingProduct, setEditingProduct] = useState<SerializedProduct | null>(null);
+
   // Format price helper
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("es-CO", {
@@ -27,6 +34,15 @@ export const RecentProductsWidget = ({ products }: RecentProductsWidgetProps) =>
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
+  };
+
+  const handleDelete = async (product: SerializedProduct) => {
+    if (window.confirm(`¿Estás seguro de que deseas eliminar el producto "${product.name}"?`)) {
+      const result = await deleteProduct(product.id);
+      if (!result.success) {
+        alert(result.error);
+      }
+    }
   };
 
   return (
@@ -74,10 +90,18 @@ export const RecentProductsWidget = ({ products }: RecentProductsWidgetProps) =>
                 <td className="py-4 font-semibold">{formatPrice(product.price)}</td>
                 <td className="py-4 text-right">
                   <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="p-1 text-on-surface-variant hover:text-primary cursor-pointer">
+                    <button 
+                      type="button"
+                      onClick={() => setEditingProduct(product)}
+                      className="p-1 text-on-surface-variant hover:text-primary cursor-pointer"
+                    >
                       <span className="material-symbols-outlined text-[20px]">edit</span>
                     </button>
-                    <button className="p-1 text-on-surface-variant hover:text-error cursor-pointer">
+                    <button 
+                      type="button"
+                      onClick={() => handleDelete(product)}
+                      className="p-1 text-on-surface-variant hover:text-error cursor-pointer"
+                    >
                       <span className="material-symbols-outlined text-[20px]">delete</span>
                     </button>
                   </div>
@@ -87,6 +111,14 @@ export const RecentProductsWidget = ({ products }: RecentProductsWidgetProps) =>
           </tbody>
         </table>
       </div>
+
+      {editingProduct && (
+        <EditProductModal
+          isOpen={true}
+          onClose={() => setEditingProduct(null)}
+          product={editingProduct}
+        />
+      )}
     </section>
   );
 };

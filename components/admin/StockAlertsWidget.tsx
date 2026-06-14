@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { SerializedProduct } from "@/actions/types/product.types";
 import Link from "next/link";
+import { EditProductModal } from "./inventario/EditProductModal";
 
 interface StockAlertsWidgetProps {
   products: SerializedProduct[];
@@ -13,6 +17,7 @@ interface StockAlertsWidgetProps {
  * @returns The rendered StockAlertsWidget component.
  */
 export const StockAlertsWidget = ({ products }: StockAlertsWidgetProps) => {
+  const [editingProduct, setEditingProduct] = useState<SerializedProduct | null>(null);
   const lowStockProducts = products.filter(product => product.stock < 5);
   const alertsCount = lowStockProducts.length;
 
@@ -47,7 +52,11 @@ export const StockAlertsWidget = ({ products }: StockAlertsWidgetProps) => {
                     {isOutOfStock ? 'Agotado' : `Quedan ${product.stock} unidades`}
                   </p>
                 </div>
-                <button className="text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-1">
+                <button 
+                  type="button"
+                  onClick={() => setEditingProduct(product)}
+                  className="text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-1"
+                >
                   <span className="material-symbols-outlined text-[20px]">edit</span>
                 </button>
               </li>
@@ -64,6 +73,14 @@ export const StockAlertsWidget = ({ products }: StockAlertsWidgetProps) => {
       <Link href="/admin/inventario" className="mt-6 text-center font-label-md text-label-md text-secondary hover:underline underline-offset-4">
         Ver Inventario Completo
       </Link>
+
+      {editingProduct && (
+        <EditProductModal
+          isOpen={true}
+          onClose={() => setEditingProduct(null)}
+          product={editingProduct}
+        />
+      )}
     </section>
   );
 };

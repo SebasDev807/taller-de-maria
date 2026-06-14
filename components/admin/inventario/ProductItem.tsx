@@ -2,14 +2,17 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { SerializedProduct } from '@/actions/types/product.types';
 import { deleteProduct } from '@/actions/product.actions';
+import { EditProductModal } from './EditProductModal';
 interface ProductItemProps {
     item: SerializedProduct;
 }
 
 export const ProductItem = ({ item }: ProductItemProps) => {
     const router = useRouter();
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     
     const handleRowClick = () => {
         router.push(`/admin/inventario/${item.slug}`);
@@ -75,7 +78,7 @@ export const ProductItem = ({ item }: ProductItemProps) => {
                             className="cursor-pointer text-outline hover:text-yellow-500 transition-colors flex items-center justify-center"
                             onClick={(e) => {
                                 e.stopPropagation();
-                                // Aquí irá la lógica de editar
+                                setIsEditModalOpen(true);
                             }}
                         >
                             <span className="material-symbols-outlined text-[20px]">edit</span>
@@ -99,6 +102,13 @@ export const ProductItem = ({ item }: ProductItemProps) => {
                         </button>
                     </div>
                 </div>
+                {isEditModalOpen && (
+                    <EditProductModal 
+                        isOpen={isEditModalOpen} 
+                        onClose={() => setIsEditModalOpen(false)} 
+                        product={item} 
+                    />
+                )}
             </td>
         </tr>
     )
