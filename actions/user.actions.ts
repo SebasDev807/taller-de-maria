@@ -104,6 +104,7 @@ export async function getUsers(): Promise<
       role: UserRole;
       isActive: boolean;
       phoneNumber?: string;
+      totalSpent: number;
       createdAt: string;
     }>
   >
@@ -119,6 +120,7 @@ export async function getUsers(): Promise<
       role: u.role as UserRole,
       isActive: u.isActive ?? false,
       phoneNumber: u.phoneNumber,
+      totalSpent: u.totalSpent || 0,
       createdAt: u.createdAt ? new Date(u.createdAt).toISOString() : new Date().toISOString(),
     }));
 

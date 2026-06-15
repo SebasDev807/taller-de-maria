@@ -36,6 +36,10 @@ const UserSchema = new Schema<IUser>(
       },
       default: UserRole.User,
     },
+    totalSpent: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

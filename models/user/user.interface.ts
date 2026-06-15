@@ -13,6 +13,7 @@ export interface IUser {
   isActive?: boolean;
   role: UserRole;
   phoneNumber?: string;
+  totalSpent?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -40,6 +40,9 @@ export const UsersTable: React.FC<UsersTableProps> = ({ users }) => {
               <th className="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">
                 Fecha Registro
               </th>
+              <th className="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">
+                Total Gastos
+              </th>
               <th className="py-4 px-6 text-right font-label-md text-label-md text-on-surface-variant font-semibold">
                 Acciones
               </th>
@@ -52,7 +55,7 @@ export const UsersTable: React.FC<UsersTableProps> = ({ users }) => {
             {users.length === 0 && (
               <tr>
                 <td
-                  colSpan={6}
+                  colSpan={7}
                   className="py-8 text-center text-on-surface-variant"
                 >
                   No se encontraron usuarios.

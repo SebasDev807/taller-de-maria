@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Mis Plegarias | Taller De Maria</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#feb300",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "tertiary": "#28120b",
+                        "outline": "#827472",
+                        "secondary-fixed": "#ffdeac",
+                        "on-tertiary-container": "#b18c81",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "surface-tint": "#745853",
+                        "surface-container": "#eeeeee",
+                        "on-tertiary-fixed": "#2c160e",
+                        "on-primary-fixed-variant": "#5b403c",
+                        "inverse-primary": "#e3beb8",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-fixed-dim": "#ffba38",
+                        "on-secondary-container": "#6a4800",
+                        "surface-dim": "#dadada",
+                        "on-background": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#e3beb8",
+                        "on-primary-fixed": "#2b1613",
+                        "secondary": "#7e5700",
+                        "tertiary-container": "#40261e",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "on-surface-variant": "#504442",
+                        "primary": "#271310",
+                        "on-secondary-fixed-variant": "#604100",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary-container": "#ae8d87",
+                        "inverse-surface": "#2f3131",
+                        "primary-container": "#3e2723",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#ffdad4",
+                        "on-secondary-fixed": "#281900",
+                        "on-surface": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "outline-variant": "#d3c3c0",
+                        "surface-bright": "#f9f9f9",
+                        "background": "#f9f9f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "lg": "48px",
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Libre Caslon Text"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                },
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .soft-shadow {
+            box-shadow: 0 20px 40px -10px rgba(62, 39, 35, 0.05);
+        }
+
+        .active-tab {
+            border-bottom: 2px solid #7e5700;
+            color: #7e5700;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+    <!-- TopNavBar -->
+    <nav class="bg-surface sticky top-0 z-50 border-b border-surface-container dark:border-outline-variant">
+        <div class="flex justify-between items-center w-full px-margin-desktop max-w-[1200px] mx-auto h-16">
+            <div class="font-headline-md text-headline-md text-primary">Taller De Maria</div>
+            <div class="hidden md:flex items-center space-x-md">
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Home</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">Catalog</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200"
+                    href="#">About Us</a>
+            </div>
+            <div class="flex items-center space-x-md">
+                <button class="text-secondary scale-95 active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined" data-icon="person"
+                        style="font-variation-settings: 'FILL' 1;">person</span>
+                </button>
+                <button class="text-on-surface-variant hover:text-secondary transition-colors duration-200">
+                    <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                </button>
+                <button class="text-on-surface-variant hover:text-secondary transition-colors duration-200">
+                    <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-[1200px] mx-auto px-margin-desktop py-xl">
+        <!-- Header Section -->
+        <header class="mb-xl max-w-2xl">
+            <h1 class="font-headline-xl text-headline-xl text-primary mb-sm">Mis Plegarias</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant opacity-80 italic">Tu rincón personal de paz y
+                devoción.</p>
+        </header>
+        <!-- Filters/Tabs -->
+        <div class="flex items-center space-x-lg border-b border-surface-container mb-lg">
+            <button class="font-label-md text-label-md pb-base active-tab transition-all duration-300" id="tab-all"
+                onclick="filterContent('all')">Todas</button>
+            <button
+                class="font-label-md text-label-md pb-base text-on-surface-variant hover:text-secondary transition-all duration-300"
+                id="tab-gospel" onclick="filterContent('gospel')">Evangelios</button>
+            <button
+                class="font-label-md text-label-md pb-base text-on-surface-variant hover:text-secondary transition-all duration-300"
+                id="tab-prayer" onclick="filterContent('prayer')">Oraciones</button>
+        </div>
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="content-grid">
+            <!-- Gospel Card 1 -->
+            <article
+                class="content-item gospel bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between transition-all duration-300 hover:translate-y-[-4px]">
+                <div>
+                    <div class="flex justify-between items-start mb-base">
+                        <span
+                            class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Evangelio</span>
+                        <span class="font-label-sm text-label-sm text-outline">12 Oct 2023</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-sm">Juan 14:27</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-4 italic">
+                        "La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro
+                        corazón, ni tenga miedo..."
+                    </p>
+                </div>
+                <div class="flex justify-end items-center mt-md pt-md border-t border-surface-container space-x-md">
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="share">share</span>
+                        Compartir
+                    </button>
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-error opacity-80 hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="delete">delete</span>
+                        Remover
+                    </button>
+                </div>
+            </article>
+            <!-- Prayer Card 1 -->
+            <article
+                class="content-item prayer bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between transition-all duration-300 hover:translate-y-[-4px]">
+                <div>
+                    <div class="flex justify-between items-start mb-base">
+                        <span
+                            class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Oración</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-sm">Oración de San Francisco</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-6">
+                        Señor, hazme un instrumento de tu paz. Donde haya odio, siembre yo amor; donde haya injuria,
+                        perdón; donde haya duda, fe; donde haya desesperación, esperanza...
+                    </p>
+                </div>
+                <div class="flex justify-end items-center mt-md pt-md border-t border-surface-container space-x-md">
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="share">share</span>
+                        Compartir
+                    </button>
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-error opacity-80 hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="delete">delete</span>
+                        Remover
+                    </button>
+                </div>
+            </article>
+            <!-- Gospel Card 2 -->
+            <article
+                class="content-item gospel bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between transition-all duration-300 hover:translate-y-[-4px]">
+                <div>
+                    <div class="flex justify-between items-start mb-base">
+                        <span
+                            class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Evangelio</span>
+                        <span class="font-label-sm text-label-sm text-outline">08 Oct 2023</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-sm">Mateo 5:3-12</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-4 italic">
+                        "Bienaventurados los pobres en espíritu, porque de ellos es el reino de los cielos.
+                        Bienaventurados los que lloran..."
+                    </p>
+                </div>
+                <div class="flex justify-end items-center mt-md pt-md border-t border-surface-container space-x-md">
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="share">share</span>
+                        Compartir
+                    </button>
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-error opacity-80 hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="delete">delete</span>
+                        Remover
+                    </button>
+                </div>
+            </article>
+            <!-- Prayer Card 2 -->
+            <article
+                class="content-item prayer bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between transition-all duration-300 hover:translate-y-[-4px]">
+                <div>
+                    <div class="flex justify-between items-start mb-base">
+                        <span
+                            class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Oración</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-sm">Ave María</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                        Dios te salve, María, llena eres de gracia; el Señor es contigo. Bendita Tú eres entre todas las
+                        mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María...
+                    </p>
+                </div>
+                <div class="flex justify-end items-center mt-md pt-md border-t border-surface-container space-x-md">
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="share">share</span>
+                        Compartir
+                    </button>
+                    <button
+                        class="flex items-center font-label-sm text-label-sm text-error opacity-80 hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined mr-xs text-[18px]" data-icon="delete">delete</span>
+                        Remover
+                    </button>
+                </div>
+            </article>
+        </div>
+        <!-- Empty State (Hidden by default) -->
+        <div class="hidden flex-col items-center justify-center py-xl text-center space-y-md" id="empty-state">
+            <div class="w-48 h-48 rounded-full bg-surface-container-low flex items-center justify-center mb-md">
+                <span class="material-symbols-outlined text-[64px] text-outline-variant"
+                    data-icon="potted_plant">potted_plant</span>
+            </div>
+            <h2 class="font-headline-md text-headline-md text-primary">Aún no has guardado plegarias</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+                Tu rincón de devoción está esperando. Explora nuestras lecturas diarias y guarda las que más resuenen en
+                tu corazón.
+            </p>
+            <a class="mt-md inline-block bg-secondary-container text-on-secondary-container px-lg py-sm rounded-full font-label-md text-label-md hover:shadow-lg transition-shadow"
+                href="#">Explorar Lecturas</a>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest dark:bg-surface-container-high border-t border-surface-container mt-xl">
+
+        <div
+            class="max-w-[1200px] mx-auto px-margin-desktop py-md border-t border-surface-container flex flex-col md:flex-row justify-between items-center space-y-sm md:space-y-0">
+            <p class="font-body-md text-body-md text-on-surface-variant opacity-60">© 2024 Taller De Maria. All rights
+                reserved. Sacred Arts &amp; Tradition.</p>
+            <div class="flex space-x-md">
+                <span
+                    class="material-symbols-outlined text-outline-variant hover:text-secondary cursor-pointer transition-colors"
+                    data-icon="facebook">face_nod</span>
+                <span
+                    class="material-symbols-outlined text-outline-variant hover:text-secondary cursor-pointer transition-colors"
+                    data-icon="photo_camera">photo_camera</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function filterContent(type) {
+            const items = document.querySelectorAll('.content-item');
+            const grid = document.getElementById('content-grid');
+            const emptyState = document.getElementById('empty-state');
+            const tabs = {
+                all: document.getElementById('tab-all'),
+                gospel: document.getElementById('tab-gospel'),
+                prayer: document.getElementById('tab-prayer')
+            };
+
+            // Update Tabs Styling
+            Object.values(tabs).forEach(tab => {
+                tab.classList.remove('active-tab');
+                tab.classList.remove('text-secondary');
+                tab.classList.add('text-on-surface-variant');
+            });
+            tabs[type].classList.add('active-tab');
+            tabs[type].classList.remove('text-on-surface-variant');
+
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                if (type === 'all' || item.classList.contains(type)) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+            } else {
+                grid.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+            }
+        }
+
+        // Simple remove interaction
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.includes('Remover')) {
+                btn.onclick = function () {
+                    const card = this.closest('.content-item');
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        card.classList.add('hidden');
+                        card.classList.remove('content-item'); // Remove from filter logic
+                        // Optional: trigger empty state check here if real app
+                    }, 300);
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -14,6 +14,7 @@ export interface UserData {
   role: UserRole;
   isActive: boolean;
   phoneNumber?: string;
+  totalSpent: number;
   createdAt: string;
 }
 
@@ -115,6 +116,13 @@ export const UserRow: React.FC<UserRowProps> = ({ user }) => {
           month: "short",
           day: "numeric",
         })}
+      </td>
+      <td className="py-4 px-6 text-on-surface-variant font-medium">
+        {new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          minimumFractionDigits: 0,
+        }).format(user.totalSpent)}
       </td>
       <td className="py-4 px-6 text-right">
         <div className="flex items-center justify-end gap-2">
