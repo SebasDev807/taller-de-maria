@@ -13,9 +13,9 @@ interface ProductItemProps {
 export const ProductItem = ({ item }: ProductItemProps) => {
     const router = useRouter();
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    
+
     const handleRowClick = () => {
-        router.push(`/admin/inventario/${item.slug}`);
+        router.push(`/admin/inventory/${item.slug}`);
     };
 
     let status = 'in-stock';
@@ -73,8 +73,8 @@ export const ProductItem = ({ item }: ProductItemProps) => {
             <td className="py-4 px-6 text-center">
                 <div className="flex items-center justify-center gap-3">
                     <div className="relative group/edit flex justify-center">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className="cursor-pointer text-outline hover:text-yellow-500 transition-colors flex items-center justify-center"
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -85,8 +85,8 @@ export const ProductItem = ({ item }: ProductItemProps) => {
                         </button>
                     </div>
                     <div className="relative group/delete flex justify-center">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className="cursor-pointer text-outline hover:text-red-500 transition-colors group/btn flex items-center justify-center"
                             onClick={async (e) => {
                                 e.stopPropagation();
@@ -103,10 +103,10 @@ export const ProductItem = ({ item }: ProductItemProps) => {
                     </div>
                 </div>
                 {isEditModalOpen && (
-                    <EditProductModal 
-                        isOpen={isEditModalOpen} 
-                        onClose={() => setIsEditModalOpen(false)} 
-                        product={item} 
+                    <EditProductModal
+                        isOpen={isEditModalOpen}
+                        onClose={() => setIsEditModalOpen(false)}
+                        product={item}
                     />
                 )}
             </td>

@@ -32,11 +32,11 @@ export async function getProductBySlug(slug: string): Promise<SerializedProduct 
   try {
     await dbConnect();
     const product = await Product.findOne({ slug }).populate("category").lean();
-    
+
     if (!product) {
       return null;
     }
-    
+
     return mapToSerializedProduct(product);
   } catch (error) {
     console.error(`Error fetching product with slug ${slug}:`, error);
@@ -58,7 +58,7 @@ export async function getFeaturedProducts(limit: number = 3): Promise<Serialized
       .limit(limit)
       .populate("category")
       .lean();
-      
+
     // Si no hay destacados explícitos, devolver los más recientes
     if (products.length === 0) {
       const recentProducts = await Product.find({})
@@ -68,7 +68,7 @@ export async function getFeaturedProducts(limit: number = 3): Promise<Serialized
         .lean();
       return recentProducts.map(mapToSerializedProduct);
     }
-    
+
     return products.map(mapToSerializedProduct);
   } catch (error) {
     console.error("Error fetching featured products:", error);
@@ -91,7 +91,7 @@ export async function getRelatedProducts(currentProductId: string, limit: number
       .limit(limit)
       .populate("category")
       .lean();
-      
+
     return products.map(mapToSerializedProduct);
   } catch (error) {
     console.error("Error fetching related products:", error);
@@ -117,11 +117,11 @@ export async function createProduct(formData: FormData): Promise<ActionResult<Se
     const price = Number(formData.get("price") || 0);
     const stock = Number(formData.get("stock") || 0);
     const category = formData.get("category") as string || "";
-    
+
     // Parse features and imageUrls
     const featuresRaw = formData.get("features") as string;
     const features = featuresRaw ? JSON.parse(featuresRaw) : [];
-    
+
     const imageUrlsRaw = formData.get("imageUrls") as string;
     const imageUrls = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
 
@@ -244,16 +244,16 @@ export async function deleteProduct(id: string): Promise<ActionResult<boolean>> 
         try {
           const urlParts = url.split('/');
           const uploadIndex = urlParts.findIndex((part: string) => part === 'upload');
-          
+
           if (uploadIndex !== -1) {
             let startIndex = uploadIndex + 1;
             if (urlParts[startIndex].match(/^v\d+$/)) {
               startIndex++;
             }
-            
+
             const publicIdWithExtension = urlParts.slice(startIndex).join('/');
             const publicId = publicIdWithExtension.substring(0, publicIdWithExtension.lastIndexOf('.'));
-            
+
             if (publicId) {
               await cloudinary.uploader.destroy(publicId);
             }
@@ -294,10 +294,10 @@ export async function updateProduct(id: string, formData: FormData): Promise<Act
     const price = Number(formData.get("price") || 0);
     const stock = Number(formData.get("stock") || 0);
     const category = formData.get("category") as string || "";
-    
+
     const featuresRaw = formData.get("features") as string;
     const features = featuresRaw ? JSON.parse(featuresRaw) : [];
-    
+
     const imageUrlsRaw = formData.get("imageUrls") as string;
     const imageUrls = imageUrlsRaw ? JSON.parse(imageUrlsRaw) : [];
 
@@ -352,8 +352,8 @@ export async function updateProduct(id: string, formData: FormData): Promise<Act
     );
 
     revalidatePath("/admin");
-    revalidatePath("/admin/inventario");
-    revalidatePath(`/admin/inventario/${slug}`);
+    revalidatePath("/admin/inventory");
+    revalidatePath(`/admin/inventory/${slug}`);
     revalidatePath("/catalog");
     revalidatePath(`/catalog/${slug}`);
 

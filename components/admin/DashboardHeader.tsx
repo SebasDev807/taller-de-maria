@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AdminPageHeader } from "./AdminPageHeader";
-import { ProductFormModal } from "./inventario";
+import { ProductFormModal } from "./inventory";
 
 export const DashboardHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,9 +10,9 @@ export const DashboardHeader = () => {
   return (
     <>
       <AdminPageHeader onActionClick={() => setIsModalOpen(true)} />
-      <ProductFormModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <ProductFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
     </>
   );

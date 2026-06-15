@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SerializedProduct } from "@/actions/types/product.types";
 import { deleteProduct } from "@/actions/product.actions";
 import Link from "next/link";
-import { EditProductModal } from "./inventario/EditProductModal";
+import { EditProductModal } from "./inventory/EditProductModal";
 
 /**
  * Props for the RecentProductsWidget component.
@@ -90,14 +90,14 @@ export const RecentProductsWidget = ({ products }: RecentProductsWidgetProps) =>
                 <td className="py-4 font-semibold">{formatPrice(product.price)}</td>
                 <td className="py-4 text-right">
                   <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button 
+                    <button
                       type="button"
                       onClick={() => setEditingProduct(product)}
                       className="p-1 text-on-surface-variant hover:text-primary cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-[20px]">edit</span>
                     </button>
-                    <button 
+                    <button
                       type="button"
                       onClick={() => handleDelete(product)}
                       className="p-1 text-on-surface-variant hover:text-error cursor-pointer"

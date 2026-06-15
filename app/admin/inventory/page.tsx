@@ -1,4 +1,4 @@
-import { InventoryToolbar, InventoryTable, InventoryHeaderClient } from "@/components/admin/inventario";
+import { InventoryToolbar, InventoryTable, InventoryHeaderClient } from "@/components/admin/inventory";
 import { getPaginatedProducts } from "@/actions/product.actions";
 
 export default async function InventarioPage({
@@ -22,10 +22,10 @@ export default async function InventarioPage({
         <InventoryToolbar />
 
         <div className="bg-surface-container-lowest rounded-lg border border-surface-container-high shadow-sm overflow-hidden">
-          <InventoryTable 
-            products={products} 
-            currentPage={currentPage} 
-            totalPages={totalPages} 
+          <InventoryTable
+            products={products}
+            currentPage={currentPage}
+            totalPages={totalPages}
           />
         </div>
       </div>

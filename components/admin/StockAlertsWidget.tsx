@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { SerializedProduct } from "@/actions/types/product.types";
 import Link from "next/link";
-import { EditProductModal } from "./inventario/EditProductModal";
+import { EditProductModal } from "./inventory/EditProductModal";
 
 interface StockAlertsWidgetProps {
   products: SerializedProduct[];
@@ -42,7 +42,7 @@ export const StockAlertsWidget = ({ products }: StockAlertsWidgetProps) => {
           {lowStockProducts.slice(0, 5).map((product) => {
             const isOutOfStock = product.stock === 0;
             return (
-              <li 
+              <li
                 key={product.id}
                 className={`flex items-center justify-between p-4 bg-surface-container-low rounded-lg border ${isOutOfStock ? 'border-error/20' : 'border-secondary-container/50'}`}
               >
@@ -52,7 +52,7 @@ export const StockAlertsWidget = ({ products }: StockAlertsWidgetProps) => {
                     {isOutOfStock ? 'Agotado' : `Quedan ${product.stock} unidades`}
                   </p>
                 </div>
-                <button 
+                <button
                   type="button"
                   onClick={() => setEditingProduct(product)}
                   className="text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-1"

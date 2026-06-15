@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Taller De Maria - Admin Customers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#b18c81",
+                        "on-surface": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "tertiary-container": "#40261e",
+                        "surface": "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "on-tertiary-fixed-variant": "#5d4037",
+                        "background": "#f9f9f9",
+                        "surface-tint": "#745853",
+                        "outline": "#827472",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary-fixed": "#281900",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-container": "#feb300",
+                        "primary-fixed": "#ffdad4",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#28120b",
+                        "on-tertiary-fixed": "#2c160e",
+                        "primary": "#271310",
+                        "outline-variant": "#d3c3c0",
+                        "on-primary-fixed-variant": "#5b403c",
+                        "secondary": "#7e5700",
+                        "inverse-primary": "#e3beb8",
+                        "surface-dim": "#dadada",
+                        "on-secondary-fixed-variant": "#604100",
+                        "surface-container": "#eeeeee",
+                        "on-surface-variant": "#504442",
+                        "on-primary-container": "#ae8d87",
+                        "on-secondary-container": "#6a4800",
+                        "secondary-fixed": "#ffdeac",
+                        "inverse-surface": "#2f3131",
+                        "on-background": "#1a1c1c",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#3e2723",
+                        "secondary-fixed-dim": "#ffba38",
+                        "on-primary-fixed": "#2b1613",
+                        "tertiary-fixed-dim": "#e7bdb1",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-fixed-dim": "#e3beb8",
+                        "on-secondary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "xl": "80px",
+                        "sm": "12px",
+                        "margin-desktop": "64px",
+                        "base": "8px",
+                        "lg": "48px",
+                        "md": "24px",
+                        "gutter": "24px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Libre Caslon Text"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Libre Caslon Text"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .shadow-ambient {
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full flex flex-col pt-20 bg-surface-container-low border-r border-outline-variant h-full w-64 z-40 hidden md:flex">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Taller De Maria</h1>
+<h2 class="font-headline-md text-headline-md text-primary mt-4">Admin Portal</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Management Console</p>
+</div>
+<ul class="flex flex-col flex-grow">
+<!-- Dashboard -->
+<li>
+<a class="text-on-surface-variant p-4 flex items-center gap-base hover:bg-surface-variant transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<!-- Inventory -->
+<li>
+<a class="text-on-surface-variant p-4 flex items-center gap-base hover:bg-surface-variant transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+<span>Inventory</span>
+</a>
+</li>
+<!-- Orders -->
+<li>
+<a class="text-on-surface-variant p-4 flex items-center gap-base hover:bg-surface-variant transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">receipt_long</span>
+<span>Orders</span>
+</a>
+</li>
+<!-- Customers (Active) -->
+<li>
+<a class="text-secondary font-bold border-r-4 border-secondary bg-surface-container-high p-4 flex items-center gap-base translate-x-1 duration-150 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span>Customers</span>
+</a>
+</li>
+<!-- Settings -->
+<li>
+<a class="text-on-surface-variant p-4 flex items-center gap-base hover:bg-surface-variant transition-colors font-label-md text-label-md mt-auto" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+<div class="p-6 mt-auto border-t border-outline-variant flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden">
+<img alt="Admin User Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional man in a clean, modern setting with soft, high-key lighting. The style is minimalist and corporate, fitting an administrative profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrO9lOLvDAraFyyWKazqM0PTS_Dj7HzKHLR_MjRzpo-yU0KrnisQF8t2ASvcZMtQ1Oyz0-jENL45hnXJjWWXBb73JwSxrUWlN4CSo2d6bvH5rpPk8LNDkbURtPmPdWqn_yWUhJJ5o6PP3sC8pDQSVxNGslUtVtCRrlpYsYgjlYUpr9ltuWP2SSCSK8z2Ildae33ZH-BwQNHh4gmwFFRvGSvU6tY0b_aJMjB3nw7xk8caU3EGdgJJct-5Vj2c1kX17oJLgY9mmn6IQ"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Admin User</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">admin@tallerdemaria.com</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-surface min-h-screen">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary">Customers</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage and view customer details.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="w-full bg-surface-container-lowest border-b border-outline outline-none py-2 pl-10 pr-4 font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary transition-colors focus:ring-0" placeholder="Search customers..." type="text"/>
+</div>
+<button class="bg-secondary-container text-primary-container px-4 py-2 rounded flex items-center gap-2 hover:scale-95 transition-transform font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">download</span>
+                    Export
+                </button>
+</div>
+</header>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest rounded-lg shadow-ambient overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-container-high bg-surface-container-low">
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Customer</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Email</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Total Orders</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Total Spent</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant font-semibold">Join Date</th>
+<th class="py-4 px-6 text-right font-label-md text-label-md text-on-surface-variant font-semibold">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-surface-container-high hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-label-md text-label-md">
+                                        MR
+                                    </div>
+<span class="font-medium text-primary">Maria Rodriguez</span>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">maria.r@example.com</td>
+<td class="py-4 px-6">12</td>
+<td class="py-4 px-6 font-medium">$450.00</td>
+<td class="py-4 px-6 text-on-surface-variant">Jan 15, 2024</td>
+<td class="py-4 px-6 text-right">
+<button class="text-outline hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-surface-container-high hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-label-md text-label-md">
+                                        JS
+                                    </div>
+<span class="font-medium text-primary">John Smith</span>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">john.smith@example.com</td>
+<td class="py-4 px-6">3</td>
+<td class="py-4 px-6 font-medium">$120.50</td>
+<td class="py-4 px-6 text-on-surface-variant">Feb 02, 2024</td>
+<td class="py-4 px-6 text-right">
+<button class="text-outline hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-surface-container-high hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-md text-label-md">
+                                        AL
+                                    </div>
+<span class="font-medium text-primary">Ana Lopez</span>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">alopez99@example.com</td>
+<td class="py-4 px-6">8</td>
+<td class="py-4 px-6 font-medium">$310.00</td>
+<td class="py-4 px-6 text-on-surface-variant">Mar 10, 2024</td>
+<td class="py-4 px-6 text-right">
+<button class="text-outline hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-surface-container-high hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-label-md text-label-md">
+                                        CG
+                                    </div>
+<span class="font-medium text-primary">Carlos Garcia</span>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">carlos.g@example.com</td>
+<td class="py-4 px-6">1</td>
+<td class="py-4 px-6 font-medium">$45.00</td>
+<td class="py-4 px-6 text-on-surface-variant">Apr 05, 2024</td>
+<td class="py-4 px-6 text-right">
+<button class="text-outline hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-surface-container-high bg-surface-container-lowest">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Showing 1 to 4 of 24 entries</span>
+<div class="flex items-center gap-2">
+<button class="p-1 rounded text-outline hover:text-primary hover:bg-surface-variant disabled:opacity-50 transition-colors" disabled="">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-secondary-container text-primary-container font-label-sm text-label-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded text-on-surface-variant hover:bg-surface-variant font-label-sm text-label-sm flex items-center justify-center transition-colors">3</button>
+<button class="p-1 rounded text-outline hover:text-primary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

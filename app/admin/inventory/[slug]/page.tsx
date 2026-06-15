@@ -3,7 +3,7 @@ import { formatCurrency } from "@/helpers/format-currency";
 import { getProductBySlug } from "@/actions/product.actions";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { ProductDetailActionsClient } from "@/components/admin/inventario";
+import { ProductDetailActionsClient } from "@/components/admin/inventory";
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -116,7 +116,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </h3>
               <div className="font-body-md text-body-md text-on-surface-variant space-y-md leading-relaxed whitespace-pre-wrap">
                 {product.description || "Este producto no tiene una descripción detallada."}
-                
+
                 {product.features && product.features.length > 0 && (
                   <>
                     <h4 className="font-label-md text-label-md text-primary mt-6 mb-2">Características Destacadas</h4>
