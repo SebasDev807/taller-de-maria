@@ -80,5 +80,5 @@ export async function loginUser(
  */
 export async function logoutUser(): Promise<void> {
   await deleteSession();
-  redirect("/auth/login");
+  redirect("/");
 }

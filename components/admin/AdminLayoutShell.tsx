@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { logoutUser } from "@/actions/auth.actions";
+import { useLogin } from "@/hooks";
 
 /**
  * Propiedades para el componente {@link AdminLayoutShell}.
@@ -39,6 +39,7 @@ interface AdminLayoutShellProps {
 export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const { logout } = useLogin();
 
   const navigationItems = [
     { name: "Dashboard", href: "/admin", icon: "dashboard" },
@@ -129,9 +130,9 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
         </div>
 
         {/* Logout Button */}
-        <form action={logoutUser} className="px-3 pb-2">
+        <div className="px-3 pb-2">
           <button
-            type="submit"
+            onClick={() => logout()}
             className="w-full flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-error/10 hover:text-error transition-all duration-150 group cursor-pointer"
           >
             <span
@@ -142,7 +143,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
             </span>
             <span className="font-label-md text-label-md">Cerrar Sesión</span>
           </button>
-        </form>
+        </div>
 
         {/* Admin User Avatar Section */}
         <div className="p-6 border-t border-outline-variant flex items-center gap-4">
