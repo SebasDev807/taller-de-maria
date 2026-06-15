@@ -52,21 +52,15 @@ export const TopNavBar = () => {
         {/* Trailing Icons */}
         <div className="flex items-center gap-base text-primary">
           <SearchInput />
-          {mounted && !user ? (
+          {mounted && !user && (
             <Link href="/auth/login" title="Iniciar Sesión" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
               <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">login</span>
             </Link>
-          ) : (
-            mounted && user && (
-              <>
-                <button title="Mi Perfil" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
-                  <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">person</span>
-                </button>
-                <button title="Cerrar Sesión" onClick={() => logout()} className="p-2 hover:bg-error-container text-error rounded-full transition-colors group hidden md:block">
-                  <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">logout</span>
-                </button>
-              </>
-            )
+          )}
+          {mounted && user && (
+            <button title="Mi Perfil" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
+              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">person</span>
+            </button>
           )}
           <button title="Notificaciones" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">notifications</span>
@@ -79,8 +73,13 @@ export const TopNavBar = () => {
           </Link>
           {mounted && user?.role === "admin" && (
             <Link href="/admin" title="Panel de Control" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
-              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">admin_panel_settings</span>
+              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">shield</span>
             </Link>
+          )}
+          {mounted && user && (
+            <button title="Cerrar Sesión" onClick={() => logout()} className="p-2 hover:bg-error-container text-error rounded-full transition-colors group hidden md:block">
+              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">logout</span>
+            </button>
           )}
 
           {/* Mobile Menu Toggle */}
@@ -131,24 +130,17 @@ export const TopNavBar = () => {
 
           <div className="h-[1px] w-full bg-surface-container-high my-2" />
 
-          {mounted && !user ? (
+          {mounted && !user && (
             <Link href="/auth/login" title="Iniciar Sesión" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
               <span className="material-symbols-outlined">login</span>
               <span className="font-label-md text-label-lg">Iniciar Sesión</span>
             </Link>
-          ) : (
-            mounted && user && (
-              <>
-                <button title="Mi Perfil" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
-                  <span className="material-symbols-outlined">person</span>
-                  <span className="font-label-md text-label-lg">Mi Perfil</span>
-                </button>
-                <button title="Cerrar Sesión" onClick={() => { logout(); setIsMenuOpen(false); }} className="flex items-center gap-3 text-error hover:text-error-container transition-colors text-left">
-                  <span className="material-symbols-outlined">logout</span>
-                  <span className="font-label-md text-label-lg">Cerrar Sesión</span>
-                </button>
-              </>
-            )
+          )}
+          {mounted && user && (
+            <button title="Mi Perfil" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
+              <span className="material-symbols-outlined">person</span>
+              <span className="font-label-md text-label-lg">Mi Perfil</span>
+            </button>
           )}
           <button title="Notificaciones" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-outlined">notifications</span>
@@ -156,9 +148,15 @@ export const TopNavBar = () => {
           </button>
           {mounted && user?.role === "admin" && (
             <Link href="/admin" title="Panel de Control" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              <span className="material-symbols-outlined">admin_panel_settings</span>
+              <span className="material-symbols-outlined">shield</span>
               <span className="font-label-md text-label-lg">Panel de Control</span>
             </Link>
+          )}
+          {mounted && user && (
+            <button title="Cerrar Sesión" onClick={() => { logout(); setIsMenuOpen(false); }} className="flex items-center gap-3 text-error hover:text-error-container transition-colors text-left">
+              <span className="material-symbols-outlined">logout</span>
+              <span className="font-label-md text-label-lg">Cerrar Sesión</span>
+            </button>
           )}
         </nav>
       </div>
