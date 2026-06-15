@@ -51,13 +51,7 @@ export async function loginUser(
       return { success: false, error: "Credenciales inválidas" };
     }
 
-    // 5. Solo usuarios admin pueden acceder al panel
-    if (user.role !== UserRole.Admin) {
-      return {
-        success: false,
-        error: "No tienes permisos para acceder al panel de administración",
-      };
-    }
+    // Removed restriction to allow any user to log in
 
     const sessionUser: SessionUser = {
       id: user._id!.toString(),

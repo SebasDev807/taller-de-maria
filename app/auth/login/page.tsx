@@ -21,7 +21,7 @@ export default function AdminLoginPage() {
             Taller De Maria
           </h1>
           <p className="font-body-md text-body-md text-on-surface-variant">
-            Portal de Administración
+            Inicia Sesión
           </p>
         </div>
         {/* --- login form --*/}
@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
             Volver a la tienda
           </Link>
           <p className="font-label-sm text-label-sm text-outline">
-            © {new Date().getFullYear()} Taller De Maria. Acceso restringido.
+            © {new Date().getFullYear()} Taller De Maria. Todos los derechos reservados.
           </p>
         </div>
       </div>

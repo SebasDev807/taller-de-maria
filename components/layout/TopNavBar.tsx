@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { SearchInput } from "../shared/SearchInput";
 import { useCart } from "@/store/shopping-cart";
+import { useAuthStore } from "@/store/auth";
 import { usePathname } from "next/navigation";
 import { mergeClassNames } from "@/helpers";
 
@@ -23,6 +24,7 @@ export const TopNavBar = () => {
   }, []);
 
   const totalCartItems = useCart((state) => state.totalItems());
+  const user = useAuthStore((state) => state.user);
 
   return (
     <>
@@ -34,13 +36,13 @@ export const TopNavBar = () => {
 
         {/* Navigation Links (Desktop) */}
         <nav className="hidden md:flex items-center gap-gutter">
-          <Link href="/" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
+          <Link href="/" title="Inicio" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
             Inicio
           </Link>
-          <Link href="/catalog" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname.startsWith("/catalog") ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
+          <Link href="/catalog" title="Productos" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname.startsWith("/catalog") ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
             Productos
           </Link>
-          <Link href="/about" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/about" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
+          <Link href="/about" title="Sobre Nosotros" className={mergeClassNames("font-label-md text-label-md transition-all duration-300 pb-1", pathname === "/about" ? "text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim" : "text-on-surface-variant hover:text-secondary-fixed-dim")}>
             Sobre Nosotros
           </Link>
         </nav>
@@ -48,27 +50,36 @@ export const TopNavBar = () => {
         {/* Trailing Icons */}
         <div className="flex items-center gap-base text-primary">
           <SearchInput />
-          <button className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
-            <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">person</span>
-          </button>
-          <button className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
+          {mounted && !user ? (
+            <Link href="/auth/login" title="Iniciar Sesión" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
+              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">login</span>
+            </Link>
+          ) : (
+            <button title="Mi Perfil" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
+              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">person</span>
+            </button>
+          )}
+          <button title="Notificaciones" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">notifications</span>
           </button>
-          <Link href="/cart" className="p-2 hover:bg-surface-variant rounded-full transition-colors group cursor-pointer relative text-secondary">
+          <Link href="/cart" title="Carrito" className="p-2 hover:bg-surface-variant rounded-full transition-colors group cursor-pointer relative text-secondary">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">shopping_cart</span>
             {mounted && totalCartItems > 0 && (
               <span className="absolute top-1 right-1 w-2 h-2 bg-secondary-container rounded-full"></span>
             )}
           </Link>
-          <Link href="/auth/login" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
-            <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">admin_panel_settings</span>
-          </Link>
+          {mounted && user?.role === "admin" && (
+            <Link href="/admin" title="Panel de Control" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
+              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">admin_panel_settings</span>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle */}
           <button
             className="md:hidden p-2 hover:bg-surface-variant rounded-full transition-colors group"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
+            title="Menú"
           >
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">
               {isMenuOpen ? "close" : "menu"}
@@ -86,6 +97,7 @@ export const TopNavBar = () => {
           <SearchInput isMobile={true} />
           <Link
             href="/"
+            title="Inicio"
             className={mergeClassNames("font-label-md text-label-lg transition-colors duration-300", pathname === "/" ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
             onClick={() => setIsMenuOpen(false)}
           >
@@ -93,6 +105,7 @@ export const TopNavBar = () => {
           </Link>
           <Link
             href="/catalog"
+            title="Productos"
             className={mergeClassNames("font-label-md text-label-lg transition-colors duration-300", pathname.startsWith("/catalog") ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
             onClick={() => setIsMenuOpen(false)}
           >
@@ -100,6 +113,7 @@ export const TopNavBar = () => {
           </Link>
           <Link
             href="/about"
+            title="Sobre Nosotros"
             className={mergeClassNames("font-label-md text-label-lg transition-colors duration-300", pathname === "/about" ? "text-secondary-fixed-dim font-bold" : "text-on-surface hover:text-secondary-fixed-dim")}
             onClick={() => setIsMenuOpen(false)}
           >
@@ -108,18 +122,27 @@ export const TopNavBar = () => {
 
           <div className="h-[1px] w-full bg-surface-container-high my-2" />
 
-          <button className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
-            <span className="material-symbols-outlined">person</span>
-            <span className="font-label-md text-label-lg">Mi Perfil</span>
-          </button>
-          <button className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
+          {mounted && !user ? (
+            <Link href="/auth/login" title="Iniciar Sesión" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
+              <span className="material-symbols-outlined">login</span>
+              <span className="font-label-md text-label-lg">Iniciar Sesión</span>
+            </Link>
+          ) : (
+            <button title="Mi Perfil" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
+              <span className="material-symbols-outlined">person</span>
+              <span className="font-label-md text-label-lg">Mi Perfil</span>
+            </button>
+          )}
+          <button title="Notificaciones" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-outlined">notifications</span>
             <span className="font-label-md text-label-lg">Notificaciones</span>
           </button>
-          <Link href="/auth/login" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-            <span className="material-symbols-outlined">admin_panel_settings</span>
-            <span className="font-label-md text-label-lg">Panel de Control</span>
-          </Link>
+          {mounted && user?.role === "admin" && (
+            <Link href="/admin" title="Panel de Control" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              <span className="material-symbols-outlined">admin_panel_settings</span>
+              <span className="font-label-md text-label-lg">Panel de Control</span>
+            </Link>
+          )}
         </nav>
       </div>
     </>

@@ -42,7 +42,13 @@ export function useLogin(): UseLoginReturn {
 
     // Hidrata el store con los datos del usuario
     setUser(result.data);
-    router.push("/admin");
+    
+    if (result.data.role === "admin") {
+      router.push("/admin");
+    } else {
+      router.push("/");
+    }
+    
     return null;
   };
   const togglePassword = () => setShowPassword((prev) => !prev);
