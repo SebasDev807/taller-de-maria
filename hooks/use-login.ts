@@ -5,6 +5,8 @@ import { loginUser, logoutUser } from "@/actions/auth.actions";
 import type { SessionUser } from "@/actions/types/auth.types";
 import { useAuthStore } from "@/store/auth";
 import { useState } from "react";
+import { syncCart } from "@/actions/cart.actions";
+import { useCart } from "@/store/shopping-cart";
 
 interface UseLoginReturn {
   /** Usuario activo en el store (null si no hay sesión) */
@@ -43,6 +45,15 @@ export function useLogin(): UseLoginReturn {
     // Hidrata el store con los datos del usuario
     setUser(result.data);
     
+    // Sincroniza el carrito local con la base de datos
+    const localItems = useCart.getState().items;
+    try {
+      const syncedItems = await syncCart(localItems);
+      useCart.getState().setItems(syncedItems);
+    } catch (error) {
+      console.error("Error sincronizando carrito:", error);
+    }
+    
     router.push("/");
     
     return null;
@@ -50,6 +61,7 @@ export function useLogin(): UseLoginReturn {
   const togglePassword = () => setShowPassword((prev) => !prev);
 
   const logout = async (): Promise<void> => {
+    useCart.getState().setItems([]); // Limpiar carrito local
     clearUser();
     await logoutUser(); // Elimina la cookie y hace redirect en el servidor
   };
