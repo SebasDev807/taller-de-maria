@@ -19,7 +19,7 @@ export const TopNavBar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -70,7 +70,7 @@ export const TopNavBar = () => {
                   </Link>
                   <Link href="/profile/prayers" className="px-4 py-3 hover:bg-surface-variant text-on-surface transition-colors font-label-md flex items-center gap-3">
                     <span className="material-symbols-outlined text-[20px]">menu_book</span>
-                    Mis oraciones
+                    Mis lecturas
                   </Link>
                   <Link href="/profile/orders" className="px-4 py-3 hover:bg-surface-variant text-on-surface transition-colors font-label-md flex items-center gap-3">
                     <span className="material-symbols-outlined text-[20px]">receipt_long</span>
