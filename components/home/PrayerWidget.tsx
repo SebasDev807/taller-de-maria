@@ -1,6 +1,7 @@
 import { getPrayer } from "@/actions/prayer.actions";
-import { ActionButton } from "./ActionButton";
+import { checkReadingSaved } from "@/actions/savedReadings.actions";
 import { ExpandableText } from "./ExpandableText";
+import { SaveReadingButton } from "./SaveReadingButton";
 
 /**
  * Componente que muestra la oración diaria.
@@ -18,6 +19,8 @@ export const PrayerWidget = async () => {
     prayer?.text ||
     "La oración del día no se encuentra disponible. Por favor, regresa más tarde.";
   const displayReference = prayer?.reference;
+
+  const isSaved = prayer?.text ? await checkReadingSaved(prayer.text, "prayer") : false;
 
   return (
     <article className="col-span-1 lg:col-span-5 bg-surface-container-low rounded-xl p-lg flex flex-col justify-between min-h-[400px] border border-surface-container-highest relative overflow-hidden self-start">
@@ -46,9 +49,16 @@ export const PrayerWidget = async () => {
             collapseLabel="Mostrar menos"
             textClassName="font-headline-md text-headline-md text-primary italic leading-relaxed mb-8 whitespace-pre-wrap w-full"
           />
-          <ActionButton variant="secondary" className="w-auto px-6" icon="favorite">
-            Guardar Oración
-          </ActionButton>
+          {prayer?.text && (
+            <SaveReadingButton
+              title={displayTitle}
+              text={prayer.text}
+              reference={displayReference}
+              type="prayer"
+              initialIsSaved={isSaved}
+              className="w-auto px-6"
+            />
+          )}
         </div>
       </div>
 

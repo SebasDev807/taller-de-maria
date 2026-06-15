@@ -1,4 +1,5 @@
 import { getGospel } from "@/actions/gospel.actions";
+import { checkReadingSaved } from "@/actions/savedReadings.actions";
 import { GospelClientContent } from "./GospelClientContent";
 
 /**
@@ -15,6 +16,8 @@ export const GospelWidget = async () => {
   const displayText = dbGospel?.text || "La reflexión del evangelio para el día de hoy no se encuentra disponible. Por favor, regresa más tarde.";
   const displayReference = dbGospel?.reference;
 
+  const isSaved = await checkReadingSaved(displayText, "gospel");
+
   return (
     <article className="col-span-1 lg:col-span-7 bg-[#FFFFFF] rounded-xl p-lg shadow-[0_20px_40px_rgba(0,0,0,0.04)] relative overflow-hidden flex flex-col justify-center min-h-100 self-start">
       <div className="relative z-10 flex flex-col h-full">
@@ -23,7 +26,7 @@ export const GospelWidget = async () => {
           <span className="font-label-md text-label-md uppercase tracking-wider">Evangelio del Día</span>
         </div>
         
-        <GospelClientContent title={displayTitle} text={displayText} reference={displayReference} />
+        <GospelClientContent title={displayTitle} text={displayText} reference={displayReference} initialIsSaved={isSaved} />
 
       </div>
       <div className="absolute -bottom-20 -right-20 opacity-5 pointer-events-none">

@@ -1,7 +1,7 @@
 "use client";
 
-import { ActionButton } from "./ActionButton";
 import { ExpandableText } from "./ExpandableText";
+import { SaveReadingButton } from "./SaveReadingButton";
 
 /**
  * Propiedades para el componente GospelClientContent.
@@ -13,6 +13,8 @@ interface GospelClientContentProps {
   text: string;
   /** Referencia bíblica opcional del evangelio. */
   reference?: string;
+  /** Si el evangelio está guardado por el usuario actual. */
+  initialIsSaved: boolean;
 }
 
 /**
@@ -22,7 +24,7 @@ interface GospelClientContentProps {
  * @param props Las propiedades del componente.
  * @returns El contenido renderizado del evangelio.
  */
-export const GospelClientContent = ({ title, text, reference }: GospelClientContentProps) => {
+export const GospelClientContent = ({ title, text, reference, initialIsSaved }: GospelClientContentProps) => {
   return (
     <>
       <h2 className="uppercase font-headline-lg text-headline-lg md:font-headline-lg-mobile md:text-headline-lg-mobile text-primary mb-2 before:content-['\22'] after:content-['\22']">
@@ -40,9 +42,14 @@ export const GospelClientContent = ({ title, text, reference }: GospelClientCont
           expandLabel="Mostrar más"
           collapseLabel="Mostrar menos"
         />
-        <ActionButton variant="secondary" className="w-auto px-6" icon="favorite">
-          Guardar Evangelio
-        </ActionButton>
+        <SaveReadingButton
+          title={title}
+          text={text}
+          reference={reference}
+          type="gospel"
+          initialIsSaved={initialIsSaved}
+          className="w-auto px-6"
+        />
       </div>
     </>
   );
