@@ -68,7 +68,7 @@ export const TopNavBar = () => {
                     <span className="material-symbols-outlined text-[20px]">settings</span>
                     Configuración
                   </Link>
-                  <Link href="/profile/prayers" className="px-4 py-3 hover:bg-surface-variant text-on-surface transition-colors font-label-md flex items-center gap-3">
+                  <Link href="/profile/readings" className="px-4 py-3 hover:bg-surface-variant text-on-surface transition-colors font-label-md flex items-center gap-3">
                     <span className="material-symbols-outlined text-[20px]">menu_book</span>
                     Mis lecturas
                   </Link>

@@ -7,6 +7,11 @@ if (process.env.NODE_ENV === "development" && models.SavedReading) {
 
 const SavedReadingSchema = new Schema<ISavedReading>(
   {
+    slug: {
+      type: String,
+      required: [true, "El slug es obligatorio"],
+      trim: true,
+    },
     title: {
       type: String,
       trim: true,

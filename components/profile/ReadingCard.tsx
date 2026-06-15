@@ -1,8 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 import { mergeClassNames } from '@/helpers';
 
 interface ReadingCardProps {
   id: string;
+  slug?: string;
   type: "prayer" | "gospel";
   title?: string;
   text: string;
@@ -14,6 +16,7 @@ interface ReadingCardProps {
 
 export const ReadingCard: React.FC<ReadingCardProps> = ({
   id,
+  slug,
   type,
   title,
   text,
@@ -31,7 +34,7 @@ export const ReadingCard: React.FC<ReadingCardProps> = ({
   return (
     <article
       className={mergeClassNames(
-        "content-item bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between transition-all duration-300 hover:translate-y-[-4px]",
+        "content-item bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between h-full transition-all duration-300 hover:translate-y-[-4px]",
         type,
         isRemoving ? "opacity-0 scale-90 pointer-events-none" : ""
       )}
@@ -45,9 +48,17 @@ export const ReadingCard: React.FC<ReadingCardProps> = ({
         </div>
         
         {/* Usamos el título si está, de lo contrario la referencia, y si no, un texto genérico */}
-        <h3 className="font-headline-md text-headline-md text-primary mb-sm">
-          {title || reference || (type === 'gospel' ? 'Evangelio' : 'Oración')}
-        </h3>
+        {slug ? (
+          <Link href={`/profile/readings/${slug}`} className="hover:text-secondary transition-colors">
+            <h3 className="font-headline-md text-headline-md text-primary mb-sm hover:text-secondary transition-colors">
+              {title || reference || (type === 'gospel' ? 'Evangelio' : 'Oración')}
+            </h3>
+          </Link>
+        ) : (
+          <h3 className="font-headline-md text-headline-md text-primary mb-sm">
+            {title || reference || (type === 'gospel' ? 'Evangelio' : 'Oración')}
+          </h3>
+        )}
         
         <p className={mergeClassNames(
           "font-body-md text-body-md text-on-surface-variant line-clamp-6",

@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 interface Reading {
   _id: string;
+  slug?: string;
   type: "prayer" | "gospel";
   title?: string;
   text: string;
@@ -92,6 +93,7 @@ export const ProfilePrayersClient: React.FC<ProfilePrayersClientProps> = ({ init
             <ReadingCard 
               key={reading._id}
               id={reading._id}
+              slug={reading.slug}
               type={reading.type}
               title={reading.title}
               text={reading.text}

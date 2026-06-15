@@ -5,6 +5,7 @@ import { SavedReading } from "@/models";
 import { getSession } from "@/lib/session";
 import type { ActionResult } from "./types/shared.types";
 import { revalidatePath } from "next/cache";
+import { generateSlug } from "@/helpers/generate-slug";
 
 export interface SaveReadingInput {
   title?: string;
@@ -39,8 +40,12 @@ export async function saveReading(
       return { success: true, data: { isSaved: true } };
     }
 
+    const baseText = data.title || data.reference || (data.type === 'gospel' ? 'Evangelio' : 'Oracion');
+    const slug = generateSlug(baseText);
+
     await SavedReading.create({
       userId: session.userId,
+      slug,
       title: data.title,
       text: data.text,
       reference: data.reference,
@@ -140,6 +145,43 @@ export async function getSavedReadings(): Promise<ActionResult<any[]>> {
     return { success: true, data: serializedReadings };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error al obtener lecturas.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Obtiene una lectura guardada por su slug y valida que pertenezca al usuario actual.
+ */
+export async function getReadingBySlug(slug: string): Promise<ActionResult<any>> {
+  try {
+    const session = await getSession();
+
+    if (!session?.userId) {
+      return { success: false, error: "Debes iniciar sesión." };
+    }
+
+    await dbConnect();
+
+    const reading = await SavedReading.findOne({
+      userId: session.userId,
+      slug,
+    }).lean();
+
+    if (!reading) {
+      return { success: false, error: "Lectura no encontrada." };
+    }
+
+    const serializedReading = {
+      ...reading,
+      _id: (reading as any)._id.toString(),
+      userId: (reading as any).userId.toString(),
+      createdAt: (reading as any).createdAt?.toISOString(),
+      updatedAt: (reading as any).updatedAt?.toISOString(),
+    };
+
+    return { success: true, data: serializedReading };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error al obtener la lectura.";
     return { success: false, error: message };
   }
 }
