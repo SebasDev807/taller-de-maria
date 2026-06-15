@@ -142,12 +142,12 @@ export async function toggleUserStatus(userId: string): Promise<ActionResult<{ i
       return { success: false, error: "Usuario no encontrado." };
     }
 
-    user.isActive = !user.isActive;
-    await user.save();
+    const newStatus = !user.isActive;
+    await User.updateOne({ _id: userId }, { $set: { isActive: newStatus } });
     
     revalidatePath("/admin/users");
 
-    return { success: true, data: { isActive: user.isActive } };
+    return { success: true, data: { isActive: newStatus } };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error al actualizar estado.";
     return { success: false, error: message };
@@ -166,12 +166,12 @@ export async function toggleUserRole(userId: string): Promise<ActionResult<{ rol
       return { success: false, error: "Usuario no encontrado." };
     }
 
-    user.role = user.role === UserRole.Admin ? UserRole.User : UserRole.Admin;
-    await user.save();
+    const newRole = user.role === UserRole.Admin ? UserRole.User : UserRole.Admin;
+    await User.updateOne({ _id: userId }, { $set: { role: newRole } });
 
     revalidatePath("/admin/users");
 
-    return { success: true, data: { role: user.role } };
+    return { success: true, data: { role: newRole } };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error al actualizar rol.";
     return { success: false, error: message };
