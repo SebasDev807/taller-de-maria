@@ -108,3 +108,38 @@ export async function checkReadingSaved(text: string, type: "prayer" | "gospel")
     return false;
   }
 }
+
+/**
+ * Obtiene todas las lecturas guardadas por el usuario actual.
+ */
+export async function getSavedReadings(): Promise<ActionResult<any[]>> {
+  try {
+    const session = await getSession();
+
+    if (!session?.userId) {
+      return { success: false, error: "Debes iniciar sesión para ver tus lecturas." };
+    }
+
+    await dbConnect();
+
+    const readings = await SavedReading.find({
+      userId: session.userId,
+    })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    // Convert _id and userId to string if needed to pass to Client Components
+    const serializedReadings = readings.map((r: any) => ({
+      ...r,
+      _id: r._id.toString(),
+      userId: r.userId.toString(),
+      createdAt: r.createdAt?.toISOString(),
+      updatedAt: r.updatedAt?.toISOString(),
+    }));
+
+    return { success: true, data: serializedReadings };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error al obtener lecturas.";
+    return { success: false, error: message };
+  }
+}
