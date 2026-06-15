@@ -5,6 +5,7 @@ import { User } from "@/models";
 import { UserRole } from "@/models/user/user.interface";
 import { mockUsers } from "@/models/user/user.seed";
 import { hashPassword } from "@/helpers";
+import { revalidatePath } from "next/cache";
 import type { ActionResult, CreateUserInput } from "./types";
 
 // ---------------------------------------------------------------------------
@@ -86,6 +87,93 @@ export async function seedUsers(): Promise<
     return { success: true, data: { inserted, skipped } };
   } catch (err) {
     const message = err instanceof Error ? err.message : "Error inesperado.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Obtiene todos los usuarios ordenados por fecha de creación descendente.
+ * Retorna objetos planos de JavaScript seguros para Client Components.
+ */
+export async function getUsers(): Promise<
+  ActionResult<
+    Array<{
+      id: string;
+      name: string;
+      email: string;
+      role: UserRole;
+      isActive: boolean;
+      phoneNumber?: string;
+      createdAt: string;
+    }>
+  >
+> {
+  try {
+    await dbConnect();
+    const users = await User.find().sort({ createdAt: -1 }).lean();
+
+    const plainUsers = users.map((u: any) => ({
+      id: u._id.toString(),
+      name: u.name,
+      email: u.email,
+      role: u.role as UserRole,
+      isActive: u.isActive ?? false,
+      phoneNumber: u.phoneNumber,
+      createdAt: u.createdAt ? new Date(u.createdAt).toISOString() : new Date().toISOString(),
+    }));
+
+    return { success: true, data: plainUsers };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error al obtener usuarios.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Alterna el estado (isActive) de un usuario.
+ * Simula un "soft delete" si se desactiva.
+ */
+export async function toggleUserStatus(userId: string): Promise<ActionResult<{ isActive: boolean }>> {
+  try {
+    await dbConnect();
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return { success: false, error: "Usuario no encontrado." };
+    }
+
+    user.isActive = !user.isActive;
+    await user.save();
+    
+    revalidatePath("/admin/users");
+
+    return { success: true, data: { isActive: user.isActive } };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error al actualizar estado.";
+    return { success: false, error: message };
+  }
+}
+
+/**
+ * Alterna el rol de un usuario entre admin y user.
+ */
+export async function toggleUserRole(userId: string): Promise<ActionResult<{ role: UserRole }>> {
+  try {
+    await dbConnect();
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return { success: false, error: "Usuario no encontrado." };
+    }
+
+    user.role = user.role === UserRole.Admin ? UserRole.User : UserRole.Admin;
+    await user.save();
+
+    revalidatePath("/admin/users");
+
+    return { success: true, data: { role: user.role } };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error al actualizar rol.";
     return { success: false, error: message };
   }
 }
