@@ -42,12 +42,12 @@ export async function syncCart(localItems: CartItem[]): Promise<CartItem[]> {
   // Fusionar carritos (se suman cantidades)
   for (const localItem of localItems) {
     const existingItemIndex = cart.items.findIndex(
-      (item: any) => item.product.toString() === localItem.id
+      (item: any) => item.product.toString() === localItem.id.toString()
     );
     if (existingItemIndex >= 0) {
       cart.items[existingItemIndex].quantity += localItem.quantity;
     } else {
-      cart.items.push({ product: localItem.id, quantity: localItem.quantity });
+      cart.items.push({ product: localItem.id.toString(), quantity: localItem.quantity });
     }
   }
 
