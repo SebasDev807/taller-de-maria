@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import type { SessionUser } from "@/actions/types";
 
 // ---------------------------------------------------------------------------
@@ -18,10 +19,17 @@ interface AuthState {
 // Store
 // ---------------------------------------------------------------------------
 
-export const useAuthStore = create<AuthState>()((set) => ({
-  user: null,
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
 
-  setUser: (user) => set({ user }),
+      setUser: (user) => set({ user }),
 
-  clearUser: () => set({ user: null }),
-}));
+      clearUser: () => set({ user: null }),
+    }),
+    {
+      name: "auth-storage",
+    }
+  )
+);

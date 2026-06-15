@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SearchInput } from "../shared/SearchInput";
 import { useCart } from "@/store/shopping-cart";
 import { useAuthStore } from "@/store/auth";
+import { useLogin } from "@/hooks";
 import { usePathname } from "next/navigation";
 import { mergeClassNames } from "@/helpers";
 
@@ -25,6 +26,7 @@ export const TopNavBar = () => {
 
   const totalCartItems = useCart((state) => state.totalItems());
   const user = useAuthStore((state) => state.user);
+  const { logout } = useLogin();
 
   return (
     <>
@@ -55,9 +57,16 @@ export const TopNavBar = () => {
               <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">login</span>
             </Link>
           ) : (
-            <button title="Mi Perfil" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
-              <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">person</span>
-            </button>
+            mounted && user && (
+              <>
+                <button title="Mi Perfil" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
+                  <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">person</span>
+                </button>
+                <button title="Cerrar Sesión" onClick={() => logout()} className="p-2 hover:bg-error-container text-error rounded-full transition-colors group hidden md:block">
+                  <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">logout</span>
+                </button>
+              </>
+            )
           )}
           <button title="Notificaciones" className="p-2 hover:bg-surface-variant rounded-full transition-colors group hidden md:block">
             <span className="material-symbols-outlined group-hover:scale-95 duration-200 ease-in-out">notifications</span>
@@ -128,10 +137,18 @@ export const TopNavBar = () => {
               <span className="font-label-md text-label-lg">Iniciar Sesión</span>
             </Link>
           ) : (
-            <button title="Mi Perfil" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
-              <span className="material-symbols-outlined">person</span>
-              <span className="font-label-md text-label-lg">Mi Perfil</span>
-            </button>
+            mounted && user && (
+              <>
+                <button title="Mi Perfil" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
+                  <span className="material-symbols-outlined">person</span>
+                  <span className="font-label-md text-label-lg">Mi Perfil</span>
+                </button>
+                <button title="Cerrar Sesión" onClick={() => { logout(); setIsMenuOpen(false); }} className="flex items-center gap-3 text-error hover:text-error-container transition-colors text-left">
+                  <span className="material-symbols-outlined">logout</span>
+                  <span className="font-label-md text-label-lg">Cerrar Sesión</span>
+                </button>
+              </>
+            )
           )}
           <button title="Notificaciones" className="flex items-center gap-3 text-on-surface hover:text-primary transition-colors text-left" onClick={() => setIsMenuOpen(false)}>
             <span className="material-symbols-outlined">notifications</span>
