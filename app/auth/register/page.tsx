@@ -1,13 +1,12 @@
-import { LoginForm } from "@/components";
+import { RegisterForm } from "@/components";
 import Link from "next/link";
 
-
-export default function AdminLoginPage() {
+export default function RegisterPage() {
 
   return (
     <main className="fade-in min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop">
       {/* Card */}
-      <div className="login-card w-full max-w-[440px] bg-surface-container-lowest rounded-xl p-md md:p-lg flex flex-col gap-lg border border-surface-container-high">
+      <div className="login-card w-full max-w-[440px] bg-surface-container-lowest rounded-xl p-md md:p-lg flex flex-col gap-lg border border-surface-container-high my-8">
 
         {/* ── Header ── */}
         <div className="text-center flex flex-col items-center gap-sm">
@@ -21,31 +20,31 @@ export default function AdminLoginPage() {
             Taller De Maria
           </h1>
           <p className="font-body-md text-body-md text-on-surface-variant">
-            Inicia Sesión
+            Crear Cuenta
           </p>
         </div>
-        {/* --- login form --*/}
+        {/* --- register form --*/}
 
-        <LoginForm />
+        <RegisterForm />
 
         {/* ── Footer ── */}
-        <div className="text-center flex flex-col items-center gap-sm">
+        <div className="text-center flex flex-col items-center gap-sm mt-4">
           <Link
-            href="/auth/register"
-            className="font-label-sm text-label-sm text-secondary hover:underline underline-offset-4 transition-all"
+            href="/auth/login"
+            className="font-label-sm text-label-sm text-secondary hover:underline underline-offset-4 transition-all flex items-center gap-1"
           >
-            ¿No tienes una cuenta? Crea una
+            ¿Ya tienes una cuenta? Inicia sesión
           </Link>
           <Link
             href="/"
-            className="font-label-sm text-label-sm text-secondary hover:underline underline-offset-4 transition-all flex items-center gap-1"
+            className="font-label-sm text-label-sm text-secondary hover:underline underline-offset-4 transition-all flex items-center gap-1 mt-2"
           >
             <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>
               arrow_back
             </span>
             Volver a la tienda
           </Link>
-          <p className="font-label-sm text-label-sm text-outline">
+          <p className="font-label-sm text-label-sm text-outline mt-2">
             © {new Date().getFullYear()} Taller De Maria. Todos los derechos reservados.
           </p>
         </div>

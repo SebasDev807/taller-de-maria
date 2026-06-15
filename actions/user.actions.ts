@@ -33,6 +33,7 @@ export async function createUser(
       email: input.email.toLowerCase().trim(),
       password: hashedPassword,
       role: input.role ?? UserRole.User,
+      phoneNumber: input.phoneNumber?.trim(),
     });
 
     return {

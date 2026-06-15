@@ -154,7 +154,7 @@ export const LoginForm = () => {
                         id="toggle-password-visibility"
                         aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                         onClick={togglePassword}
-                        className="absolute right-0 bottom-2.5 text-outline hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-secondary focus-visible:rounded"
+                        className="absolute right-0 bottom-2.5 text-outline hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-secondary focus-visible:rounded cursor-pointer"
                     >
                         <span
                             className="material-symbols-outlined"

@@ -15,10 +15,18 @@ const UserSchema = new Schema<IUser>(
       lowercase: true,
       trim: true,
     },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
     password: {
       type: String,
       required: [true, "La contraseña es obligatoria"],
       minlength: [6, "La contraseña debe tener al menos 6 caracteres"],
+    },
+    phoneNumber: {
+      type: String,
+      trim: true,
     },
     role: {
       type: String,

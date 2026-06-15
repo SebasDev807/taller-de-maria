@@ -10,7 +10,9 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
+  isActive?: boolean;
   role: UserRole;
+  phoneNumber?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
