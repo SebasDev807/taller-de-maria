@@ -124,29 +124,33 @@ export const UserRow: React.FC<UserRowProps> = ({ user }) => {
             title={`Cambiar a ${
               user.role === UserRole.Admin ? "Usuario" : "Admin"
             }`}
-            className="text-outline hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant disabled:opacity-50"
+            className="flex items-center justify-center w-36 gap-1 text-sm border border-outline hover:border-primary text-outline hover:text-primary transition-colors px-3 py-1.5 rounded-full hover:bg-surface-variant disabled:opacity-50 cursor-pointer"
           >
             <span
-              className="material-symbols-outlined"
+              className="material-symbols-outlined text-[18px]"
               style={{ fontVariationSettings: "'FILL' 0" }}
             >
               manage_accounts
             </span>
+            <span>{user.role === UserRole.Admin ? "Quitar Admin" : "Hacer Admin"}</span>
           </button>
           <button
             onClick={handleToggleStatus}
             disabled={isPendingStatus}
             title={user.isActive ? "Desactivar" : "Activar"}
-            className={`${
-              user.isActive ? "text-error" : "text-primary"
-            } hover:bg-surface-variant transition-colors p-2 rounded-full disabled:opacity-50`}
+            className={`flex items-center justify-center w-36 gap-1 text-sm border px-3 py-1.5 rounded-full transition-colors disabled:opacity-50 cursor-pointer ${
+              user.isActive
+                ? "border-error/50 text-error hover:bg-error hover:text-on-error"
+                : "border-primary/50 text-primary hover:bg-primary hover:text-on-primary"
+            }`}
           >
             <span
-              className="material-symbols-outlined"
+              className="material-symbols-outlined text-[18px]"
               style={{ fontVariationSettings: "'FILL' 0" }}
             >
               {user.isActive ? "person_off" : "person"}
             </span>
+            <span>{user.isActive ? "Desactivar" : "Activar"}</span>
           </button>
         </div>
       </td>
