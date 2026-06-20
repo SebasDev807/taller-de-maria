@@ -28,11 +28,11 @@ export const ShoppingCart = () => {
             const result = await createOrder(currentItems, currentSubtotal);
             if (result.success) {
                 // Generar mensaje para WhatsApp
-                let message = "¡Hola! Quisiera realizar el siguiente pedido:\n\n🛍️ *Productos:*\n";
+                let message = "¡Hola! Quisiera realizar el siguiente pedido:\n\n📦 *Productos:*\n";
                 currentItems.forEach(item => {
                     message += `- ${item.name} (x${item.quantity})\n`;
                 });
-                message += `\n💰 *Total:* ${formatCurrency(currentSubtotal)}\n\n¡Muchas gracias!`;
+                message += `\n💵 *Total:* ${formatCurrency(currentSubtotal)}\n\n¡Muchas gracias!`;
 
                 const encodedMessage = encodeURIComponent(message);
                 const waUrl = `https://wa.me/573126386364?text=${encodedMessage}`;
