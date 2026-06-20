@@ -3,4 +3,6 @@ export * from "./merge-class-names";
 export * from "./password";
 export * from "./gospel-resolver";
 export * from "./prayer-resolver";
-export * from "./generate-slug";export * from "./generate-sku";
+export * from "./generate-slug";
+export * from "./generate-sku";
+export * from "./about-resolver";

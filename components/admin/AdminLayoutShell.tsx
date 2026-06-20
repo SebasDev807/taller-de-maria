@@ -46,7 +46,7 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
     { name: "Inventario", href: "/admin/inventory", icon: "inventory_2" },
     { name: "Pedidos", href: "/admin/orders", icon: "receipt_long" },
     { name: "Usuarios", href: "/admin/users", icon: "group" },
-    { name: "Ajustes", href: "#", icon: "settings" },
+    { name: "Ajustes", href: "/admin/settings/about", icon: "settings" },
   ];
 
   const handleToggleSidebar = () => {

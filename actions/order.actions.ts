@@ -1,7 +1,7 @@
 "use server";
 
 import dbConnect from "@/lib/mongodb";
-import { Order } from "@/models";
+import { Order, Product } from "@/models";
 import { getSession } from "@/lib/session";
 import { CartItem } from "@/store/shopping-cart";
 import { OrderStatus } from "@/models/order/order.interface";
@@ -60,7 +60,30 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   if (!session) throw new Error("No autorizado");
 
   await dbConnect();
-  await Order.findByIdAndUpdate(orderId, { status });
+  const order = await Order.findById(orderId);
+  if (!order) throw new Error("Pedido no encontrado");
+
+  // Restar stock al completar el pedido
+  if (status === "completed" && order.status !== "completed") {
+    for (const item of order.items) {
+      await Product.findByIdAndUpdate(item.product, {
+        $inc: { stock: -item.quantity }
+      });
+    }
+  }
+
+  // Devolver stock si se cancela o se quita el estado completado
+  if (order.status === "completed" && status !== "completed") {
+    for (const item of order.items) {
+      await Product.findByIdAndUpdate(item.product, {
+        $inc: { stock: item.quantity }
+      });
+    }
+  }
+
+  order.status = status;
+  await order.save();
+
   return { success: true };
 }
 
@@ -69,6 +92,18 @@ export async function deleteOrder(orderId: string) {
   if (!session) throw new Error("No autorizado");
 
   await dbConnect();
+  const order = await Order.findById(orderId);
+  if (!order) throw new Error("Pedido no encontrado");
+
+  // Devolver stock si estaba completado y se elimina
+  if (order.status === "completed") {
+    for (const item of order.items) {
+      await Product.findByIdAndUpdate(item.product, {
+        $inc: { stock: item.quantity }
+      });
+    }
+  }
+
   await Order.findByIdAndDelete(orderId);
   return { success: true };
 }

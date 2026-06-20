@@ -4,3 +4,4 @@ export type { PrayerData, PrayerHistoryData } from "./prayer.types";
 export type { CreateUserInput } from "./user.types";
 export type { SessionUser, AuthActionResult, RegisterActionResult } from "./auth.types";
 export type { CategoryData } from "./category.types";
+export type { AboutData } from "./about.types";

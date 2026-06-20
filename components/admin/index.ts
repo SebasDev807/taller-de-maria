@@ -8,3 +8,4 @@ export * from "./DailyReflectionWidget";
 export * from "./RecentProductsWidget";
 export * from "./StockAlertsWidget";
 export * from "./inventory";
+export * from "./AboutForm";

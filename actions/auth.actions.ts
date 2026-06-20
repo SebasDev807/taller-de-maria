@@ -41,7 +41,7 @@ async function sendVerificationEmail(params: {
   const verificationUrl = `${env.NEXT_PUBLIC_APP_URL}/api/auth/verify?token=${params.token}`;
 
   const { error } = await resend.emails.send({
-    from: "Taller de María <onboarding@resend.dev>",
+    from: "Taller de María <hola@tallerdemaria.com>",
     to: params.email,
     subject: "Confirma tu cuenta — Taller de María",
     html: buildVerificationEmail({ name: params.name, verificationUrl }),
