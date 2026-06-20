@@ -38,6 +38,7 @@ export const AddToCartButton = ({ variant = "icon", product, quantity = 1 }: Add
         quantity: quantity,
         image: product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls[0] : "",
         alt: product.name,
+        stock: product.stock,
       });
     }
 

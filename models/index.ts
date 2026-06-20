@@ -6,3 +6,4 @@ export { default as Product } from "./product/product.model";
 export { Cart } from "./cart";
 export { default as SavedReading } from "./savedReading/savedReading.model";
 export { default as VerificationToken } from "./verificationToken/verificationToken.model";
+export { default as Order } from "./order/order.model";

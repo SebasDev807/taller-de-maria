@@ -1,4 +1,5 @@
 export * from "./AdminLayoutShell";
+export * from "./OrdersTable";
 export * from "./AdminPageHeader";
 export * from "./DashboardHeader";
 export * from "./AdminHistoryPopover";

@@ -24,7 +24,8 @@ export async function getCart(): Promise<CartItem[]> {
     price: item.product.price,
     quantity: item.quantity,
     image: item.product.imageUrls?.[0] || "",
-    alt: item.product.name
+    alt: item.product.name,
+    stock: item.product.stock || 0
   }));
 }
 
@@ -109,5 +110,17 @@ export async function removeFromCart(productId: string): Promise<void> {
   cart.items = cart.items.filter(
     (item: any) => item.product.toString() !== productId
   );
+  await cart.save();
+}
+
+export async function clearCart(): Promise<void> {
+  const session = await getSession();
+  if (!session) return;
+
+  await dbConnect();
+  const cart = await Cart.findOne({ user: session.userId });
+  if (!cart) return;
+
+  cart.items = [];
   await cart.save();
 }

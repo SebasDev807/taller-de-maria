@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useAuthStore } from "@/store/auth";
-import { addToCart, updateCartItem, removeFromCart } from "@/actions/cart.actions";
+import { addToCart, updateCartItem, removeFromCart, clearCart } from "@/actions/cart.actions";
 
 export type CartItem = {
   id: string | number;
@@ -11,6 +11,7 @@ export type CartItem = {
   quantity: number;
   image: string;
   alt: string;
+  stock: number;
 };
 
 interface CartState {
@@ -21,6 +22,7 @@ interface CartState {
   totalItems: () => number;
   subtotal: () => number;
   setItems: (items: CartItem[]) => void;
+  clearCart: () => void;
 }
 
 const initialCartItems: CartItem[] = [];
@@ -37,14 +39,17 @@ export const useCart = create<CartState>()(
           const existing = state.items.find(item => item.id === newItem.id);
           if (existing) {
             return {
-              items: state.items.map(item =>
-                item.id === newItem.id
-                  ? { ...item, quantity: item.quantity + newItem.quantity }
-                  : item
-              )
+              items: state.items.map(item => {
+                if (item.id === newItem.id) {
+                  const newQuantity = Math.min(item.quantity + newItem.quantity, item.stock);
+                  return { ...item, quantity: newQuantity };
+                }
+                return item;
+              })
             };
           }
-          return { items: [...state.items, newItem] };
+          const initialQuantity = Math.min(newItem.quantity, newItem.stock);
+          return { items: [...state.items, { ...newItem, quantity: initialQuantity }] };
         });
         
         if (useAuthStore.getState().user) {
@@ -57,7 +62,8 @@ export const useCart = create<CartState>()(
           items: state.items
             .map((item) => {
               if (item.id === id) {
-                return { ...item, quantity: item.quantity + delta };
+                const newQuantity = Math.min(item.quantity + delta, item.stock);
+                return { ...item, quantity: newQuantity };
               }
               return item;
             })
@@ -76,6 +82,13 @@ export const useCart = create<CartState>()(
 
         if (useAuthStore.getState().user) {
           removeFromCart(id.toString()).catch(console.error);
+        }
+      },
+
+      clearCart: () => {
+        set({ items: [] });
+        if (useAuthStore.getState().user) {
+          clearCart().catch(console.error);
         }
       },
 

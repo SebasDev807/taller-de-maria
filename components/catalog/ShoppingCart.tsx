@@ -4,11 +4,13 @@ import { useCart } from "@/store";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { formatCurrency } from "@/helpers";
+import { createOrder } from "@/actions/order.actions";
 
 export const ShoppingCart = () => {
 
     const [mounted, setMounted] = useState(false);
-    const { items, updateQuantity, removeItem, totalItems, subtotal } = useCart();
+    const [isOrdering, setIsOrdering] = useState(false);
+    const { items, updateQuantity, removeItem, totalItems, subtotal, clearCart } = useCart();
 
     useEffect(() => {
         setMounted(true);
@@ -17,6 +19,34 @@ export const ShoppingCart = () => {
     const currentTotalItems = mounted ? totalItems() : 0;
     const currentSubtotal = mounted ? subtotal() : 0;
     const currentItems = mounted ? items : [];
+
+    const handleCheckout = async () => {
+        if (currentItems.length === 0) return;
+        setIsOrdering(true);
+
+        try {
+            const result = await createOrder(currentItems, currentSubtotal);
+            if (result.success) {
+                // Generar mensaje para WhatsApp
+                let message = "¡Hola! Quisiera realizar el siguiente pedido:\n\n🛍️ *Productos:*\n";
+                currentItems.forEach(item => {
+                    message += `- ${item.name} (x${item.quantity})\n`;
+                });
+                message += `\n💰 *Total:* ${formatCurrency(currentSubtotal)}\n\n¡Muchas gracias!`;
+
+                const encodedMessage = encodeURIComponent(message);
+                const waUrl = `https://wa.me/573126386364?text=${encodedMessage}`;
+
+                clearCart();
+                window.open(waUrl, '_blank');
+            }
+        } catch (error) {
+            console.error("Error creating order:", error);
+            alert("Hubo un error al procesar tu pedido. Por favor, intenta de nuevo o inicia sesión.");
+        } finally {
+            setIsOrdering(false);
+        }
+    };
 
 
     return (
@@ -64,7 +94,8 @@ export const ShoppingCart = () => {
                                         <span className="font-label-md text-label-md px-sm text-primary">{item.quantity}</span>
                                         <button
                                             onClick={() => updateQuantity(item.id, 1)}
-                                            className="px-sm py-xs text-on-surface hover:bg-surface-container transition-colors cursor-pointer"
+                                            disabled={item.quantity >= item.stock}
+                                            className={`px-sm py-xs transition-colors cursor-pointer ${item.quantity >= item.stock ? "text-outline-variant cursor-not-allowed" : "text-on-surface hover:bg-surface-container"}`}
                                         >
                                             <span className="material-symbols-outlined text-[18px]">add</span>
                                         </button>
@@ -108,11 +139,14 @@ export const ShoppingCart = () => {
                     </div>
                     {/* Checkout Button */}
                     <button
+                        onClick={handleCheckout}
                         className="w-full bg-secondary-container hover:bg-secondary-fixed-dim text-on-secondary-container font-label-md text-label-md py-sm px-md rounded flex items-center justify-center gap-sm hover:scale-[0.98] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed"
-                        disabled={items.length === 0}
+                        disabled={items.length === 0 || isOrdering}
                     >
-                        <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>forum</span>
-                        Finalizar pedido por WhatsApp
+                        <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                            {isOrdering ? "hourglass_empty" : "forum"}
+                        </span>
+                        {isOrdering ? "Procesando..." : "Finalizar pedido por WhatsApp"}
                     </button>
                     <div className="mt-md text-center">
                         <span className="font-label-sm text-label-sm text-outline flex items-center justify-center gap-xs">
