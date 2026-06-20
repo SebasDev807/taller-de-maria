@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { randomUUID } from "crypto";
 import dbConnect from "@/lib/mongodb";
-import { User } from "@/models";
+import { User, VerificationToken } from "@/models";
 import { UserRole } from "@/models/user/user.interface";
 import { comparePassword, hashPassword } from "@/helpers/password";
 import { createSession, deleteSession } from "@/lib/session";
@@ -14,12 +14,49 @@ import type { AuthActionResult, RegisterActionResult, SessionUser } from "./type
 import { env } from "@/config/env";
 
 // ---------------------------------------------------------------------------
+// Helpers internos
+// ---------------------------------------------------------------------------
+
+/** Genera un token de verificación y lo persiste en la colección VerificationToken. */
+async function upsertVerificationToken(userId: string): Promise<string> {
+  const token = randomUUID();
+  const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 horas
+
+  // findOneAndUpdate con upsert: crea si no existe, reemplaza si ya existe (1:1)
+  await VerificationToken.findOneAndUpdate(
+    { userId },
+    { token, expiresAt },
+    { upsert: true, new: true }
+  );
+
+  return token;
+}
+
+/** Construye la URL del email y envía el correo de verificación. */
+async function sendVerificationEmail(params: {
+  name: string;
+  email: string;
+  token: string;
+}): Promise<boolean> {
+  const verificationUrl = `${env.NEXT_PUBLIC_APP_URL}/api/auth/verify?token=${params.token}`;
+
+  const { error } = await resend.emails.send({
+    from: "Taller de María <onboarding@resend.dev>",
+    to: params.email,
+    subject: "Confirma tu cuenta — Taller de María",
+    html: buildVerificationEmail({ name: params.name, verificationUrl }),
+  });
+
+  return !error;
+}
+
+// ---------------------------------------------------------------------------
 // Actions
 // ---------------------------------------------------------------------------
 
 /**
- * Registra un nuevo usuario, genera un token de verificación y envía
- * el email de confirmación con Resend.
+ * Registra un nuevo usuario, genera un token de verificación en su propio
+ * documento (relación 1:1) y envía el email de confirmación con Resend.
  */
 export async function registerUser(
   formData: FormData
@@ -42,45 +79,54 @@ export async function registerUser(
   try {
     await dbConnect();
 
-    // 2. Verificar que el email no esté registrado
+    // 2. Verificar si ya existe un usuario con ese email
     const existing = await User.findOne({ email });
+
     if (existing) {
-      return { success: false, error: "Ya existe una cuenta con ese correo." };
+      // Cuenta ya activa → bloquear
+      if (existing.isActive) {
+        return { success: false, error: "Ya existe una cuenta activa con ese correo." };
+      }
+
+      // Cuenta inactiva (registro previo sin confirmar) → renovar token y reenviar email
+      const token = await upsertVerificationToken(existing._id!.toString());
+      const sent = await sendVerificationEmail({ name: existing.name, email, token });
+
+      if (!sent) {
+        return {
+          success: false,
+          error: "No pudimos enviar el email de verificación. Intenta de nuevo.",
+        };
+      }
+
+      return { success: true, email };
     }
 
-    // 3. Hashear contraseña y generar token de verificación (UUID v4)
-    const [hashedPassword, token] = await Promise.all([
-      hashPassword(password),
-      Promise.resolve(randomUUID()),
-    ]);
+    // 3. Hashear contraseña
+    const hashedPassword = await hashPassword(password);
 
-    const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 horas
-
-    // 4. Crear usuario inactivo en la BD
-    await User.create({
+    // 4. Crear usuario inactivo
+    const user = await User.create({
       name: name.trim(),
       email,
       password: hashedPassword,
       role: UserRole.User,
       phoneNumber: phoneNumber?.trim(),
       isActive: false,
-      verificationToken: token,
-      verificationTokenExpires: tokenExpires,
     });
 
-    // 5. Construir URL y enviar email
-    const verificationUrl = `${env.NEXT_PUBLIC_APP_URL}/api/auth/verify?token=${token}`;
+    // 5. Crear token de verificación en su propio documento (1:1 con User)
+    const token = await upsertVerificationToken(user._id.toString());
 
-    const { error: emailError } = await resend.emails.send({
-      from: "Taller de María <noreply@tallerdmaria.com>",
-      to: email,
-      subject: "Confirma tu cuenta — Taller de María",
-      html: buildVerificationEmail({ name, verificationUrl }),
-    });
+    // 6. Enviar email
+    const sent = await sendVerificationEmail({ name, email, token });
 
-    if (emailError) {
-      // El usuario fue creado pero el email falló: limpiar la BD
-      await User.deleteOne({ email });
+    if (!sent) {
+      // Email falló: limpiar usuario y token
+      await Promise.all([
+        User.deleteOne({ _id: user._id }),
+        VerificationToken.deleteOne({ userId: user._id }),
+      ]);
       return {
         success: false,
         error: "No pudimos enviar el email de verificación. Intenta de nuevo.",
@@ -97,7 +143,6 @@ export async function registerUser(
 /**
  * Verifica credenciales contra la BD y crea una sesión JWT en cookie.
  * Bloquea el acceso si la cuenta aún no ha sido confirmada por email.
- * Retorna los datos del usuario en éxito, o un mensaje de error genérico.
  */
 export async function loginUser(
   formData: FormData
@@ -126,7 +171,7 @@ export async function loginUser(
       return { success: false, error: "Credenciales inválidas" };
     }
 
-    // 4. Comparar password con el hash usando helpers/password.ts
+    // 4. Comparar password con el hash
     const passwordMatch = await comparePassword(password, user.password);
 
     if (!passwordMatch) {
@@ -137,8 +182,7 @@ export async function loginUser(
     if (!user.isActive) {
       return {
         success: false,
-        error:
-          "Tu cuenta aún no ha sido confirmada. Revisa tu correo electrónico.",
+        error: "Tu cuenta aún no ha sido confirmada. Revisa tu correo electrónico.",
       };
     }
 
@@ -165,7 +209,7 @@ export async function loginUser(
 }
 
 /**
- * Elimina la sesión y redirige al login.
+ * Elimina la sesión y redirige al inicio.
  */
 export async function logoutUser(): Promise<void> {
   await deleteSession();
