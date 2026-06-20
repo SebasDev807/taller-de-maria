@@ -1,16 +1,19 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { createUser } from "@/actions/user.actions";
 import { useState } from "react";
+import { registerUser } from "@/actions/auth.actions";
 import { CreateUserInput } from "@/actions/types";
 
 interface UseRegisterReturn {
   /**
-   * Registra un nuevo usuario con los datos del formulario.
-   * Retorna un mensaje de error si falla, o null en éxito.
+   * Registra un nuevo usuario. En éxito devuelve el email al que se envió
+   * la confirmación. En error devuelve el mensaje de error.
    */
   registerUserFn: (data: CreateUserInput) => Promise<string | null>;
+  /** Estado de espera de confirmación (email enviado). */
+  emailSent: boolean;
+  /** Email al que se envió el correo de confirmación. */
+  sentToEmail: string | null;
   showPassword: boolean;
   serverError: string | null;
   togglePassword: () => void;
@@ -18,21 +21,27 @@ interface UseRegisterReturn {
 }
 
 export function useRegister(): UseRegisterReturn {
-  const router = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [emailSent, setEmailSent] = useState(false);
+  const [sentToEmail, setSentToEmail] = useState<string | null>(null);
 
   const registerUserFn = async (data: CreateUserInput): Promise<string | null> => {
-    const result = await createUser(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    if (data.phoneNumber) formData.append("phoneNumber", data.phoneNumber);
+
+    const result = await registerUser(formData);
 
     if (!result.success) {
       return result.error;
     }
 
-    // Redirige al login después del registro exitoso
-    router.push("/auth/login");
-
+    // Éxito: mostrar banner de "revisa tu correo"
+    setSentToEmail(result.email);
+    setEmailSent(true);
     return null;
   };
 
@@ -40,6 +49,8 @@ export function useRegister(): UseRegisterReturn {
 
   return {
     registerUserFn,
+    emailSent,
+    sentToEmail,
     showPassword,
     serverError,
     togglePassword,

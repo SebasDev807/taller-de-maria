@@ -1,8 +1,37 @@
 import { LoginForm } from "@/components";
 import Link from "next/link";
 
+interface LoginPageProps {
+  searchParams: Promise<{ verified?: string }>;
+}
 
-export default function AdminLoginPage() {
+export default async function AdminLoginPage({ searchParams }: LoginPageProps) {
+  const { verified } = await searchParams;
+
+  const banners: Record<string, { icon: string; text: string; style: string }> = {
+    success: {
+      icon: "verified",
+      text: "¡Cuenta confirmada! Ya puedes iniciar sesión.",
+      style: "bg-[#E6F4EA] text-[#1E4D2B] border border-[#A8D5B5]",
+    },
+    expired: {
+      icon: "schedule",
+      text: "El enlace de verificación ha expirado. Regístrate de nuevo.",
+      style: "bg-[#FFF8E1] text-[#6D4C00] border border-[#FFD54F]",
+    },
+    invalid: {
+      icon: "error",
+      text: "El enlace no es válido o ya fue usado.",
+      style: "bg-error-container text-on-error-container border border-error",
+    },
+    error: {
+      icon: "warning",
+      text: "Ocurrió un error al verificar tu cuenta. Intenta de nuevo.",
+      style: "bg-error-container text-on-error-container border border-error",
+    },
+  };
+
+  const banner = verified ? banners[verified] : null;
 
   return (
     <main className="fade-in min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop">
@@ -24,8 +53,24 @@ export default function AdminLoginPage() {
             Inicia Sesión
           </p>
         </div>
-        {/* --- login form --*/}
 
+        {/* ── Banner de verificación ── */}
+        {banner && (
+          <div
+            role="alert"
+            className={`flex items-center gap-2 font-label-sm text-label-sm px-4 py-3 rounded-lg ${banner.style}`}
+          >
+            <span
+              className="material-symbols-outlined shrink-0"
+              style={{ fontSize: "18px", fontVariationSettings: "'FILL' 1" }}
+            >
+              {banner.icon}
+            </span>
+            <span>{banner.text}</span>
+          </div>
+        )}
+
+        {/* --- login form --*/}
         <LoginForm />
 
         {/* ── Footer ── */}

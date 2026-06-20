@@ -18,6 +18,12 @@ const envSchema = z.object({
       error: "NODE_ENV debe ser 'development', 'production' o 'test'",
     })
     .default("development"),
+  RESEND_API_KEY: z
+    .string({ error: "RESEND_API_KEY es requerida" })
+    .min(1, "RESEND_API_KEY no puede estar vacía"),
+  NEXT_PUBLIC_APP_URL: z
+    .string({ error: "NEXT_PUBLIC_APP_URL es requerida" })
+    .url("NEXT_PUBLIC_APP_URL debe ser una URL válida"),
 
   // Cloudinary
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z

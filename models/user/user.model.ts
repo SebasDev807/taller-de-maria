@@ -40,6 +40,16 @@ const UserSchema = new Schema<IUser>(
       type: Number,
       default: 0,
     },
+    /** Token UUID para verificar la cuenta por email. */
+    verificationToken: {
+      type: String,
+      default: null,
+    },
+    /** Fecha de expiración del token (24 horas desde el registro). */
+    verificationTokenExpires: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,

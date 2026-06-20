@@ -12,3 +12,8 @@ export interface SessionUser {
 export type AuthActionResult =
   | { success: true; data: SessionUser }
   | { success: false; error: string };
+
+/** Resultado de la acción de registro con envío de email. */
+export type RegisterActionResult =
+  | { success: true; email: string }
+  | { success: false; error: string };

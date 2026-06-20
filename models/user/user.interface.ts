@@ -14,6 +14,10 @@ export interface IUser {
   role: UserRole;
   phoneNumber?: string;
   totalSpent?: number;
+  /** Token UUID enviado por email para confirmar la cuenta. */
+  verificationToken?: string | null;
+  /** Fecha de expiración del token de verificación (24 horas). */
+  verificationTokenExpires?: Date | null;
   createdAt?: Date;
   updatedAt?: Date;
 }

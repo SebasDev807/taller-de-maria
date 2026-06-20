@@ -15,7 +15,9 @@ export const RegisterForm = () => {
         setServerError,
         serverError,
         showPassword,
-        togglePassword
+        togglePassword,
+        emailSent,
+        sentToEmail,
     } = useRegister();
 
     const {
@@ -40,6 +42,30 @@ export const RegisterForm = () => {
     };
 
     return (
+        <>
+        {/* ── Estado: email enviado ── */}
+        {emailSent ? (
+            <div className="flex flex-col items-center gap-md text-center py-sm">
+                <span
+                    className="material-symbols-outlined text-secondary"
+                    style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1" }}
+                >
+                    mark_email_read
+                </span>
+                <h2 className="font-headline-sm text-headline-sm text-primary">
+                    ¡Revisa tu correo!
+                </h2>
+                <p className="font-body-md text-body-md text-on-surface-variant">
+                    Enviamos un enlace de confirmación a{" "}
+                    <strong className="text-secondary">{sentToEmail}</strong>.
+                    <br />
+                    Haz clic en el enlace para activar tu cuenta.
+                </p>
+                <p className="font-label-sm text-label-sm text-outline mt-sm">
+                    El enlace expira en 24 horas. Revisa también tu carpeta de spam.
+                </p>
+            </div>
+        ) : (
         <form
             className="flex flex-col gap-md"
             onSubmit={handleSubmit(onSubmit)}
@@ -368,5 +394,7 @@ export const RegisterForm = () => {
                 </button>
             </div>
         </form>
+        )}
+        </>
     );
 };
