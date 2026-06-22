@@ -38,7 +38,11 @@ const aboutSchema: Schema<IAbout> = new Schema(
   }
 );
 
-const About: Model<IAbout> =
-  mongoose.models.About || mongoose.model<IAbout>("About", aboutSchema);
+// Borramos el modelo cacheado para evitar errores de Cast en Next.js hot-reload
+if (mongoose.models.About) {
+  delete mongoose.models.About;
+}
+
+const About: Model<IAbout> = mongoose.model<IAbout>("About", aboutSchema);
 
 export default About;
