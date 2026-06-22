@@ -81,15 +81,23 @@ export default async function AboutPage() {
   const values = {
     ...aboutMocks.values,
     items: dbData?.pillars && dbData.pillars.length > 0
-      ? dbData.pillars.map((pillar: string, index: number) => {
-          const hasColon = pillar.includes(":");
-          const title = hasColon ? pillar.split(":")[0].trim() : `Pilar ${index + 1}`;
-          const description = hasColon ? pillar.substring(pillar.indexOf(":") + 1).trim() : pillar;
+      ? dbData.pillars.map((pillar: any, index: number) => {
+          if (typeof pillar === 'string') {
+            const hasColon = pillar.includes(":");
+            const title = hasColon ? pillar.split(":")[0].trim() : `Pilar ${index + 1}`;
+            const description = hasColon ? pillar.substring(pillar.indexOf(":") + 1).trim() : pillar;
+            return {
+              id: index + 1,
+              icon: pillarIcons[index % pillarIcons.length],
+              title,
+              description,
+            };
+          }
           return {
             id: index + 1,
-            icon: pillarIcons[index % pillarIcons.length],
-            title,
-            description,
+            icon: pillar.icon || pillarIcons[index % pillarIcons.length],
+            title: pillar.title || `Pilar ${index + 1}`,
+            description: pillar.description || "",
           };
         })
       : aboutMocks.values.items,

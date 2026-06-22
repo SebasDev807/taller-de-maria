@@ -33,8 +33,15 @@ export async function getAboutConfig(): Promise<ActionResult<AboutData | null>> 
 }
 
 export async function updateAboutConfig(formData: FormData): Promise<ActionResult<AboutData>> {
-  const pillarsString = formData.get("pillars")?.toString() || "";
-  const pillarsArray = pillarsString.split("\n").map(p => p.trim()).filter(p => p !== "");
+  let pillarsArray = [];
+  const pillarsString = formData.get("pillars")?.toString();
+  if (pillarsString) {
+    try {
+      pillarsArray = JSON.parse(pillarsString);
+    } catch (e) {
+      pillarsArray = [];
+    }
+  }
 
   const validated = aboutSchema.safeParse({
     title: formData.get("title"),

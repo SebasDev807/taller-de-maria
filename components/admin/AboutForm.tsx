@@ -1,8 +1,19 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { useState } from "react";
 import { aboutResolver } from "@/helpers";
+
+const ICONS = [
+  { value: "favorite", label: "Devoción (Corazón)" },
+  { value: "history_edu", label: "Tradición (Pluma)" },
+  { value: "handyman", label: "Artesanía (Herramientas)" },
+  { value: "church", label: "Fe (Iglesia)" },
+  { value: "stars", label: "Excelencia (Estrellas)" },
+  { value: "psychology", label: "Filosofía (Mente)" },
+  { value: "workspace_premium", label: "Calidad (Premio)" },
+  { value: "palette", label: "Arte (Paleta)" },
+];
 
 
 import { CustomButton, FieldError } from "../shared";
@@ -26,6 +37,7 @@ export const AboutForm = ({ initialData }: AboutFormProps) => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<AboutFormValues>({
@@ -40,6 +52,11 @@ export const AboutForm = ({ initialData }: AboutFormProps) => {
     },
   });
 
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "pillars",
+  });
+
   const onSubmit = async (values: AboutFormValues) => {
     setServerError(null);
     setSuccess(false);
@@ -50,7 +67,7 @@ export const AboutForm = ({ initialData }: AboutFormProps) => {
     formData.set("address", values.address);
     formData.set("contact", values.contact);
     formData.set("schedule", values.schedule);
-    formData.set("pillars", values.pillars.join("\n"));
+    formData.set("pillars", JSON.stringify(values.pillars));
 
     const result = await updateAboutConfig(formData);
 
@@ -140,20 +157,73 @@ export const AboutForm = ({ initialData }: AboutFormProps) => {
       </div>
 
       {/* Campo: Pilares */}
-      <div className="flex flex-col gap-2">
-        <label className="font-label-md text-label-md text-on-surface" htmlFor="pillars">
-          Pilares del Taller (Uno por línea)
-        </label>
-        <textarea
-          {...register("pillars", {
-            setValueAs: (v) => (typeof v === "string" ? v.split("\n").map(p => p.trim()).filter(p => p) : v),
-          })}
-          className={`${inputBase} resize-none`}
-          id="pillars"
-          placeholder="Pilar 1&#10;Pilar 2&#10;Pilar 3"
-          rows={5}
-        />
-        <FieldError id="pillars-error" message={errors.pillars?.message} />
+      <div className="flex flex-col gap-4">
+        <label className="font-label-md text-label-md text-on-surface">Pilares del Taller</label>
+        {fields.map((field, index) => (
+          <div key={field.id} className="p-4 bg-surface-container-lowest border border-outline-variant rounded flex flex-col gap-4 relative">
+            <button
+              type="button"
+              onClick={() => remove(index)}
+              className="absolute top-2 right-2 text-error hover:text-error/80 transition-colors"
+              title="Eliminar pilar"
+            >
+              <span className="material-symbols-outlined">delete</span>
+            </button>
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex flex-col gap-2 w-full md:w-1/3">
+                <label className="font-label-sm text-label-sm text-on-surface-variant">Icono</label>
+                <select
+                  {...register(`pillars.${index}.icon` as const)}
+                  className={inputBase}
+                >
+                  {ICONS.map((icon) => (
+                    <option key={icon.value} value={icon.value}>
+                      {icon.label}
+                    </option>
+                  ))}
+                </select>
+                {errors.pillars?.[index]?.icon && (
+                  <FieldError id={`pillars-${index}-icon-error`} message={errors.pillars[index].icon?.message} />
+                )}
+              </div>
+              <div className="flex flex-col gap-2 w-full md:w-2/3">
+                <label className="font-label-sm text-label-sm text-on-surface-variant">Título</label>
+                <input
+                  {...register(`pillars.${index}.title` as const)}
+                  className={inputBase}
+                  type="text"
+                  placeholder="Ej. Devoción"
+                />
+                {errors.pillars?.[index]?.title && (
+                  <FieldError id={`pillars-${index}-title-error`} message={errors.pillars[index].title?.message} />
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="font-label-sm text-label-sm text-on-surface-variant">Descripción</label>
+              <textarea
+                {...register(`pillars.${index}.description` as const)}
+                className={`${inputBase} resize-none`}
+                placeholder="Descripción del pilar..."
+                rows={3}
+              />
+                {errors.pillars?.[index]?.description && (
+                  <FieldError id={`pillars-${index}-description-error`} message={errors.pillars[index].description?.message} />
+                )}
+            </div>
+          </div>
+        ))}
+        {errors.pillars?.message && typeof errors.pillars.message === 'string' && (
+          <FieldError id="pillars-root-error" message={errors.pillars.message} />
+        )}
+        <button
+          type="button"
+          onClick={() => append({ icon: "favorite", title: "", description: "" })}
+          className="self-start text-secondary font-label-md flex items-center gap-2 hover:bg-secondary-container p-2 rounded transition-colors"
+        >
+          <span className="material-symbols-outlined text-[20px]">add</span>
+          Agregar Pilar
+        </button>
       </div>
 
       {/* Feedback del servidor */}

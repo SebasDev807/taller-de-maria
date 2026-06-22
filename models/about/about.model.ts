@@ -1,13 +1,28 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
+export interface IPillar {
+  icon: string;
+  title: string;
+  description: string;
+}
+
 export interface IAbout extends Document {
   title: string;
   history: string;
   address: string;
   contact: string;
   schedule: string;
-  pillars: string[];
+  pillars: IPillar[];
 }
+
+const pillarSchema = new Schema<IPillar>(
+  {
+    icon: { type: String, required: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+  },
+  { _id: false }
+);
 
 const aboutSchema: Schema<IAbout> = new Schema(
   {
@@ -16,7 +31,7 @@ const aboutSchema: Schema<IAbout> = new Schema(
     address: { type: String, required: true },
     contact: { type: String, required: true },
     schedule: { type: String, required: true },
-    pillars: { type: [String], default: [] },
+    pillars: { type: [pillarSchema], default: [] },
   },
   {
     timestamps: true,
