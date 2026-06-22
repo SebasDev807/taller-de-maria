@@ -23,7 +23,7 @@ const aboutMocks = {
   },
   values: {
     title: "Pilares del Taller",
-    subtitle: "Nuestra filosofía de trabajo se sostiene en tres virtudes que guían cada incisión, cada nudo y cada entrega.",
+    subtitle: "Nuestra filosofía de trabajo se sostiene en virtudes que guían cada incisión, cada nudo y cada entrega.",
     items: [
       {
         id: 1,
@@ -73,8 +73,8 @@ export default async function AboutPage() {
   const history = {
     ...aboutMocks.history,
     title: dbData?.title || aboutMocks.history.title,
-    paragraphs: dbData?.history 
-      ? dbData.history.split("\n").filter((p: string) => p.trim() !== "") 
+    paragraphs: dbData?.history
+      ? dbData.history.split("\n").filter((p: string) => p.trim() !== "")
       : aboutMocks.history.paragraphs,
   };
 
@@ -82,24 +82,24 @@ export default async function AboutPage() {
     ...aboutMocks.values,
     items: dbData?.pillars && dbData.pillars.length > 0
       ? dbData.pillars.map((pillar: any, index: number) => {
-          if (typeof pillar === 'string') {
-            const hasColon = pillar.includes(":");
-            const title = hasColon ? pillar.split(":")[0].trim() : `Pilar ${index + 1}`;
-            const description = hasColon ? pillar.substring(pillar.indexOf(":") + 1).trim() : pillar;
-            return {
-              id: index + 1,
-              icon: pillarIcons[index % pillarIcons.length],
-              title,
-              description,
-            };
-          }
+        if (typeof pillar === 'string') {
+          const hasColon = pillar.includes(":");
+          const title = hasColon ? pillar.split(":")[0].trim() : `Pilar ${index + 1}`;
+          const description = hasColon ? pillar.substring(pillar.indexOf(":") + 1).trim() : pillar;
           return {
             id: index + 1,
-            icon: pillar.icon || pillarIcons[index % pillarIcons.length],
-            title: pillar.title || `Pilar ${index + 1}`,
-            description: pillar.description || "",
+            icon: pillarIcons[index % pillarIcons.length],
+            title,
+            description,
           };
-        })
+        }
+        return {
+          id: index + 1,
+          icon: pillar.icon || pillarIcons[index % pillarIcons.length],
+          title: pillar.title || `Pilar ${index + 1}`,
+          description: pillar.description || "",
+        };
+      })
       : aboutMocks.values.items,
   };
 
@@ -162,9 +162,9 @@ export default async function AboutPage() {
               {values.subtitle}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+          <div className="flex flex-wrap justify-center gap-gutter">
             {values.items.map(item => (
-              <div key={item.id} className="bg-surface-container-lowest p-lg rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-surface-container-high flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
+              <div key={item.id} className="w-full md:flex-1 md:min-w-[300px] md:max-w-[380px] bg-surface-container-lowest p-lg rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-surface-container-high flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
                 <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-secondary">
                   <span className="material-symbols-outlined">{item.icon}</span>
                 </div>

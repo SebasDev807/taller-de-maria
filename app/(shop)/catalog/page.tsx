@@ -41,11 +41,10 @@ export default async function Catalog({
       <header className="mb-lg text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-md border-b border-surface-container-high pb-md">
         <div className="w-full md:w-auto">
           <h1 className="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-primary mb-xs">
-            Sacred Collection
+            Nuestra Colección
           </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[576px] mx-auto md:mx-0">
-            Discover our meticulously handcrafted items of devotion. Each piece is created with reverence, designed to bring peace and focus to your spiritual practice.
-          </p>
+            Descubre nuestros artículos religiosos hechos a mano con dedicación y cuidado. Rosarios, imágenes y medallas pensados para acompañarte en la oración, fortalecer tu fe y traer paz a tu hogar.          </p>
         </div>
 
         {/* Filter Controls */}
