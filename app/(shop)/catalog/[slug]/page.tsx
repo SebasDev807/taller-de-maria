@@ -7,6 +7,35 @@ import {
 } from "@/components/catalog";
 import { getProductBySlug } from "@/actions/product.actions";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+interface ProductPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+/**
+ * Genera los metadatos para la página del producto.
+ */
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+
+  if (!product) {
+    return {
+      title: "Producto no encontrado",
+    };
+  }
+
+  return {
+    title: `Taller De Maria | ${product.name}`,
+    description: `Taller De Maria | ${product.description}`,
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: product.imageUrls?.[0] || "",
+    },
+  };
+}
 
 /**
  * Componente de página de producto individual que muestra todos los detalles del producto,
