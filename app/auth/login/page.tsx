@@ -1,9 +1,15 @@
 import { LoginForm } from "@/components";
 import Link from "next/link";
+import { Metadata } from "next";
 
-interface LoginPageProps {
+export interface LoginPageProps {
   searchParams: Promise<{ verified?: string }>;
 }
+
+export const metadata: Metadata = {
+  title: "Iniciar Sesión - Taller De Maria",
+  description: "Inicia Sesión en Taller De Maria",
+};
 
 export default async function AdminLoginPage({ searchParams }: LoginPageProps) {
   const { verified } = await searchParams;

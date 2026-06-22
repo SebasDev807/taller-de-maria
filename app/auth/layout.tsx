@@ -13,11 +13,6 @@ const lato = Lato({
   weight: ["300", "400", "700", "900"],
 });
 
-export const metadata: Metadata = {
-  title: "Acceso Admin - Taller De Maria",
-  description: "Portal de Administración de Taller De Maria",
-};
-
 export default function AuthLayout({
   children,
 }: Readonly<{
