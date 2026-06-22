@@ -2,8 +2,10 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sobre Nosotros - Taller De Maria",
+  title: "Sobre Nosotros | Taller De Maria",
   description: "Conozca la historia, los valores y la ubicación del Taller De Maria.",
+  keywords: ["Taller de María", "Sobre Nosotros", "Historia", "Valores", "Devoción", "Tradición", "Artesanía"]
+
 };
 
 // Mocks that will eventually come from the admin panel

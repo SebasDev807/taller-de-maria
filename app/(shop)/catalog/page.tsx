@@ -4,8 +4,9 @@ import { getCategories } from "@/actions/category.actions";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Productos - Taller De María",
+  title: "Productos | Taller De María",
   description: "Productos de Taller de María",
+  keywords: ["Taller de María", "Productos", "Devoción", "Rosarios", "Cruces", "Virgen María", "San Benito", "Estampas", "Insumos", "Artesanías"],
 };
 /**
  * Componente principal de la página de catálogo de productos.

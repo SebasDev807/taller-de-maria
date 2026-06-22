@@ -1,4 +1,11 @@
 import { ShoppingCart } from "@/components";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tu Oratorio | Taller de María",
+  description: "Revisa los artículos seleccionados antes de coordinar tu entrega.",
+  keywords: ["Taller de María", "Tu Oratorio", "Carrito"],
+};
 
 export default function CartPage() {
 

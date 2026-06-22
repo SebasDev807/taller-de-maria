@@ -15,8 +15,9 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Inicio - Taller De María",
+  title: "Inicio | Taller De María",
   description: "Paz y devoción en cada detalle.",
+  keywords: ["Taller de María", "Inicio"],
 };
 
 export default function RootLayout({
