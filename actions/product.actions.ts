@@ -264,6 +264,16 @@ export async function deleteProduct(id: string): Promise<ActionResult<boolean>> 
       }
     }
 
+    // Try to delete the folder. Cloudinary only deletes it if it's empty.
+    if (result.slug) {
+      try {
+        await cloudinary.api.delete_folder(`taller_de_maria/products/${result.slug}`);
+      } catch (folderError) {
+        // Ignoramos el error, ya que Cloudinary lanza error si la carpeta no está vacía o no existe
+        console.log(`La carpeta taller_de_maria/products/${result.slug} no está vacía o no existe, no se eliminó.`);
+      }
+    }
+
     revalidatePath("/admin");
     revalidatePath("/admin/inventario");
     revalidatePath("/catalog");
