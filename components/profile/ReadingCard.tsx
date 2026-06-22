@@ -34,7 +34,7 @@ export const ReadingCard: React.FC<ReadingCardProps> = ({
   return (
     <article
       className={mergeClassNames(
-        "content-item bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between h-full transition-all duration-300 hover:translate-y-[-4px]",
+        "content-item bg-surface-container-lowest p-md soft-shadow rounded-lg border border-surface-container-low flex flex-col justify-between h-[340px] transition-all duration-300 hover:translate-y-[-4px]",
         type,
         isRemoving ? "opacity-0 scale-90 pointer-events-none" : ""
       )}

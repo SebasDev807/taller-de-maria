@@ -98,7 +98,7 @@ export const SaveReadingButton = ({
     buttonIcon = "check_circle";
   } else if (isSaved) {
     buttonText = `Eliminar ${label}`;
-    buttonIcon = "favorite";
+    buttonIcon = "delete";
   } else {
     buttonText = `Guardar ${label}`;
     buttonIcon = "favorite_border";
