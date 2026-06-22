@@ -1,8 +1,12 @@
-import { TopNavBar, Footer, CatalogCard, CatalogFilters, Pagination } from "@/components";
+import { CatalogCard, CatalogFilters, Pagination } from "@/components";
 import { getProducts } from "@/actions/product.actions";
 import { getCategories } from "@/actions/category.actions";
+import { Metadata } from "next";
 
-
+export const metadata: Metadata = {
+  title: "Productos - Taller De María",
+  description: "Productos de Taller de María",
+};
 /**
  * Componente principal de la página de catálogo de productos.
  * Renderiza la cabecera, controles de filtro, y la grilla de productos 
@@ -17,6 +21,7 @@ export default async function Catalog({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+
   const params = await searchParams;
   const category = typeof params.category === "string" ? params.category : "All Items";
 
