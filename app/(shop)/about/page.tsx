@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Metadata } from "next";
+import { getAboutConfig } from "@/actions/about.actions";
 
 export const metadata: Metadata = {
   title: "Sobre Nosotros | Taller De Maria",
@@ -63,8 +64,43 @@ const aboutMocks = {
   }
 };
 
-export default function AboutPage() {
-  const { history, values, contact } = aboutMocks;
+const pillarIcons = ["favorite", "history_edu", "handyman", "stars", "psychology", "church"];
+
+export default async function AboutPage() {
+  const result = await getAboutConfig();
+  const dbData = result.success ? result.data : null;
+
+  const history = {
+    ...aboutMocks.history,
+    title: dbData?.title || aboutMocks.history.title,
+    paragraphs: dbData?.history 
+      ? dbData.history.split("\n").filter((p: string) => p.trim() !== "") 
+      : aboutMocks.history.paragraphs,
+  };
+
+  const values = {
+    ...aboutMocks.values,
+    items: dbData?.pillars && dbData.pillars.length > 0
+      ? dbData.pillars.map((pillar: string, index: number) => {
+          const hasColon = pillar.includes(":");
+          const title = hasColon ? pillar.split(":")[0].trim() : `Pilar ${index + 1}`;
+          const description = hasColon ? pillar.substring(pillar.indexOf(":") + 1).trim() : pillar;
+          return {
+            id: index + 1,
+            icon: pillarIcons[index % pillarIcons.length],
+            title,
+            description,
+          };
+        })
+      : aboutMocks.values.items,
+  };
+
+  const contact = {
+    ...aboutMocks.contact,
+    addressStr: dbData?.address || `${aboutMocks.contact.address.street}\n${aboutMocks.contact.address.city}`,
+    scheduleStr: dbData?.schedule || `${aboutMocks.contact.hours.weekdays}\n${aboutMocks.contact.hours.weekends}`,
+    contactStr: dbData?.contact || `${aboutMocks.contact.info.email}\n${aboutMocks.contact.info.phone}`,
+  };
 
   return (
 
@@ -155,9 +191,8 @@ export default function AboutPage() {
                 <span className="material-symbols-outlined text-secondary mt-1">location_on</span>
                 <div>
                   <h4 className="font-label-md text-label-md text-primary mb-1">Dirección</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">
-                    {contact.address.street}<br />
-                    {contact.address.city}
+                  <p className="font-body-md text-body-md text-on-surface-variant whitespace-pre-line">
+                    {contact.addressStr}
                   </p>
                 </div>
               </div>
@@ -166,9 +201,8 @@ export default function AboutPage() {
                 <span className="material-symbols-outlined text-secondary mt-1">schedule</span>
                 <div>
                   <h4 className="font-label-md text-label-md text-primary mb-1">Horario de Atención</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">
-                    {contact.hours.weekdays}<br />
-                    {contact.hours.weekends}
+                  <p className="font-body-md text-body-md text-on-surface-variant whitespace-pre-line">
+                    {contact.scheduleStr}
                   </p>
                 </div>
               </div>
@@ -177,9 +211,8 @@ export default function AboutPage() {
                 <span className="material-symbols-outlined text-secondary mt-1">mail</span>
                 <div>
                   <h4 className="font-label-md text-label-md text-primary mb-1">Contacto</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">
-                    {contact.info.email}<br />
-                    {contact.info.phone}
+                  <p className="font-body-md text-body-md text-on-surface-variant whitespace-pre-line">
+                    {contact.contactStr}
                   </p>
                 </div>
               </div>
