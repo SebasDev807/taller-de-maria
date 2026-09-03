@@ -89,15 +89,19 @@ export async function registerUser(
       }
 
       // Cuenta inactiva (registro previo sin confirmar) → renovar token y reenviar email
-      const token = await upsertVerificationToken(existing._id!.toString());
-      const sent = await sendVerificationEmail({ name: existing.name, email, token });
+      // const token = await upsertVerificationToken(existing._id!.toString());
+      // const sent = await sendVerificationEmail({ name: existing.name, email, token });
 
-      if (!sent) {
-        return {
-          success: false,
-          error: "No pudimos enviar el email de verificación. Intenta de nuevo.",
-        };
-      }
+      // if (!sent) {
+      //   return {
+      //     success: false,
+      //     error: "No pudimos enviar el email de verificación. Intenta de nuevo.",
+      //   };
+      // }
+
+      // Activar al usuario si intenta registrarse de nuevo
+      existing.isActive = true;
+      await existing.save();
 
       return { success: true, email };
     }
@@ -105,33 +109,33 @@ export async function registerUser(
     // 3. Hashear contraseña
     const hashedPassword = await hashPassword(password);
 
-    // 4. Crear usuario inactivo
+    // 4. Crear usuario inactivo (ahora activo temporalmente)
     const user = await User.create({
       name: name.trim(),
       email,
       password: hashedPassword,
       role: UserRole.User,
       phoneNumber: phoneNumber?.trim(),
-      isActive: false,
+      isActive: true, // Temporalmente true
     });
 
-    // 5. Crear token de verificación en su propio documento (1:1 con User)
-    const token = await upsertVerificationToken(user._id.toString());
+    // // 5. Crear token de verificación en su propio documento (1:1 con User)
+    // const token = await upsertVerificationToken(user._id.toString());
 
-    // 6. Enviar email
-    const sent = await sendVerificationEmail({ name, email, token });
+    // // 6. Enviar email
+    // const sent = await sendVerificationEmail({ name, email, token });
 
-    if (!sent) {
-      // Email falló: limpiar usuario y token
-      await Promise.all([
-        User.deleteOne({ _id: user._id }),
-        VerificationToken.deleteOne({ userId: user._id }),
-      ]);
-      return {
-        success: false,
-        error: "No pudimos enviar el email de verificación. Intenta de nuevo.",
-      };
-    }
+    // if (!sent) {
+    //   // Email falló: limpiar usuario y token
+    //   await Promise.all([
+    //     User.deleteOne({ _id: user._id }),
+    //     VerificationToken.deleteOne({ userId: user._id }),
+    //   ]);
+    //   return {
+    //     success: false,
+    //     error: "No pudimos enviar el email de verificación. Intenta de nuevo.",
+    //   };
+    // }
 
     return { success: true, email };
   } catch (err) {

@@ -50,19 +50,15 @@ export const RegisterForm = () => {
                     className="material-symbols-outlined text-secondary"
                     style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1" }}
                 >
-                    mark_email_read
+                    check_circle
                 </span>
                 <h2 className="font-headline-sm text-headline-sm text-primary">
-                    ¡Revisa tu correo!
+                    ¡Cuenta creada con éxito!
                 </h2>
                 <p className="font-body-md text-body-md text-on-surface-variant">
-                    Enviamos un enlace de confirmación a{" "}
-                    <strong className="text-secondary">{sentToEmail}</strong>.
+                    Tu cuenta ha sido activada automáticamente.
                     <br />
-                    Haz clic en el enlace para activar tu cuenta.
-                </p>
-                <p className="font-label-sm text-label-sm text-outline mt-sm">
-                    El enlace expira en 24 horas. Revisa también tu carpeta de spam.
+                    Ya puedes iniciar sesión con tu correo <strong className="text-secondary">{sentToEmail}</strong>.
                 </p>
             </div>
         ) : (
