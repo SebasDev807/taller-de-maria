@@ -53,12 +53,12 @@ export const RegisterForm = () => {
                     check_circle
                 </span>
                 <h2 className="font-headline-sm text-headline-sm text-primary">
-                    ¡Cuenta creada con éxito!
+                    ¡Registro exitoso!
                 </h2>
                 <p className="font-body-md text-body-md text-on-surface-variant">
-                    Tu cuenta ha sido activada automáticamente.
+                    Ya estás listo para ingresar a tu cuenta.
                     <br />
-                    Ya puedes iniciar sesión con tu correo <strong className="text-secondary">{sentToEmail}</strong>.
+                    Puedes iniciar sesión con el correo <strong className="text-secondary">{sentToEmail}</strong>.
                 </p>
             </div>
         ) : (
