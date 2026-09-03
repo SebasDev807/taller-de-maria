@@ -39,7 +39,7 @@ interface AdminLayoutShellProps {
 export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const { logout } = useLogin();
+  const { logout, user } = useLogin();
 
   const navigationItems = [
     { name: "Dashboard", href: "/admin", icon: "dashboard" },
@@ -147,14 +147,20 @@ export function AdminLayoutShell({ children }: AdminLayoutShellProps) {
 
         {/* Admin User Avatar Section */}
         <div className="p-6 border-t border-outline-variant flex items-center gap-4">
-          <img
-            alt="Admin User Avatar"
-            className="w-10 h-10 rounded-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWMUDFdIL_z_iEYh8URq7xMoA7DtKs-Ma0caSTB8HfJig_8ybbrRzHvTjyZ252x-7qXX5TRdMTnG8_Za0K-fEgOfxK7A-gswuHmeeMCC7WK60tP6iFqjmu8IhHZZ2A-kijWON-DxKK26yPNArojLfyscWkACoNtgRdqft-urU89knO-pkrfIi4E8NjsmwsgM44cxgFCdPfCSEEFr9H9Drn7wA4u7ydGs6hhQycvaszta5RgmWrqZPTUD1LcT1HIffYJdZkscxIitA"
-          />
+          {user?.name ? (
+            <div className="w-10 h-10 rounded-full bg-secondary text-primary-container flex items-center justify-center font-bold text-lg shrink-0">
+              {user.name.charAt(0).toUpperCase()}
+            </div>
+          ) : (
+            <img
+              alt="Admin User Avatar"
+              className="w-10 h-10 rounded-full object-cover shrink-0"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWMUDFdIL_z_iEYh8URq7xMoA7DtKs-Ma0caSTB8HfJig_8ybbrRzHvTjyZ252x-7qXX5TRdMTnG8_Za0K-fEgOfxK7A-gswuHmeeMCC7WK60tP6iFqjmu8IhHZZ2A-kijWON-DxKK26yPNArojLfyscWkACoNtgRdqft-urU89knO-pkrfIi4E8NjsmwsgM44cxgFCdPfCSEEFr9H9Drn7wA4u7ydGs6hhQycvaszta5RgmWrqZPTUD1LcT1HIffYJdZkscxIitA"
+            />
+          )}
           <div className="min-w-0">
-            <p className="font-label-md text-label-md text-primary truncate">Admin User</p>
-            <p className="font-label-sm text-label-sm text-on-surface-variant truncate">admin@tallerdemaria.com</p>
+            <p className="font-label-md text-label-md text-primary truncate">{user?.name || "Admin User"}</p>
+            <p className="font-label-sm text-label-sm text-on-surface-variant truncate">{user?.email || "admin@tallerdemaria.com"}</p>
           </div>
         </div>
       </nav>
