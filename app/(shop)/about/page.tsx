@@ -49,16 +49,16 @@ const aboutMocks = {
     title: "Encuéntrenos",
     description: "Nuestro taller está abierto para aquellos que buscan un momento de paz o desean encargar una pieza especial en persona. Le invitamos a visitarnos.",
     address: {
-      street: "Calle del Silencio 14, Barrio Antiguo",
+      street: "Cra 2b Calle 73 Cn 03 Barrio Villa del Norte",
       city: "Popayán, Cauca"
     },
     hours: {
       weekdays: "Lunes a Viernes: 10:00 - 14:00 | 17:00 - 20:00",
-      weekends: "Sábados: 10:00 - 14:00 (Solo con cita previa)"
+      weekends: "Sábados: 10:00 - 14:00"
     },
     info: {
       email: "taller@tallerdemaria.com",
-      phone: "+57 320 123 4567"
+      phone: "+57 3126386364"
     },
     mapImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuC-27utUo4XyV-l8zcJgpt4BwNy1CCD6txvanjQCIqxFufOJO_uNpu7aA09IPzXOCv1KeKHWDtoytWlUz-2KAvQHt8Kr5k4-liXS8W1Xep-ZrYtpfHqFXXz1pvZWPjCKdTPTOgDRzAlbIn0eocj3SffCYGC2IYyvGDXSpAGV0LEe4KfeJakCJxf6OuTPzT5_i4ZXdxdMzYP9lnqI_OS34mHAv9TlMBoKdWk6MBTGWM6U51kzGVx6RH5lJuSUwdadFm9ZkqlNhLs1BE"
   }
@@ -228,24 +228,29 @@ export default async function AboutPage() {
           </div>
 
           {/* Map Side */}
-          <div className="relative min-h-[400px] bg-surface-container-low">
+          <a
+            href="https://www.google.com/maps/place/Cl.+73+Nte.,+Popay%C3%A1n,+Cauca/@2.4854716,-76.5653446,17z/data=!3m1!4b1!4m6!3m5!1s0x8e30043e74ebc171:0x86cbf602f94fcbba!8m2!3d2.4854662!4d-76.5627697!16s%2Fg%2F11bymzjwls?authuser=1&entry=ttu&g_ep=EgoyMDI2MDkwMS4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative min-h-[400px] bg-surface-container-low block cursor-pointer group hover:opacity-95 overflow-hidden"
+          >
             <Image
               alt="Mapa de Ubicación"
-              className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply"
+              className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
               src={contact.mapImage}
               fill
               unoptimized
             />
             {/* Faux Map Pin */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <div className="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest">
+              <div className="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest group-hover:-translate-y-2 transition-transform duration-300">
                 <span className="material-symbols-outlined text-on-secondary-container">church</span>
               </div>
-              <div className="mt-2 bg-surface-container-lowest px-3 py-1 rounded shadow-sm border border-surface-container-high">
+              <div className="mt-2 bg-surface-container-lowest px-3 py-1 rounded shadow-sm border border-surface-container-high group-hover:border-secondary transition-colors duration-300">
                 <span className="font-label-sm text-label-sm text-primary">Taller De Maria</span>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </section>
     </main>
